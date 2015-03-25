@@ -1,3 +1,0 @@
-class NameField < SurveyField
-
-end
