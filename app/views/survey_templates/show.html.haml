@@ -6,5 +6,6 @@
   - @fields.each do |field|
     = label :submission, field.id, field.question_title
     = text_field :submission, field.id
+    <br>
   <br>  
   = submit_tag 'Submit', id: "survey_submit"
