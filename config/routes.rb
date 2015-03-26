@@ -1,23 +1,23 @@
   Swirlysurvey::Application.routes.draw do
   
-  devise_for :users
+  # devise_for :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  root :to => "volunteer_dashboard#index", :format => false, :as => :volunteer #perhaps just a placeholder
-  
+  # root :to => "volunteer_dashboard#index", :format => false, :as => :volunteer #perhaps just a placeholder
+  root :to => 'dashboard#index', :format => false
   resources :survey_templates
   resources :submissions
 
-  devise_scope :user do
-    get "/login" => "devise/sessions#new"
-    get "/logout" => "devise/sessions#destroy"
-  end
+  # devise_scope :user do
+    # get "/login" => "devise/sessions#new"
+    # get "/logout" => "devise/sessions#destroy"
+  # end
 
-  match 'volunteer', :to => "volunteer_dashboard#index", :format => false, :as => :volunteer #perhaps just a placeholder
+  # match 'volunteer', :to => "volunteer_dashboard#index", :format => false, :as => :volunteer #perhaps just a placeholder
 
-  match 'volunteer/login', :to => "volunteer_dashboard#login", :format => false, :as => :volunteer_login #perhaps just a placeholder
+  # match 'volunteer/login', :to => "volunteer_dashboard#login", :format => false, :as => :volunteer_login #perhaps just a placeholder
 
 
   match 'admin', :to => 'dashboard#index', :format => false, :as => :dashboard
@@ -26,6 +26,10 @@
 
   match 'admin/login', :to => 'dashboard#login', :format => false, :as => :dashboard_login
 
+  # for omniauth login 
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'logout', to: 'sessions#destroy', as: 'signout'
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
