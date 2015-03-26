@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150325234944) do
+ActiveRecord::Schema.define(:version => 20150326193311) do
 
   create_table "field_responses", :force => true do |t|
     t.string   "response"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(:version => 20150325234944) do
     t.integer  "submission_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "participants", :force => true do |t|
+    t.string   "email"
+    t.integer  "survey_template_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "submissions", :force => true do |t|

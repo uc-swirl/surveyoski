@@ -26,6 +26,9 @@
 
   match 'admin/login', :to => 'dashboard#login', :format => false, :as => :dashboard_login
 
+  match 'survey_template/:id/all_responses', :to => 'survey_template#all_responses'
+  match 'survey_template/:id/participants', :to => 'survey_template#participants'
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
