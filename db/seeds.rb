@@ -11,7 +11,7 @@
 #end
 
 
-s = SurveyTemplate.create
+s = SurveyTemplate.create(:survey_title => "Survey for CS 169", :survey_description => "Please fill in each field below")
 s.text_question_fields.build(:question_title => "Name:")
 s.phone_fields.build(:question_title => "Phone:")
 s.email_fields.build(:question_title => "Email:")

@@ -1,6 +1,7 @@
 - # this is show view for the SurveyTemplate model views/survey_template/show.html.haml
 
-%h2 Submit a survey
+%h2= @survey_title
+%h5= @survey_description
 
 = form_tag submissions_path :template_id => @id do
   - @fields.each do |field|

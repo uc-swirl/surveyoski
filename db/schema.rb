@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150313053458) do
+ActiveRecord::Schema.define(:version => 20150325234944) do
 
   create_table "field_responses", :force => true do |t|
     t.string   "response"
@@ -31,16 +31,16 @@ ActiveRecord::Schema.define(:version => 20150313053458) do
     t.string   "type"
     t.integer  "survey_template_id"
     t.string   "question_title"
+    t.string   "question_description"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
-    t.string   "checkbox_options"
-    t.string   "radio_button_options"
-    t.string   "drop_down_options"
   end
 
   create_table "survey_templates", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "survey_title"
+    t.string   "survey_description"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "users", :force => true do |t|
