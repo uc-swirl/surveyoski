@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
   #attr_accessible :firstname, :lastname, :username, :phone_number, :email, :password, :active, :admin
-
+  attr_accessible :email, :name
   def surveyTemplates #This is a dev stub, remove when user is associated with SurveyTemplates
     SurveyTemplate.all
   end

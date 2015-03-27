@@ -1,4 +1,4 @@
-%h1 DK-tracking Form
+%h1 SurveyOski Evaluation
 
 %table#forms
   %thead
@@ -7,5 +7,8 @@
   %tbody
     - @templates.each do |template|
       %tr
-        %td= link_to "Template" + template.id.to_s, survey_template_path(template)
+        - if template.survey_title.to_s != ''
+          %td= link_to template.survey_title.to_s, survey_template_path(template)
+        - else
+          %td= link_to "Survey " + template.id.to_s, survey_template_path(template)
 

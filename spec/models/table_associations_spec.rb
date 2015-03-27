@@ -5,7 +5,7 @@ describe "Tables are associated correctly" do
     @t = SurveyTemplate.create
     @q1 = TextQuestionField.create(:question_title => "Name:")
     @q1.survey_template_id = @t.id
-    @q2 = EmailField.create(:question_title => "Email:")
+    @q2 = TextQuestionField.create(:question_title => "Email:")
     @q2.survey_template_id = @t.id
     
     @s1 = Submission.create

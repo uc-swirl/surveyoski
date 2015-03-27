@@ -3,11 +3,12 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(env["omniauth.auth"])
     if user != nil
 	    session[:user_id] = user.id
+      redirect_to root_path
 	  else
       session[:user_id] = nil
 		  flash[:notice] = "need to use a Berkeley email"
+      redirect_to dashboard_login_path
 	  end
-    redirect_to root_path
   end
 
   def destroy
