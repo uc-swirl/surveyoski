@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
       user.name = auth.info.name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.email = auth.info.email
+      if (auth.info.email =~ /berkeley.edu$/) == nil
+        return nil
+      end
       user.save!
     end
   end

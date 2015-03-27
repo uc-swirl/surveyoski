@@ -4,6 +4,7 @@ class SubmissionsController < ApplicationController
   def new
   end
   def create
+    user = User.find(session[:user_id])
     template = SurveyTemplate.find(params[:template_id])
     begin
       #template = Template.find(params[:template_id])
@@ -13,6 +14,8 @@ class SubmissionsController < ApplicationController
         answer = field.field_responses.build(:response => params[:submission][key])
         answer.save!
         submission.field_responses << answer
+        template.participants.build(:email => user.email)
+        template.save!
         answer.save!
       end
       flash[:notice] = "Your submission was recorded."
