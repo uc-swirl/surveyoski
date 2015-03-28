@@ -28,7 +28,7 @@ class SubmissionsController < ApplicationController
         submission.field_responses << answer
         answer.save!
       end
-      flash[:notice] = "Your submission was recorded." + all_blank.to_s
+      flash[:notice] = "Your submission was recorded."
       redirect_to survey_templates_path
     rescue Exception => e
       flash[:notice] = e.message
