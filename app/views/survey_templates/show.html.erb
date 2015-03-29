@@ -5,8 +5,6 @@
 <h5>
   <%= @survey_description %>
 </h5>
-<%= link_to 'All Responses', "/survey_template/#{@id}/all_responses" %>
-<%= link_to 'Emails of Participants', "/survey_template/#{@id}/participants" %>
 <%= form_tag submissions_path :template_id => @id do %>
     <% @fields.each do |field| %>
         <%= label :submission, field.id, field.question_title, class: "field_label" %>
