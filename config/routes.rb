@@ -14,8 +14,8 @@
 
   match 'admin/login', :to => 'dashboard#login', :format => false, :as => :dashboard_login
 
-  match 'survey_template/:id/all_responses', :to => 'survey_template#all_responses'
-  match 'survey_template/:id/participants', :to => 'survey_template#participants'
+  get 'survey_templates/:id/all_responses', :to => 'survey_templates#all_responses'
+  get 'survey_templates/:id/participants', :to => 'survey_templates#participants'
 
   # for omniauth login 
   get 'auth/:provider/callback', to: 'sessions#create'
