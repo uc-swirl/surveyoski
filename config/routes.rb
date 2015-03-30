@@ -14,10 +14,15 @@
 
   match 'admin/login', :to => 'dashboard#login', :format => false, :as => :dashboard_login
 
+  get 'survey_templates/:id/all_responses', :to => 'survey_templates#all_responses'
+  get 'survey_templates/:id/participants', :to => 'survey_templates#participants'
+
   # for omniauth login 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'logout', to: 'sessions#destroy', as: 'signout'
+
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
