@@ -13,19 +13,34 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :participants
 
   # this returns a csv in string format of: "QUESTION1,QUESTION2\NREPLY1A,REPLY1B\NREPLY2A,REPLY2B\N"
-  # ex: "what is your favorite color?,do you like ponies?\nblue,maybe\nmagenta,no\n" 
+  # ex: "what is your favorite color?,do you like ponies?\nblue,maybe\nmagenta,no\n"
   def get_all_responses
+  	if submissions.length == 0
+  	  return "There have been no submissions yet."
+  	elsif submissions.length == 1
+  	  return "There has only been 1 submission so far."
+    elsif submissions.length <= 10
+      return "There have only been #{submissions.length} submissions so far."
+     end
+
     titles = []
     survey_fields.each do |field|
       titles << field.question_title #IS THIS ORDER ALWAYS THE SAME??
     end
     output = titles.to_csv
+
+    all_responses = []
     submissions.each do |submission|
       curr_submission = []
       survey_fields.each do |field|
         curr_submission << submission.field_responses.where(survey_field_id: field.id)[0].response
       end
-      output += curr_submission.to_csv
+      all_responses << curr_submission
+    end
+
+    scrambled = all_responses.shuffle
+    scrambled.each do |response|
+      output += response.to_csv
     end
     output
   end
