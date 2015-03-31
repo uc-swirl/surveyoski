@@ -8,8 +8,8 @@
 
   - @fields.each do |field|
     %p{:border=>"1px solid black"}
-      %span= field.question_title 
-      = render partial:  field.partial, :field => field
+      %span= field.question_title
+      = render partial:  field.edit_partial, :field => field
 
 
   %hr

@@ -3,7 +3,7 @@ class TextQuestionField < SurveyField
     {:value => true}
   end
 
-  def partial
+  def edit_partial
     return "admin/survey_fields/text_question_field.html"
   end
 

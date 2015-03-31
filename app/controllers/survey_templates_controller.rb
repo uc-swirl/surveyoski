@@ -8,7 +8,9 @@ class SurveyTemplatesController < ApplicationController
       @survey = session[:survey]
     end
     @fields = @survey.survey_fields
+    @fields_types = 
 
+    
     session[:survey] = @survey
   end
 
