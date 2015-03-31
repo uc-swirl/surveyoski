@@ -2,29 +2,25 @@ class SurveyTemplatesController < ApplicationController
   before_filter :authorize , :only => :show
 
   def new
-    if not session[:survey]
-      @survey = SurveyTemplate.new()
-    else 
-      @survey = session[:survey]
-    end
-    @fields = @survey.survey_fields
-    @fields_types = 
-
+    @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     
-    session[:survey] = @survey
   end
 
   def create
-    if params[:commit] == 'Add Field'
-      @survey = session[:survey]
+    @survey = SurveyTemplate.create()
+    @name = params[:form_name]
+    @fields = params[:fields]
+    name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
 
-      field_name = params[:new_field_name]
-      field_type = params[:new_field_type]
 
-      @survey.survey_fields << TextQuestionField.new(:question_title => field_name)
-
-      return redirect_to new_survey_template_path
+    @fields.each do |key, field_parm| 
+      field_name = field_parm[:name]
+      field_type = field_parm[:type]
+      klass = name_to_type[field_type]
+      field =  klass.new(:question_title => field_name)
+      @survey.survey_fields << field
     end
+
   end
 
   def authorize

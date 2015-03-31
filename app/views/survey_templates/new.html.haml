@@ -2,15 +2,10 @@
 
 = form_tag survey_templates_path do
 
-  = label :name, "Name"
-  = text_field_tag :name
+  = label :form_name, "Name"
+  = text_field_tag :form_name
 
-
-  - @fields.each do |field|
-    %p{:border=>"1px solid black"}
-      %span= field.question_title
-      = render partial:  field.edit_partial, :field => field
-
+  %div.form_fields
 
   %hr
   = label :new_field_name, 'Field Name'
@@ -18,9 +13,9 @@
 
   %br
   = label :new_field_type, 'Field Type'
-  = text_field_tag :new_field_type
+  = select_tag :new_field_type, options_for_select(@field_types)
   %br
-  = submit_tag 'Add Field'
+  %button.add_field_button Add Field
   %br
 
   %div
