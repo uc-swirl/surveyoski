@@ -1,5 +1,5 @@
 class SurveyTemplatesController < ApplicationController
-  before_filter :authorize , :only => :show
+  before_filter :authorize 
 
   def new
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
@@ -42,6 +42,7 @@ class SurveyTemplatesController < ApplicationController
   def index
     @templates = SurveyTemplate.all
   end
+  
   def show # shows the HTML form
   	template = SurveyTemplate.find(params[:id])
     @fields = template.survey_fields
