@@ -74,6 +74,11 @@ SurveyBuilder = function () {
 
   var load_field = function (field_type, field_name, options) {
     var field = new SurveyField(field_type, field_name, jQuery(".form_fields"));
+    if (options) {
+      options.splice(0, 0, ""); //insert a "" to bootstrap the reduce
+      options = options.reduce (function (previousValue, currentValue, index, array) { 
+        return previousValue + currentValue[0] + " : " + currentValue[1] +"\n" });
+    }
     field.setOptions(options);
     add_field(field);
   }

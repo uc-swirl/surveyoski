@@ -3,8 +3,8 @@
 = form_tag survey_templates_path do
 
   = label :form_name, "Name"
-  = text_field_tag :form_name
-
+  = text_field_tag :form_name, @survey.survey_title
+  = hidden_field_tag(:id, @survey.id)
   - if @fields_json
     %script.loading_form_fields= raw("var _survey_fields= " + @fields_json + ";")
 

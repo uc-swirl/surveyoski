@@ -14,12 +14,12 @@ class SurveyTemplatesController < ApplicationController
   end
 
   def create
-    @survey = SurveyTemplate.create()
+    @survey = SurveyTemplate.find_or_create_by_id(params[:id])
     @name = params[:form_name]
     @fields = params[:fields]
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
-
-
+    @survey.survey_title = @name
+    @survey.survey_fields = []
     @fields.each do |key, field_param| 
       field_name = field_param[:name]
       field_type = field_param[:type]
