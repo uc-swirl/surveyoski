@@ -3,9 +3,14 @@ function SurveyField(field_type, field_name, form) {
   this.type = field_type;
   this.name = field_name;
   this.form = form;
+  this.options = "";
   this.id = SurveyField.prototype._field_count;
   SurveyField.prototype._field_count += 1;
   jQuery("<input/>", {type : "hidden", name : this.form_name("type"), value : field_type}).appendTo(form);
+}
+
+SurveyField.prototype.setOptions = function (options) {
+  this.options = options;
 }
 
 SurveyField.prototype.setType = function (field_type) {
@@ -47,24 +52,41 @@ SurveyBuilder = function () {
 
         var field_type = jQuery("#new_field_type").val();
         var field_name = jQuery("#new_field_name").val();
+        var field = new SurveyField(field_type, field_name, jQuery(".form_fields"));
 
-        add_field(field_type, field_name) 
+        add_field(field) 
       });
+
+      if (typeof _survey_fields !== 'undefined') {
+        load_survey_template();
+      }
     });
+
+
   };
 
-  var add_field = function (field_type, field_name) {
-    var field = new SurveyField(field_type, field_name);
+  var load_survey_template = function () {
+    jQuery.each(_survey_fields, function (index, object) {
+      console.log(object);
+      load_field(object.nice_name, object.question_title, object.field_options);
+    });
+  }
+
+  var load_field = function (field_type, field_name, options) {
+    var field = new SurveyField(field_type, field_name, jQuery(".form_fields"));
+    field.setOptions(options);
+    add_field(field);
+  }
+
+  var add_field = function (field) {
 
     var question_container = jQuery("<div/>", {"class" : "question_container"}).appendTo(".form_fields");
     var question_table = jQuery("<table/>", {"class" : "question_table"}).appendTo(question_container);
-    var field = new SurveyField(field_type, field_name, question_container);
-
 
     add_title_row(question_table, field);
-    add_type_row(question_table, field_type);
+    add_type_row(question_table, field.type);
 
-    field_types[field_type](field).appendTo(question_table);
+    field_types[field.type](field).appendTo(question_table);
 
   }
   var add_title_row = function(question_table, field) {
@@ -85,22 +107,18 @@ SurveyBuilder = function () {
     var radio_options = jQuery("<tr/>");
     jQuery("<td/>", {text : "Options (name : value): "}).appendTo(radio_options);
     var col = jQuery("<td/>").appendTo(radio_options);
-    jQuery("<textarea/>", {name: field.form_name("options")}).appendTo(col);
+    var input = jQuery("<textarea/>", {name: field.form_name("options")}).appendTo(col);
+    input.val(field.options);
     return radio_options;
   }; 
 
   var add_checkbox_options = add_multiple_option;
-
   var add_select_list_options = add_multiple_option;
-
   var add_radio_buttons_options = add_multiple_option;
 
   var add_text_options = function (field) {
     return jQuery("");
   }; 
-
-
-
 
 
   return {init : init};

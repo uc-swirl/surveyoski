@@ -5,6 +5,11 @@
   = label :form_name, "Name"
   = text_field_tag :form_name
 
+  - if @fields_json
+    %script.loading_form_fields= raw("var _survey_fields= " + @fields_json + ";")
+
+
+
   %div.form_fields
 
   %hr

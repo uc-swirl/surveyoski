@@ -3,8 +3,6 @@ class TextQuestionField < SurveyField
     {:value => true}
   end
 
-
-
   def self.nice_name
     "Text"
   end
@@ -13,8 +11,5 @@ class TextQuestionField < SurveyField
     return "admin/survey_fields/text_question_field.html"
   end
 
-  def parse_options
-    true
-  end
   
 end
