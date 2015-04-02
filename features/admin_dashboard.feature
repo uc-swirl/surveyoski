@@ -1,14 +1,14 @@
 Feature: Admin Dashboard
 
-  As a volunteer organizer 
-  So that I can access the various features of ACCE Tracker
+  As a course staff or admin,
+  So that I can access the various features of Survey Oski
   I want to be shown a dashboard with links to admin features. 
 
   Background:
     Given the following users exist:
-    | firstname | lastname    | phone_number   | email               | admin | password       |
-    | Alex      | Lin         | 17072238447    | alex@incredible.com | false | password123    |
-    | Ben       | Luu         | 17072238442    | ben@poodles.com     | true  | 123password    |
+    | name     | email                  | status
+    | Ben Luu  | ben@berkeley.edu       | admin
+    | Alex Lin | alexlily@berkeley.edu  | student
 
   Scenario: I should not be able to go to the admin dashboard if I'm not logged in as an admin
     Given I am on the admin dashboard
@@ -16,7 +16,7 @@ Feature: Admin Dashboard
 
   Scenario: I should not be able to go to the admin dashboard if I am logged as a volunteer
     Given I am on the admin login page
-    Given I have logged in as alex@incredible.com with password password123
+    Given I have logged in as alex@berkeley.edu
     Given I am on the admin dashboard
     Then I should be redirected to the volunteer page
 

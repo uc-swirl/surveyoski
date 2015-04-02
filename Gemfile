@@ -33,3 +33,4 @@ gem 'haml-rails'
 gem 'validates_as_phone_number', '~> 0.7.5'
 gem 'devise'
 gem 'email_validator', '~> 1.5.0'
+gem 'omniauth-google-oauth2', "~> 0.2.1"

@@ -11,10 +11,10 @@
 #end
 
 
-s = SurveyTemplate.create
+s = SurveyTemplate.create(:survey_title => "Survey for CS 169", :survey_description => "Please fill in each field below")
 s.text_question_fields.build(:question_title => "Name:")
-s.phone_fields.build(:question_title => "Phone:")
-s.email_fields.build(:question_title => "Email:")
+#s.phone_fields.build(:question_title => "Phone:")
+#s.email_fields.build(:question_title => "Email:")
 s.text_question_fields.build(:question_title => "Address:")
 s.text_question_fields.build(:question_title => "City:")
 s.text_question_fields.build(:question_title => "Zip:")
@@ -27,6 +27,6 @@ s.text_question_fields.build(:question_title => "Favourite colour:")
 s.text_question_fields.build(:question_title => "Speed of a diving swallowtail:")
 s.save!
 
-User.create!(:email => "m.arcojoemontagna@gmail.com", :password => "12345678", :password_confirmation => "12345678", :admin => true)
-User.create!(:email => "m.m999223@gmail.com", :password => "12345678", :password_confirmation => "12345678", :admin => false)
+#User.create!(:email => "m.arcojoemontagna@gmail.com", :password => "12345678", :password_confirmation => "12345678", :admin => true)
+#User.create!(:email => "m.m999223@gmail.com", :password => "12345678", :password_confirmation => "12345678", :admin => false)
 
