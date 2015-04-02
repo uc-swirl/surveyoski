@@ -17,11 +17,6 @@ describe SurveyTemplatesController do
       get :show, :id => @st.id
     end
   end
-  describe "displaying all forms" do
-    it 'shows the available templates' do
-      get :index
-      expect(response).to render_template("index")
-    end
-  end
+
 end
 
