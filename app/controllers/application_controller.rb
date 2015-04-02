@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  after_action :verify_authorized
   
   helper_method :current_user
 
