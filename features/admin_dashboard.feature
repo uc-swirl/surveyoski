@@ -6,9 +6,9 @@ Feature: Admin Dashboard
 
   Background:
     Given the following users exist:
-    | name     | email                  | status
-    | Ben Luu  | ben@berkeley.edu       | admin
-    | Alex Lin | alexlily@berkeley.edu  | student
+    | name     | email                  | status   |
+    | Ben Luu  | ben@berkeley.edu       | admin    |
+    | Alex Lin | alexlily@berkeley.edu  | student  |
 
   Scenario: I should not be able to go to the admin dashboard if I'm not logged in as an admin
     Given I am on the admin dashboard

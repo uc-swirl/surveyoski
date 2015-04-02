@@ -10,8 +10,6 @@ end
 Given /the following users exist/ do |user_table|
   user_table.hashes.each do |user|
     #    | firstname | lastname    | phone_number   | email               | admin | password |
-    user[:admin] = user[:admin] == "true"
-    user[:password_confirmation] = user[:password]
     User.create!(user)
   end
 end

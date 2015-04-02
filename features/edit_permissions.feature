@@ -5,9 +5,9 @@ Feature: Change permissions
 
   Background:
     Given the following users exist:
-    | name     | email               | status
-    | Ben Luu  | ben@poodles.com     | admin
-    | Alex Lin | alexlily@gmail.com  | student
+    | name     | email                  | status   |
+    | Ben Luu  | ben@berkeley.edu       | admin    |
+    | Alex Lin | alexlily@berkeley.edu  | student  |
 
 Scenario: give a user admin privileges 
   Given I am on the admin login page

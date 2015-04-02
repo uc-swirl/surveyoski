@@ -5,6 +5,8 @@ describe SurveyTemplatesController do
   describe "displaying a survey" do
     before (:each) do
       @st = SurveyTemplate.create
+      @user = User.create! # assume logged in 
+      session[:user_id] = @user.id
     end
     it 'renders SurveyTemplate#show' do
       get :show, :id => @st.id

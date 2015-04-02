@@ -5,6 +5,10 @@ gem 'rails', '3.2.16'
 
 group :development, :test do
   gem 'database_cleaner'
+  # gem "cucumber" 
+  # gem "gherkin", "= 2.1.4" 
+  # gem "cucumber-rails"
+
   gem 'cucumber-rails', :require => false
   gem 'sqlite3'
   gem 'ruby-debug19'
