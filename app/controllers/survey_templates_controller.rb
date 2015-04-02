@@ -15,8 +15,8 @@ class SurveyTemplatesController < ApplicationController
 
   def create
     @survey = SurveyTemplate.find_or_create_by_id(params[:id])
-    @name = params[:form_name]
-    @fields = params[:fields]
+    @name = if params[:form_name] then params[:form_name] else [] end 
+    @fields = if params[:fields] then params[:fields] else [] end
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
     @survey.survey_title = @name
     @survey.survey_fields = []
@@ -32,12 +32,12 @@ class SurveyTemplatesController < ApplicationController
   end
 
   def authorize
-      session[:param] = "this is a parameter and it's in the session hash"
-      if not current_user
-        session[:template_id] = params[:id]
-        redirect_to "/auth/google_oauth2"
-      end
+    session[:param] = "this is a parameter and it's in the session hash"
+    if not current_user
+      session[:template_id] = params[:id]
+      redirect_to "/auth/google_oauth2"
     end
+  end
 
   def index
     @templates = SurveyTemplate.all
