@@ -1,15 +1,25 @@
 Given /^I have( | not )logged in as a(?:n?) ([a-zA-Z]+)$/ do |negative, role|
-  @user = User.create!(:email => "something@berkeley.edu", :status => role)
-  if negative != "not"
-    ApplicationController.any_instance.stub(:current_user).and_return(@user)
-  end
+  visit dashboard_login_path
+  click_link 'Sign in with Google'
 end
 
 Given /^I have( | not )logged in as a student for a survey template$/ do |negative|
-  if negative != "not"
-    ApplicationController.any_instance.stub(:current_user).and_return(@user)
-    SurveyTemplatesController.any_instance.stub(:authorize).and_return(true)
+  @surveyTemplate = SurveyTemplate.create
+  if negative
+    visit signout_path
   end
-    @surveyTemplate = SurveyTemplate.create
 end 
+
+And (/I go to that survey's page/) do 
+  visit survey_template_path(@surveyTemplate)
+end
+
+Then (/I should be on that survey's page/) do
+  current_path = URI.parse(current_url).path
+  if current_path.respond_to? :should
+    current_path.should == survey_template_path(@surveyTemplate)
+  else
+    assert_equal survey_template_path(@surveyTemplate), current_path
+  end
+end
 

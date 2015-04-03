@@ -1,0 +1,18 @@
+%h1 Change permissions for user
+
+= form_tag :admin_change_user_path do
+  = label_tag 'email'
+  = text_field_tag 'email'
+  <br>
+  Change to: 
+  <br>
+  = label_tag 'student'
+  = radio_button_tag 'status', 'student'
+  = label_tag 'TA'
+  = radio_button_tag 'status', 'TA'
+  = label_tag 'professor'
+  = radio_button_tag 'status', 'professor'
+  = label_tag 'admin'
+  = radio_button_tag 'status', 'admin'
+  <br>
+  =submit_tag "Update"

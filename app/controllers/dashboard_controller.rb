@@ -6,28 +6,20 @@ class DashboardController < ApplicationController
       end
     end
 
-    def add_user
-
+    def update_user
     end
-
-    def create_user
-      user = params[:user]
-
-      created = User.create(:firstname => user[:firstname],
-         :lastname => user[:lastname], 
-         :email => user[:email], 
-         :password => user[:password],
-         :password_confirmation=> user[:password_confirmation],
-         :admin=> user[:admin] == "1"
-
-         )
-      if created.valid?
-        flash[:notice] = "Succesfully added user"
-        return redirect_to dashboard_path
+    def change_user
+      # puts params[:email]
+      # puts params[:status]
+      user = User.find_by_email(params[:email])
+      if user
+        user.status = params[:status]
+        user.save
+        flash[:notice] = user.name + " was successfully changed to " + user.status
       else
-        flash[:notice] = "Invalid field"
-        return redirect_to admin_add_user_path
+        flash[:notice] = "User with that email does not exist."
       end
+      redirect_to :root
     end
 
     def index

@@ -8,16 +8,10 @@
 end
 
 Given /the following users exist/ do |user_table|
-  user_table.hashes.each do |user|
-    #    | firstname | lastname    | phone_number   | email               | admin | password |
-    User.create!(user)
-  end
-end
 
-Given /^(?:|I )have logged in as (.+) with password (.+)$/ do |email, password|
-  fill_in("user_email", :with => email)
-  fill_in("user_password", :with => password)
-  click_button("Sign in")
+  user_table.hashes.each do |user|
+    User.create!(:email => user[:email], :name => user[:name], :status =>user[:status])
+  end
 end
 
 Then /^there should be some links to admin actions$/ do
