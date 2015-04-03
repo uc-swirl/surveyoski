@@ -23,12 +23,15 @@ class SurveyTemplatesController < ApplicationController
 
   def create
     @survey = SurveyTemplate.find_or_create_by_id(params[:id])
-    @name = params[:form_name]
-    @fields = params[:fields]
+    @name = if params[:form_name] then params[:form_name] else [] end 
+    @fields = if params[:fields] then params[:fields] else [] end
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
     @survey.survey_title = @name
     @survey.survey_fields = []
     @fields.each do |key, field_param| 
+      puts "K", key
+      puts "field ", field_param
+
       field_name = field_param[:name]
       field_type = field_param[:type]
       klass = name_to_type[field_type]
@@ -38,7 +41,7 @@ class SurveyTemplatesController < ApplicationController
     end
     @survey.save
   end
-
+  
   def index
     authorize :survey_templates, :index?
     @templates = SurveyTemplate.all

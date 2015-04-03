@@ -14,7 +14,7 @@ group :development, :test do
   gem 'rake','~> 10.4.2'
   gem 'autotest-rails'
   gem "factory_girl_rails", "~> 4.0"
-
+  gem 'selenium-webdriver'
 end
 
 group :production do
@@ -32,6 +32,6 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'validates_as_phone_number', '~> 0.7.5'
 gem 'devise'
+gem 'pundit'
 gem 'email_validator', '~> 1.5.0'
 gem 'omniauth-google-oauth2', "~> 0.2.1"
-gem 'pundit'

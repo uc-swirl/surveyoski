@@ -12,13 +12,14 @@ class SurveyField < ActiveRecord::Base
     ObjectSpace.each_object(Class).select { |klass| klass < self }
   end
 
-  def edit_partial
-    throw raise "edit partial not implemented"
+  def parse_options (options)
+    #parses options into an array like [["option1", "value1"], ["option1", "value1"]]  
+    if options
+      lines = options.split("\r\n").map {|x| x.split(":").map {|x| x.strip } }
+      self.field_options = lines
+    end
   end
 
-  def parse_options (options)
-    true
-  end
 
   def as_json(options = {})
     super({:root => false, methods: :nice_name}.merge(options || {}))

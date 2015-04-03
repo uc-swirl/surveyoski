@@ -8,7 +8,7 @@ describe DashboardController do
         login_with_oauth
       end
     it 'Index should render the dashboard layout' do
-      get :index, :format => false
+      get :index
       puts response.body
       expect(response).to render_template(:index)
       #response.should render_template(:index)
