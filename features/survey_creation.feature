@@ -1,7 +1,17 @@
+
+
+
+
 Feature: Survey creation
 As a course instuctor or TA,
 So that I can get feedback from students
 I would like to make new course surveys
+
+
+Scenario: Form Creation
+Given I make a survey template
+Then I should be on the new/edit survey page
+
 
 Scenario:
 Given I am an instructor
