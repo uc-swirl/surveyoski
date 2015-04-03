@@ -5,6 +5,11 @@ describe DropDownField do
     @sel = DropDownField.new(:question_title => "Waiting", :question_description => "Between worlds")
   end
 
+  it "my parent knows about me" do
+    expect(SurveyField.descendants).to include(DropDownField)
+  end
+  
+  
   it "store has a title" do
     expect(@sel.question_title).to eq("Waiting")
   end

@@ -5,6 +5,10 @@ describe RadioButtonField do
     @rad = RadioButtonField.new(:question_title => "Waiting", :question_description => "Between worlds")
   end
 
+  it "my parent knows about me" do
+    expect(SurveyField.descendants).to include(RadioButtonField)
+  end
+  
   it "store has a title" do
     expect(@rad.question_title).to eq("Waiting")
   end

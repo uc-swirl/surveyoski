@@ -4,6 +4,11 @@ describe TextQuestionField do
   before(:each) do
     @sel = TextQuestionField.new(:question_title => "Waiting", :question_description => "Between worlds")
   end
+  
+  it "my parent knows about me" do
+    expect(SurveyField.descendants).to include(TextQuestionField)
+  end
+  
 
   it "store has a title" do
     expect(@sel.question_title).to eq("Waiting")

@@ -5,6 +5,10 @@ describe CheckboxField do
     @check = CheckboxField.new(:question_title => "Waiting", :question_description => "Between worlds")
   end
 
+  it "my parent knows about me" do
+    expect(SurveyField.descendants).to include(CheckboxField)
+  end
+
   it "store has a title" do
     expect(@check.question_title).to eq("Waiting")
   end
