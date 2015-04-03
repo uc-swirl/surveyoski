@@ -14,7 +14,7 @@ group :development, :test do
   gem 'rake','~> 10.4.2'
   gem 'autotest-rails'
   gem "factory_girl_rails", "~> 4.0"
-
+  gem 'selenium-webdriver'
 end
 
 group :production do
