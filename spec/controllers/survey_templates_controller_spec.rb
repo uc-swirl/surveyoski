@@ -3,10 +3,6 @@ require 'spec_helper'
 
 describe SurveyTemplatesController do
 
-
-
-
-
   describe "survey actions while logged in" do
     before(:each) do
       ApplicationController.any_instance.stub(:current_user).and_return(@user = mock('user'))
@@ -62,6 +58,56 @@ describe SurveyTemplatesController do
       end
     end
 
+    describe "index" do
+      before(:each) do
+        @survey = SurveyTemplate.create()
+      end
+      it 'it sets @templates and renders index' do
+        post :index
+        expect(response).to render_template("index") 
+        expect(assigns(:templates)).to include(@survey)
+      end
+    end
+
+    describe "show" do
+      before(:each) do
+        @field = TextQuestionField.new(:question_title => "TextTest")
+        @survey = SurveyTemplate.create(:survey_title => "Gunpowder", :survey_description => "Green")
+        @survey.survey_fields << @field
+      end
+      it 'sets various instance vars' do
+        post :show, :id => @survey.id
+        expect(response).to render_template("show") 
+
+        expect(assigns(:fields)).to include (@field)
+        expect(assigns(:id)).to eq(@survey.id.to_s)
+        expect(assigns(:survey_title)).to eq("Gunpowder")
+        expect(assigns(:survey_description)).to eq("Green")
+      end
+    end
+
+
+    describe "all_responses and participants" do
+      before(:each) do
+        @field = TextQuestionField.new(:question_title => "TextTest")
+        @survey = SurveyTemplate.create(:survey_title => "Gunpowder", :survey_description => "Green")
+        @survey.survey_fields << @field
+      end
+      it 'all_responses sets the survey_template var' do
+        post :all_responses, :id => @survey.id
+        expect(assigns(:survey_template)).to eq(@survey)
+
+      end
+      it 'participants sets the survey_template var' do
+        post :participants, :id => @survey.id
+        expect(assigns(:survey_template)).to eq(@survey)
+
+      end
+    end
+
+
+
   end
+
 end
 
