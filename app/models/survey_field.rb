@@ -12,10 +12,6 @@ class SurveyField < ActiveRecord::Base
     ObjectSpace.each_object(Class).select { |klass| klass < self }
   end
 
-  def edit_partial
-    throw raise "edit partial not implemented"
-  end
-
   def parse_options (options)
     true
   end
