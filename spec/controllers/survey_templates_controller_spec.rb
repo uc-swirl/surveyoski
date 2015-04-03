@@ -55,12 +55,10 @@ describe SurveyTemplatesController do
       it 'it allows adding new fields' do
         expect(@survey.survey_fields.length).to eq(0)
 
-        post :create, {:id => @survey.id, :fields => [{:name => "Checky", :type => "Checkbox", :options => "C1:1\nC2:2"}], :form_name => "What a wonderful form"}
+        post :create, {:id => @survey.id, :fields => {0 => {:name => "Checky", :type => "Checkbox", :options => "C1:1\nC2:2", :form_name => "What a wonderful form"}}}
 
         @survey.reload
         expect(@survey.survey_fields.length).to eq(1)
-
-
       end
     end
 
