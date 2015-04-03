@@ -1,0 +1,7 @@
+<%= label :submission, field.question_title, class: "field_label", id: field.id %>
+
+<% field.options.each do |option| %>
+	<br>
+    <%= check_box_tag("checkbox#{option}",option) %>
+    <%= label_tag("checkbox#{option}", option) %>
+<% end %>

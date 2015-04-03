@@ -20,7 +20,20 @@ s.text_question_fields.build(:question_title => "City:")
 s.text_question_fields.build(:question_title => "Zip:")
 s.text_question_fields.build(:question_title => "My bus lines:")
 s.text_question_fields.build(:question_title => "Main bus issues:")
+
+s.checkbox_fields.build(:question_title => "Select all that apply", :checkbox_options => "Happy, Sad, Angry, disappointed")
+s.radio_button_fields.build(:question_title => "Teaching effectiveness", :radio_button_options => "effective, not effective")
+s.drop_down_fields.build(:question_title => "Class rank quartile", :drop_down_options => "rank #1-28, rank #28-56")
+s.text_question_fields.build(:question_title => "What do you think that can improve the class?")
+
 s.save!
+# s.email_fields.build(:question_title => "Email:")
+# s.text_question_fields.build(:question_title => "Address:")
+# s.text_question_fields.build(:question_title => "City:")
+# s.text_question_fields.build(:question_title => "Zip:")
+# s.text_question_fields.build(:question_title => "My bus lines:")
+# s.text_question_fields.build(:question_title => "Main bus issues:")
+
 
 s = SurveyTemplate.create
 s.text_question_fields.build(:question_title => "Favourite colour:")
