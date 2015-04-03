@@ -1,6 +1,11 @@
 Given /^I have( | not )logged in as a(?:n?) ([a-zA-Z]+)$/ do |negative, role|
+  class User
+    attr_accessible :provider, :uid
+  end
+  User.create!(:provider => "google_oauth2", :uid => "http://xxxx.com/openid?id=118181138998978630963", :status => role)
   visit dashboard_login_path
   click_link 'Sign in with Google'
+  puts User.all
 end
 
 Given /^I have( | not )logged in as a student for a survey template$/ do |negative|

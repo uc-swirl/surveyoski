@@ -5,7 +5,7 @@ Before('@omniauth_test_good') do
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       "provider"=>"google_oauth2",
       "uid"=>"http://xxxx.com/openid?id=118181138998978630963",
-      "info"=>{"email"=>"test@berkeley.edu", "name"=>"Test User"},
+      "info"=>{"email"=>"gooduser@berkeley.edu", "name"=>"Test User"},
       "credentials"=>{"token"=>"12398735987", "expires_at"=>12312412472837}
   })
 end
@@ -21,7 +21,7 @@ Before('@omniauth_test_bad') do
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       "provider"=>"google_oauth2",
       "uid"=>"http://xxxx.com/openid?id=118181138998978630963",
-      "info"=>{"email"=>"test@notberkley.com", "name"=>"Test User"},
+      "info"=>{"email"=>"bad@notberkley.com", "name"=>"Test Bad Login"},
       "credentials"=>{"token"=>"12398735987", "expires_at"=>12312412472837}
   })
 end

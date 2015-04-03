@@ -13,9 +13,13 @@
     %nav.nav
       %ul.admin_links
         %li
-          = link_to "Change permissions", 'admin/update_user'
+          = link_to "Dashboard", :root
+        %li
+          = link_to "Change permissions", :admin_update_user#"/admin/update_user"
         %li
           = link_to "All surveys", :survey_templates
+        %li
+          = link_to "New survey", :new_survey_template
 
     #main
       = yield

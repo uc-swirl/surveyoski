@@ -5,10 +5,6 @@ gem 'rails', '3.2.16'
 
 group :development, :test do
   gem 'database_cleaner'
-  # gem "cucumber" 
-  # gem "gherkin", "= 2.1.4" 
-  # gem "cucumber-rails"
-
   gem 'cucumber-rails', :require => false
   gem 'sqlite3'
   gem 'ruby-debug19'
@@ -38,3 +34,4 @@ gem 'validates_as_phone_number', '~> 0.7.5'
 gem 'devise'
 gem 'email_validator', '~> 1.5.0'
 gem 'omniauth-google-oauth2', "~> 0.2.1"
+gem 'pundit'
