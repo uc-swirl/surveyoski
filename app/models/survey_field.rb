@@ -13,8 +13,11 @@ class SurveyField < ActiveRecord::Base
   end
 
   def parse_options (options)
-    true
+    #parses options into an array like [["option1", "value1"], ["option1", "value1"]]  
+    lines = options.split("\r\n").map {|x| x.split(":").map {|x| x.strip } }
+    self.field_options = lines
   end
+
 
   def as_json(options = {})
     super({:root => false, methods: :nice_name}.merge(options || {}))
