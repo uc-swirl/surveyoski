@@ -1,6 +1,9 @@
 Swirlysurvey::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  ActionDispatch::Reloader.to_prepare do
+    Rails.application.eager_load!
+  end
   # Code is not reloaded between requests
   config.cache_classes = true
 
