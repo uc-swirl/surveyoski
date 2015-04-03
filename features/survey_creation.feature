@@ -8,8 +8,10 @@ So that I can get feedback from students
 I would like to make new course surveys
 
 
+
+
 Scenario: Form Creation
-Given I make a survey template
+Given I am on the new survey template page
 Then I should be on the new/edit survey page
 
 
