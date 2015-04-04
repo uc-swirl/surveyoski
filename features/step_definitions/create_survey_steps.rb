@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 Given /I am on the new survey template page/ do
   @user = User.create(:email => "test@berkeley.edu", :status => "admin")
@@ -83,7 +83,7 @@ end
 
 
 
-=======
+
 Given /^(?:|I )am a(?:|n) (.+)$/ do |user|
 	(['student', 'admin', 'instructor', 'ta'].include? user.downcase).should == true
     @user = User.create(:email => "test@berkeley.edu", :status => user.downcase)
@@ -103,4 +103,4 @@ Then /^(?:|I ) should be on (.+)$/ do |page_name|
 		assert_equal path_to(page_name), current_path
 	end
 end
->>>>>>> 7d35cf4e740c91cc0a87fafc90be794beed238c5
+ 
