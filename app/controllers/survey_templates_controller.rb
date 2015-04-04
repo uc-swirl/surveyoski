@@ -1,12 +1,20 @@
 class SurveyTemplatesController < ApplicationController
-  before_filter :authorize 
+  before_filter :authorize_user
+
+  def authorize_user
+      if not current_user
+        session[:template_id] = params[:id]
+        redirect_to "/auth/google_oauth2"
+      end
+  end
 
   def new
+    authorize :survey_templates, :new?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
-
   end
 
   def edit
+    authorize :survey_templates, :edit?
     @survey = SurveyTemplate.find(params[:id])
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
@@ -33,20 +41,14 @@ class SurveyTemplatesController < ApplicationController
     end
     @survey.save
   end
-
-  def authorize
-    session[:param] = "this is a parameter and it's in the session hash"
-    if not current_user
-      session[:template_id] = params[:id]
-      redirect_to "/auth/google_oauth2"
-    end
-  end
-
+  
   def index
+    authorize :survey_templates, :index?
     @templates = SurveyTemplate.all
   end
   
   def show # shows the HTML form
+    authorize :survey_templates, :show?
   	template = SurveyTemplate.find(params[:id])
     @fields = template.survey_fields
     @id = params[:id]
@@ -54,9 +56,11 @@ class SurveyTemplatesController < ApplicationController
     @survey_description = template.survey_description
   end
   def all_responses
+    authorize :survey_templates, :all_responses?
   	@survey_template = SurveyTemplate.find(params[:id])
   end
   def participants
+    authorize :survey_templates, :participants?
   	@survey_template = SurveyTemplate.find(params[:id])
   end
 

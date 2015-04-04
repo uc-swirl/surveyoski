@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'cucumber/rspec/doubles'
 SimpleCov.start 'rails'
 
 require 'cucumber/rails'
@@ -51,3 +52,34 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# class ApplicationController < ActionController::Base
+#   if Rails.env.test?
+#     prepend_before_filter :stub_current_user
+#     def stub_current_user
+#       puts "stub current user"
+#       session[:user_id] = cookies[:stub_user_id] if cookies[:stub_user_id]
+#       puts "session id is "
+#       puts session[:user_id]
+#     end
+#   end
+# end
+
+
+# Before('@omniauth_test') do
+#   OmniAuth.config.test_mode = true
+#   Capybara.default_host = 'http://example.com'
+
+#   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+#       :provider => 'google_oauth2',
+#       :uid => '123545',
+#       :info => { :email => 'example@berkeley.edu', 
+#       	:name => 'russell' },
+#         :credentials => {:token => '1234565', 
+#         	:expires_at => 123456789009999}
+#       })
+#   request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
+# end
+
+# After('@omniauth_test') do
+#   OmniAuth.config.test_mode = false
+# end

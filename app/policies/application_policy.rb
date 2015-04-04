@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    true
   end
 
   def show?
@@ -51,4 +51,3 @@ class ApplicationPolicy
     end
   end
 end
-
