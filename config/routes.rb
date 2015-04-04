@@ -3,16 +3,14 @@
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  # root :to => "volunteer_dashboard#index", :format => false, :as => :volunteer #perhaps just a placeholder
   root :to => 'dashboard#index', :format => false
   resources :survey_templates
   resources :submissions
-
-  match 'admin', :to => 'dashboard#index', :format => false, :as => :dashboard
-  match 'admin/add_user', :to => 'dashboard#add_user', :format => false, :as => :admin_add_user
-  match 'admin/create_user', :to => 'dashboard#create_user', :format => false, :as => :admin_create_user
-
-  match 'admin/login', :to => 'dashboard#login', :format => false, :as => :dashboard_login
+  
+  get 'admin', :to => 'dashboard#index', :format => false, :as => :dashboard
+  get 'admin/update_user', :to => 'dashboard#update_user', :format => false, :as => :admin_update_user
+  post 'admin_update_user_pathin/change_user', :to => 'dashboard#change_user', :format => false, :as => :admin_change_user
+  get 'admin/login', :to => 'dashboard#login', :format => false, :as => :dashboard_login
 
   get 'survey_templates/:id/all_responses', :to => 'survey_templates#all_responses'
   get 'survey_templates/:id/participants', :to => 'survey_templates#participants'

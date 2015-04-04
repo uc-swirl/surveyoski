@@ -30,7 +30,7 @@ describe SubmissionsController do
     f1 = st.text_question_fields.build(:question_title => "Poodles?") 
     st.save!   
     post :create, {:submission => {f1.id => "another response"}, :template_id => st.id}
-    response.should redirect_to survey_templates_path
+    response.should redirect_to survey_template_path(st)
   end
 
   it 'adds participant for the survey'do

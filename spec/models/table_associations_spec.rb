@@ -30,6 +30,11 @@ describe "Tables are associated correctly" do
     @r4.submission_id = @s2.id
     @r4.survey_field_id = @q2.id   
     @r4.save
+
+    @p1 = @t.participants.build(:email => "alexlily@berkeley.edu")
+    @p2 = @t.participants.build(:email => "marcojoemontagna@gmail.com")
+    @p3 = @t.participants.build(:email => "dluu@gmail.com")
+    @t.save!
     
   end
   it "template can access its fields" do
@@ -43,6 +48,9 @@ describe "Tables are associated correctly" do
   end
   it "response knows its question" do 
     expect(@r1.survey_field.question_title).to be == "Name:"
+  end
+  it "survey knows its participants" do
+    expect(@t.participants.length).to be 3
   end
 
 end

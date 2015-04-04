@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20150401181311) do
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "status"
   end
 
 end

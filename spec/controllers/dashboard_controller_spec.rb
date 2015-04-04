@@ -1,26 +1,28 @@
 require 'spec_helper'
 
 describe DashboardController do
-    describe "Render the appropriate layouts and templates when logged in" do
+  describe "Render the appropriate layouts and templates when logged in" do
       before(:each) do
-        @request.env["devise.mapping"] = :user
-        @user = sign_in
+        user = User.create(:email=> "something", :status => "admin")
+        session[:user_id] = user.id
       end
-    it 'Index should render the dashboard layout' do
-      get :index
-      response.should render_template("layouts/dashboard")
-    end
+      it 'renders index' do
+        visit dashboard_path
+        expect(response).to render_template("dashboard") 
+      end
   end
 
-    describe "Should not render admin layout, when not logged in" do
-      before(:each) do
-        @request.env["devise.mapping"] = :user
-        @user = sign_in(nil)
+  describe "Render the appropriate layouts and templates when not logged in" do
+      it 'doesn\'t render index' do
+        user = User.create(:email=> "something", :status => "student")
+        session[:user_id] = user.id
+        visit dashboard_path
+        expect(response).to render_template("dashboard/login") 
       end
-    it 'Index should not render the dashboard layout' do
-      get :index
-      response.should_not render_template("layouts/dashboard")
-    end
+      it 'doesn\'t render index for non-logged in user' do
+        visit dashboard_path
+        expect(response).to render_template("dashboard/login") 
+      end
   end
 
 end
