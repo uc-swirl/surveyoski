@@ -1,3 +1,4 @@
+
 require 'spec_helper'
 
 describe SurveyTemplate do
@@ -42,31 +43,25 @@ describe SurveyTemplate do
     it 'formats submissions into csv string when there have been more than 10 responses' do
       3.times do
         submis = @s.submissions.build
-        r1 = submis.field_responses.build
-        r1.response = "Lime Green"
+        r1 = submis.field_responses.build(:response => "Lime Green")
         r1.survey_field_id = @q1.id
-        r2 = submis.field_responses.build
-        r2.response = "25"
+        r2 = submis.field_responses.build(:response => "25")
         r2.survey_field_id = @q2.id
         submis.save
       end
       3.times do
         submis = @s.submissions.build
-        r1 = submis.field_responses.build
-        r1.response = "Magenta"
+        r1 = submis.field_responses.build(:response => "Magenta")
         r1.survey_field_id = @q1.id
-        r2 = submis.field_responses.build
-        r2.response = "2"
+        r2 = submis.field_responses.build(:response => "2")
         r2.survey_field_id = @q2.id
         submis.save
       end
       6.times do
         submis = @s.submissions.build
-        r1 = submis.field_responses.build
-        r1.response = "Pink"
+        r1 = submis.field_responses.build(:response => "Pink")
         r1.survey_field_id = @q1.id
-        r2 = submis.field_responses.build
-        r2.response = "14"
+        r2 = submis.field_responses.build(:response => "14")
         r2.survey_field_id = @q2.id
         submis.save
       end
