@@ -16,6 +16,7 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'selenium-webdriver'
   gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 group :production do
