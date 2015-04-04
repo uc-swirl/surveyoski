@@ -41,6 +41,30 @@ class SurveyTemplatesController < ApplicationController
     end
     @survey.save
   end
+
+  def clone
+    template = SurveyTemplate.find(params[:id])
+    new_template = template.dup
+    new_template.save
+    amend_title(new_template)
+    clone_fields(new_template, template)
+    redirect_to survey_templates_path
+  end
+
+  def amend_title(clone)
+    if clone.survey_title == nil
+      clone.survey_title = "<no title> cloned"
+    else
+      clone.survey_title = clone.survey_title + " (cloned)"
+    end
+    clone.save
+  end
+  def clone_fields(clone, orig)
+    orig.survey_fields.each do |field|
+      clone.survey_fields << field.dup
+    end
+    clone.save
+  end
   
   def index
     authorize :survey_templates, :index?
