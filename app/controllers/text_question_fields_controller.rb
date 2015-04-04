@@ -1,0 +1,5 @@
+class TextQuestionsFieldsController < ApplicationController
+
+
+end
+
