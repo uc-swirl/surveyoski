@@ -1,4 +1,0 @@
-class Ta < User
-
-end
-

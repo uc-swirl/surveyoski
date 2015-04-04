@@ -8,10 +8,10 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require_tree .
+
+
  */
- 
+
 #user_remember_me {
     float: left;
     position: relative;
@@ -1450,8 +1450,8 @@ textarea {
 }
 
 /* line 48, /Users/Clancy/.rvm/gems/ruby-2.1.2/gems/bootstrap-sass-3.2.0.2/assets/stylesheets/bootstrap/_scaffolding.scss */
-a {
-    color: #428bca;
+#sign_in {
+    color: white;
     text-decoration: none;
 }
 /* line 53, /Users/Clancy/.rvm/gems/ruby-2.1.2/gems/bootstrap-sass-3.2.0.2/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -8244,4 +8244,37 @@ section {
 .field_box {
     display: block;
     margin-left: 150px;
+}
+.header {
+    width: 100%;
+    height: 80px;
+    color: #FDB515;
+    background: #003A70;
+    font-size: 50px;
+    border-bottom: 5px solid;
+    z-index: 0;
+    font-family: Ubuntu;
+}
+
+#text {
+    position: absolute;
+    left: calc(50% - 253px/2);
+}
+
+#background img {
+    position: absolute;
+    z-index: -1;
+}
+
+div#background {
+    bottom: 150px;
+    position: relative;
+}
+
+#icon img {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 20px;
+    top: 8px;
 }

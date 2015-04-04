@@ -4,7 +4,7 @@ Given /^I have( | not )logged in as a(?:n?) ([a-zA-Z]+)$/ do |negative, role|
   end
   User.create!(:provider => "google_oauth2", :uid => "http://xxxx.com/openid?id=118181138998978630963", :status => role)
   visit dashboard_login_path
-  click_link 'Sign in with Google'
+  click_link 'sign_in'
   puts User.all
 end
 
