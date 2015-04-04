@@ -15,6 +15,8 @@ group :development, :test do
   gem 'autotest-rails'
   gem "factory_girl_rails", "~> 4.0"
   gem 'selenium-webdriver'
+  gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 group :production do
@@ -35,3 +37,4 @@ gem 'devise'
 gem 'pundit'
 gem 'email_validator', '~> 1.5.0'
 gem 'omniauth-google-oauth2', "~> 0.2.1"
+gem "codeclimate-test-reporter", group: :test, require: nil

@@ -3,14 +3,13 @@ class SurveyTemplatePolicy < Struct.new(:user, :survey_template)
     user.status != "student"  
   end
   def create?
-  	true
-  	#user.status != "student"
+  	user.status != "student"
   end 
   def new?
   	create?
   end 
   def edit?
-  	true
+  	user.status != "student"
   end
   def show?
   	true
@@ -21,9 +20,7 @@ class SurveyTemplatePolicy < Struct.new(:user, :survey_template)
   def participants?
   	user.status == "professor" or user.status == "admin"
   end
-  # class Scope < Scope
-  #   def resolve
-  #     scope
-  #   end
-  # end
+  def destroy?
+    user.status == "professor" or user.status == "admin"
+  end
 end

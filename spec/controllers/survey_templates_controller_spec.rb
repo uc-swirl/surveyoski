@@ -35,7 +35,6 @@ describe SurveyTemplatesController do
       end
     end
 
-
     describe "create_new" do
       it 'the survey template is stored in the db' do
         expect(SurveyTemplate.find_by_survey_title("What a wonderful form")).to be_nil
@@ -85,7 +84,19 @@ describe SurveyTemplatesController do
         expect(assigns(:survey_description)).to eq("Green")
       end
     end
-
+    describe "deleting surveys" do
+      before(:each) do
+        @field = TextQuestionField.new(:question_title => "TextTest")
+        @survey = SurveyTemplate.create(:survey_title => "Gunpowder", :survey_description => "Green")
+        @survey.survey_fields << @field
+      end
+      it "deletes the survey object" do
+        expect {delete :destroy, :id => @survey.id}.to change{SurveyTemplate.all.length}.by(-1)
+      end
+      it "deletes the survey object" do
+        expect {delete :destroy, :id => @survey.id}.to change{SurveyField.all.length}.by(-1)
+      end
+    end
 
     describe "all_responses and participants" do
       before(:each) do

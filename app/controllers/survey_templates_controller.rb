@@ -40,6 +40,33 @@ class SurveyTemplatesController < ApplicationController
       @survey.survey_fields << field
     end
     @survey.save
+    redirect_to survey_templates_path
+  end
+
+  def clone
+    template = SurveyTemplate.find(params[:id])
+    new_template = template.dup
+    new_template.save
+    amend_title(new_template)
+    clone_fields(new_template, template)
+    redirect_to survey_templates_path
+  end
+
+  def amend_title(clone)
+    if clone.survey_title == nil
+      clone.survey_title = "<no title> cloned"
+    else
+      clone.survey_title = clone.survey_title + " (cloned)"
+    end
+    clone.save
+  end
+  def clone_fields(clone, orig)
+    orig.survey_fields.each do |field|
+      clone.survey_fields << field.dup
+    end
+    clone.save
+  end
+  def clone_options(clone, field)
   end
   
   def index
@@ -62,6 +89,13 @@ class SurveyTemplatesController < ApplicationController
   def participants
     authorize :survey_templates, :participants?
   	@survey_template = SurveyTemplate.find(params[:id])
+  end
+
+  def destroy
+    authorize :survey_templates, :destroy?
+    @survey_template = SurveyTemplate.find(params[:id])
+    @survey_template.destroy    
+    redirect_to survey_templates_path
   end
 
 end
