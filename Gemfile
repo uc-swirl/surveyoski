@@ -15,6 +15,7 @@ group :development, :test do
   gem 'autotest-rails'
   gem "factory_girl_rails", "~> 4.0"
   gem 'selenium-webdriver'
+  gem 'poltergeist'
 end
 
 group :production do

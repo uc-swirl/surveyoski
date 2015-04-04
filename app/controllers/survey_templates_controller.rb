@@ -40,6 +40,7 @@ class SurveyTemplatesController < ApplicationController
       @survey.survey_fields << field
     end
     @survey.save
+    redirect_to survey_templates_path
   end
   
   def index

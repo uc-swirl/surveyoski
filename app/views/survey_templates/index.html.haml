@@ -8,7 +8,7 @@
     - @templates.each do |template|
       %tr
         - if template.survey_title.to_s != ''
-          %td= link_to template.survey_title.to_s, survey_template_path(template)
+          %td= link_to template.survey_title.to_s, edit_survey_template_path(template)
         - else
           %td= link_to "Survey " + template.id.to_s, survey_template_path(template)
         %td= link_to 'All Responses', "/survey_templates/#{template.id}/all_responses"
