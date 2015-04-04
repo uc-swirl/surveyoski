@@ -5,9 +5,4 @@ class DashboardControllerPolicy < Struct.new(:user, :survey_template)
   def update_user?
   	user.status != "student"
   end 
-  # class Scope < Scope
-  #   def resolve
-  #     scope
-  #   end
-  # end
 end
