@@ -1,0 +1,23 @@
+<div class = "dashboard_title">Change permissions for user</div>
+<%= form_tag :admin_change_user, :class => 'permisson' do %>
+    <%= label_tag('email', 'Email', :class=>'option') %>
+    <%= text_field_tag 'email'%>
+
+    <div id="change">Change permission to</div>
+
+
+    <%= radio_button_tag 'status', 'student' %>
+    <%= label_tag('student', 'Student', :class => 'option') %>
+
+    <%= radio_button_tag 'status', 'TA' %>
+    <%= label_tag('TA', 'TA', :class=>'option') %>
+
+    <%= radio_button_tag 'status', 'professor' %>
+    <%= label_tag('professor', 'Professor', :class =>'option') %>
+
+    <%= radio_button_tag 'status', 'admin' %>
+    <%= label_tag('admin', 'Admin', :class=>'option') %>
+
+    <br>
+    <%= submit_tag "Update", :class=>'submit' %>
+<% end %>

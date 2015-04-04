@@ -4116,7 +4116,6 @@ select[multiple].input-lg,
     vertical-align: middle;
     cursor: pointer;
     position: absolute;
-    margin-left: calc(50% - 89px);
     background-image: none;
     border: 1px solid transparent;
     white-space: nowrap;
@@ -8292,4 +8291,12 @@ section {
 #logout:hover{
     border-radius: 10px;
     color: #fecd61;
+}
+
+form.permisson {
+    margin-left: 150px;
+}
+.option {
+    margin-bottom: 20px;
+    margin-right: 20px;
 }
