@@ -1,7 +1,7 @@
 class SurveyField < ActiveRecord::Base
   attr_accessible :question_title, :question_description
   belongs_to :survey_template
-  has_many :field_responses
+  has_many :field_responses, :dependent => :destroy
   serialize :field_options, JSON
 
   def is_valid? (response)

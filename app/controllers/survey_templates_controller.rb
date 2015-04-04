@@ -65,6 +65,8 @@ class SurveyTemplatesController < ApplicationController
     end
     clone.save
   end
+  def clone_options(clone, field)
+  end
   
   def index
     authorize :survey_templates, :index?
