@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(:version => 20150401181311) do
     t.string   "question_title"
     t.string   "question_description"
     t.string   "field_options"
+    t.string   "drop_down_options"
+    t.string   "survey_fields"
+    t.string   "checkbox_options"
+    t.string   "radio_button_options"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end

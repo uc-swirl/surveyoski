@@ -1,0 +1,3 @@
+<%= label :submission, field.question_title, class: "field_label", id: field.id %>
+<br>
+<%= select_tag(field.id, options_for_select(field.field_options)) %>

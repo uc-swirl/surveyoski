@@ -4,5 +4,9 @@ class CheckboxField < SurveyField
     "Checkbox"
   end
 
+  attr_accessible :checkbox_options
+  def location
+  	return "fields/checkbox_field"
+  end
 
 end

@@ -7,8 +7,7 @@
 </h5>
 <%= form_tag submissions_path :template_id => @id do %>
     <% @fields.each do |field| %>
-        <%= label :submission, field.id, field.question_title, class: "field_label" %>
-        <%= text_field :submission, field.id, class: "field_box" %>
+        <%= render partial: field.location, locals: {field: field} %>
         <br>
     <% end %>
     <br>
