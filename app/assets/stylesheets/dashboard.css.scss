@@ -4,7 +4,7 @@
 
 .nav ul {
   list-style: none;
-  background-color: #444;
+  background-color: #FDB515;
   text-align: center;
   padding: 0;
   margin: 0;
@@ -19,13 +19,19 @@
  
 .nav a {
   text-decoration: none;
-  color: #fff;
+  color: #003A70;
   display: block;
   transition: .3s background-color;
+  font-family: Ubuntu;
+  border-radius: 10px;
 }
  
 .nav a:hover {
-  background-color: #005f5f;
+  background: #fecd61;
+  transition: .5s;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
  
 .nav a.active {
@@ -36,7 +42,7 @@
  
 @media screen and (min-width: 600px) {
   .nav li {
-    width: 120px;
+    width: 220px;
     border-bottom: none;
     height: 50px;
     line-height: 50px;
@@ -62,4 +68,8 @@
     background-color: #444;
   }
   */
+  ul#top {
+    border-bottom: 5px #FDB515 solid;
+  }
+
 }

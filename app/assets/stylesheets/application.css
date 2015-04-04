@@ -8254,6 +8254,7 @@ section {
     border-bottom: 5px solid;
     z-index: 0;
     font-family: Ubuntu;
+    position: relative;
 }
 
 #text {
@@ -8266,7 +8267,7 @@ section {
     z-index: -1;
 }
 
-div#background {
+#background {
     bottom: 150px;
     position: relative;
 }
@@ -8277,4 +8278,18 @@ div#background {
     position: absolute;
     left: 20px;
     top: 8px;
+}
+
+#logout {
+    position: absolute;
+    right: 20px;
+    font-size: 22px;
+    top: calc(50% - 31px / 2);
+    text-decoration: none;
+    color: #FDB515;
+}
+
+#logout:hover{
+    border-radius: 10px;
+    color: #fecd61;
 }
