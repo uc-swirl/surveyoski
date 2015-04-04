@@ -20,4 +20,7 @@ class SurveyTemplatePolicy < Struct.new(:user, :survey_template)
   def participants?
   	user.status == "professor" or user.status == "admin"
   end
+  def destroy?
+    user.status == "professor" or user.status == "admin"
+  end
 end

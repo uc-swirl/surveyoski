@@ -90,5 +90,12 @@ class SurveyTemplatesController < ApplicationController
   	@survey_template = SurveyTemplate.find(params[:id])
   end
 
+  def destroy
+    authorize :survey_templates, :destroy?
+    @survey_template = SurveyTemplate.find(params[:id])
+    @survey_template.destroy    
+    redirect_to survey_templates_path
+  end
+
 end
 
