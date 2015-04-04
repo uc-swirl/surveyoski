@@ -23,6 +23,7 @@ class DashboardController < ApplicationController
 
     def index
       authorize :dashboard_controller, :index?
+      render :action => "index", :layout => "dashboard"
     end
 
     def login
