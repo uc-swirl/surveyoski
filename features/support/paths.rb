@@ -14,6 +14,8 @@ module NavigationHelpers
     case page_name
     when /^dashboard$/ then dashboard_path
     when /^login$/ then dashboard_login_path
+    when /^new$/ then new_survey_template_path
+    when /^edit survey$/ then new_survey_template_path
       
 		
     # Add more mappings here.

@@ -14,4 +14,4 @@ Then I should be on the new/edit survey page
 Scenario:
 Given I am an instructor
 And I make a new survey
-Then I should be on the new/edit survey page
+Then I should be on the edit survey page
