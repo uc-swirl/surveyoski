@@ -1,6 +1,6 @@
 <%= label :submission, field.question_title, class: "field_label", id: field.id %>
-<% field.options.each do |option| %>
+<% field.field_options.each do |option| %>
 	<br>
-    <%= radio_button_tag("radio", option) %>
-    <%= label_tag("radio_#{option}", option) %>
+    <%= radio_button_tag(field.question_title, option[1]) %>
+    <%= label_tag(option[1], option[1]) %>
 <% end %>

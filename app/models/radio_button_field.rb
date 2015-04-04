@@ -8,7 +8,5 @@ class RadioButtonField < SurveyField
   def location
   	return "fields/radio_button_field"
   end
-  def options
-  	return radio_button_options.split(', ')
-  end
+
 end
