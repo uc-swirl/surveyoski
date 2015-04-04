@@ -40,6 +40,7 @@ class SurveyTemplatesController < ApplicationController
       @survey.survey_fields << field
     end
     @survey.save
+    redirect_to survey_templates_path
   end
 
   def clone
@@ -64,6 +65,8 @@ class SurveyTemplatesController < ApplicationController
       clone.survey_fields << field.dup
     end
     clone.save
+  end
+  def clone_options(clone, field)
   end
   
   def index
