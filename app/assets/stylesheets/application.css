@@ -2063,8 +2063,8 @@ pre code {
 .container, main {
     margin-right: auto;
     margin-left: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    /* padding-left: 15px; */
+    /* padding-right: 15px; */
 }
 /* line 15, /Users/Clancy/.rvm/gems/ruby-2.1.2/gems/bootstrap-sass-3.2.0.2/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
 .container:before, main:before, .container:after, main:after {
@@ -2090,7 +2090,7 @@ pre code {
 @media (min-width: 1200px) {
     /* line 10, /Users/Clancy/.rvm/gems/ruby-2.1.2/gems/bootstrap-sass-3.2.0.2/assets/stylesheets/bootstrap/_grid.scss */
     .container, main {
-        width: 1170px;
+        width: 1276px;
     }
 }
 
@@ -8200,14 +8200,6 @@ img {
 /* line 11, /Users/Clancy/Dropbox/Apps/rails_apps/rails-devise/app/assets/stylesheets/framework_and_overrides.css.scss */
 .navbar-brand {
     font-size: inherit;
-}
-
-/* line 36, /Users/Clancy/Dropbox/Apps/rails_apps/rails-devise/app/assets/stylesheets/framework_and_overrides.css.scss */
-main {
-    background-color: #eee;
-    padding-bottom: 80px;
-    width: 100%;
-    margin-top: 51px;
 }
 
 /* line 43, /Users/Clancy/Dropbox/Apps/rails_apps/rails-devise/app/assets/stylesheets/framework_and_overrides.css.scss */

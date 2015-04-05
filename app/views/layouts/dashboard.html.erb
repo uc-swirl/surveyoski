@@ -10,13 +10,12 @@
 </head>
 <body>
     <%= render 'layouts/header' %>
-    <span>
-      <%= flash[:notice] %>
-    </span>
     <%= render 'dashboard/functions' %>
+    <div id = "background">
+      <img src = "http://calibermag.org/wp-content/uploads/2012/03/UC-Berkeley-151.jpg">
+    </div>
     <div id="main">
       <%= yield %>
     </div>
-
 </body>
 </html>

@@ -59,20 +59,6 @@
     margin-right: -4px;
   }
 
-  /* Options 2 - Float
-  .nav li {
-    float: left;
-  }
-  .nav ul {
-    overflow: auto;
-    width: 600px;
-    margin: 0 auto;
-  }
-  .nav {
-    background-color: #444;
-  }
-  */
-  /* line 71, ../../app/assets/stylesheets/dashboard.css.scss */
   ul#top {
     border-bottom: 5px #FDB515 solid;
   }
@@ -83,5 +69,24 @@
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 36px;
+  }
+
+  #loggedin_background img {
+    position: absolute;
+    z-index: -1;
+  }
+
+  #loggedin_background {
+    bottom: 150px;
+    position: relative;
+  }
+
+  #background-overlay{
+    background: black;
+    position: absolute;
+    width: 100%;
+
+    top: 0px;
+    opacity: 0.25;
   }
 }
