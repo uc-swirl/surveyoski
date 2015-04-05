@@ -1,7 +1,4 @@
-// Place all the styles related to the dashboard controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
+/* line 5, ../../app/assets/stylesheets/dashboard.css.scss */
 .nav ul {
   list-style: none;
   background-color: #FDB515;
@@ -9,6 +6,8 @@
   padding: 0;
   margin: 0;
 }
+
+/* line 12, ../../app/assets/stylesheets/dashboard.css.scss */
 .nav li {
   font-family: 'Oswald', sans-serif;
   font-size: 1.2em;
@@ -16,7 +15,8 @@
   height: 40px;
   border-bottom: 1px solid #888;
 }
- 
+
+/* line 20, ../../app/assets/stylesheets/dashboard.css.scss */
 .nav a {
   text-decoration: none;
   color: #003A70;
@@ -25,22 +25,25 @@
   font-family: Ubuntu;
   border-radius: 10px;
 }
- 
+
+/* line 29, ../../app/assets/stylesheets/dashboard.css.scss */
 .nav a:hover {
-  background: #fecd61;
+  background: #fee6b0;
   transition: .5s;
   border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
 }
- 
+
+/* line 37, ../../app/assets/stylesheets/dashboard.css.scss */
 .nav a.active {
   background-color: #fff;
   color: #444;
   cursor: default;
 }
- 
+
 @media screen and (min-width: 600px) {
+  /* line 44, ../../app/assets/stylesheets/dashboard.css.scss */
   .nav li {
     width: 220px;
     border-bottom: none;
@@ -48,13 +51,14 @@
     line-height: 50px;
     font-size: 1.4em;
   }
- 
+
   /* Option 1 - Display Inline */
+  /* line 53, ../../app/assets/stylesheets/dashboard.css.scss */
   .nav li {
     display: inline-block;
     margin-right: -4px;
   }
- 
+
   /* Options 2 - Float
   .nav li {
     float: left;
@@ -68,14 +72,16 @@
     background-color: #444;
   }
   */
+  /* line 71, ../../app/assets/stylesheets/dashboard.css.scss */
   ul#top {
     border-bottom: 5px #FDB515 solid;
   }
+
+  /* line 74, ../../app/assets/stylesheets/dashboard.css.scss */
   .dashboard_title {
-    margin-left: 150px;
+    margin-left: 250px;
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 36px;
   }
-
 }

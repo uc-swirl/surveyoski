@@ -1,0 +1,25 @@
+<%= render 'dashboard/functions' %>
+<h1>New Form</h1>
+<%= form_tag survey_templates_path do %>
+    <%= label :form_name, "Name" %>
+    <%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
+    <%= hidden_field_tag(:id, if @survey then @survey.id else "" end) %>
+    <% if @fields_json %>
+        <script class="loading_form_fields">
+            <%= raw("var _survey_fields= " + @fields_json + ";") %>
+        </script>
+    <% end %>
+    <div class="form_fields"></div>
+    <hr/>
+    <%= label :new_field_name, 'Field Name' %>
+    <%= text_field_tag :new_field_name %>
+    <br/>
+    <%= label :new_field_type, 'Field Type' %>
+    <%= select_tag :new_field_type, options_for_select(@field_types) %>
+    <br/>
+    <button class="add_field_button">Add Field</button>
+    <br/>
+    <div></div>
+    <br/>
+    <%= submit_tag 'Submit' %>
+<% end %>

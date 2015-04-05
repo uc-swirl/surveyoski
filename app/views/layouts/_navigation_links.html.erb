@@ -1,6 +1,0 @@
-<%# add navigation links to this file %>
-<% if session[:user_id] %>
-  <li><%= link_to 'Sign out', signout_path %></li>
-<% else %>
-  <li><%= link_to 'Sign in', dashboard_login_path %></li>
-<% end %>

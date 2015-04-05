@@ -1,0 +1,33 @@
+
+<%= render 'dashboard/functions' %>
+<h1>SurveyOski Evaluation</h1>
+<table id="forms">
+  <thead>
+  <tr>
+    <th>
+      <%= "Forms" %>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @templates.each do |template| %>
+      <tr>
+        <% if template.survey_title.to_s != '' %>
+            <td>
+              <%= link_to template.survey_title.to_s, survey_template_path(template) %>
+            </td>
+        <% else %>
+            <td>
+              <%= link_to "Survey " + template.id.to_s, survey_template_path(template) %>
+            </td>
+        <% end %>
+        <td>
+          <%= link_to 'All Responses', "/survey_templates/#{template.id}/all_responses" %>
+        </td>
+        <td>
+          <%= link_to 'Emails of Participants', "/survey_templates/#{template.id}/participants" %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
