@@ -6,14 +6,24 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu:400,500" rel="stylesheet" type="text/css">
   </head>
   <body>
     <header>
-      <%= render 'layouts/navigation' %>
+      <%= render 'layouts/header' %>
     </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+    <span>
+      <%= flash[:notice] %>
+    </span>
+
+    <div id="main">
+      <%= render 'dashboard/functions' %>
+      <div id = "background">
+        <img src = "http://calibermag.org/wp-content/uploads/2012/03/UC-Berkeley-151.jpg">
+        <%= render 'layouts/messages' %>
+      </div>
+      <%= yield %>
+    </div>
+
   </body>
 </html>
