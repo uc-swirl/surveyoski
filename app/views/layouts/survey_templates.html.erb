@@ -9,15 +9,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <%= render 'layouts/header' %>
-    <%= render 'dashboard/functions' %>
+<%= render 'layouts/header' %>
+<%= render 'dashboard/functions' %>
 
-    <div id = "background">
-      <img src = "http://calibermag.org/wp-content/uploads/2012/03/UC-Berkeley-151.jpg">
-    </div>
-    <div id = "background-overlay"></div>
-    <div id="main">
-      <%= yield %>
-    </div>
+<div id = "background">
+  <img src = "http://calibermag.org/wp-content/uploads/2012/03/UC-Berkeley-151.jpg">
+</div>
+<div id = "background-overlay"></div>
+<div id="main">
+  <%= yield %>
+</div>
 </body>
 </html>

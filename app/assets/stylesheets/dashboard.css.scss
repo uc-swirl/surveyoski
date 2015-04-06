@@ -71,22 +71,12 @@
     font-size: 36px;
   }
 
-  #loggedin_background img {
-    position: absolute;
-    z-index: -1;
-  }
-
-  #loggedin_background {
-    bottom: 150px;
-    position: relative;
-  }
-
   #background-overlay{
-    background: black;
+    background: white;
     position: absolute;
     width: 100%;
-
-    top: 0px;
-    opacity: 0.25;
+    height: 103%;
+    opacity: 0.6;
+    z-index:-1;
   }
 }
