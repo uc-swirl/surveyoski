@@ -25,6 +25,13 @@
         <td>
           <%= link_to 'Emails of Participants', "/survey_templates/#{template.id}/participants" %>
         </td>
+        <td>
+          <%= link_to "Clone this survey", "/survey_templates/#{template.id}/clone" %>
+        </td>
+        <td>
+          <%= link_to "Delete this survey", "/survey_templates/#{template.id}", method: :delete %>
+        </td>
+
       </tr>
   <% end %>
   </tbody>
