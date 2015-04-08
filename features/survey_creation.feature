@@ -1,6 +1,3 @@
-
-
-
 Feature: Survey creation
 As a course instuctor or TA,
 So that I can get feedback from students

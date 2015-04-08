@@ -7,8 +7,6 @@ class SubmissionsController < ApplicationController
     user = User.find(session[:user_id])
     template = SurveyTemplate.find(params[:template_id])
     begin
-      #template = Template.find(params[:template_id])
-      #submission = template.submissions.build
       all_blank = params[:submission].keys.all? do |key|
         params[:submission][key] == ''
       end

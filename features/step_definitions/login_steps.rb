@@ -1,11 +1,15 @@
-Given /^I have( | not )logged in as a(?:n?) ([a-zA-Z]+)$/ do |negative, role|
+Given /^I have logged in as a(?:n?) ([a-zA-Z]+)$/ do |role|
   class User
     attr_accessible :provider, :uid
   end
-  User.create!(:provider => "google_oauth2", :uid => "http://xxxx.com/openid?id=118181138998978630963", :status => role)
-  visit dashboard_login_path
-  click_link 'sign_in'
-  puts User.all
+  @user = User.create(:email => "test@berkeley.edu", :status => role, :name => "TEST USER")
+  ApplicationController.any_instance.stub(:current_user).and_return(@user)
+  User.stub(:find).and_return(@user)
+  visit dashboard_path
+end
+
+Given /^I have not logged in as a(?:n?) (?:[a-zA-Z]+)$/ do
+  visit signout_path
 end
 
 Given /^I have( | not )logged in as a student for a survey template$/ do |negative|

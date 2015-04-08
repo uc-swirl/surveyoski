@@ -1,5 +1,3 @@
-
-
 Given /I am on the new survey template page/ do
   @user = User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
@@ -12,13 +10,9 @@ Given /I save the survey/ do
   click_button 'Submit'
 end
 
-
 Given /I name the survey "(.+)"/ do |name|
   fill_in "form_name", :with => name
 end
-
-
-
 
 Given /that field should have the following options "(.+)"/ do |options|
   options = (options.split (",")).map {|x| x.split}
@@ -80,9 +74,6 @@ Given /the survey editor should have a field "(.+)"/ do |name|
     expect(page).to have_css("input[value='"+name+"']")
   }
 end
-
-
-
 
 Given /^(?:|I )am a(?:|n) (.+)$/ do |user|
 	(['student', 'admin', 'instructor', 'ta'].include? user.downcase).should == true

@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def create
-    flash.keep
     user = User.from_omniauth(request.env["omniauth.auth"])
     if user != nil
 	    session[:user_id] = user.id

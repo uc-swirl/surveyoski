@@ -1,5 +1,6 @@
 When (/I make "([^"]+)" an admin/) do |email|
-  visit 'admin/update_user'
+  visit admin_update_user_path
+  # visit '/admin/update_user'
   step 'I fill in "email" with "' + email +'"'
   step 'I choose "status_admin"'
   click_button "Update"
