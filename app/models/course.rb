@@ -3,4 +3,7 @@ class Course < ActiveRecord::Base
   has_many :enrollments
   has_many :users, through: :enrollments
   has_many :survey_templates
+
+
+
 end

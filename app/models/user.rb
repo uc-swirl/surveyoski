@@ -1,11 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :status
   has_many :enrollments
-  
-  # def surveyTemplates #This is a dev stub, remove when user is associated with SurveyTemplates
-  #   SurveyTemplate.all
-  # end
-
+  has_many :courses, through: :enrollments
 
   def self.from_omniauth(auth)
     where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
@@ -21,6 +17,14 @@ class User < ActiveRecord::Base
       end
       user.save!
     end
+  end
+
+  def all_surveys
+    surveys = []
+    self.courses.each do |course|
+      surveys.concat course.survey_templates
+    end
+    surveys
   end
 
 end

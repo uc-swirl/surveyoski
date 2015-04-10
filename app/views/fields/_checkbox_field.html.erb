@@ -2,6 +2,6 @@
 
 <% field.field_options.each do |option| %>
 	<br>
-    <%= check_box_tag(option[0], option[1] ) %>
+    <%= check_box_tag(field.question_title + "[" + option[0] + "]", option[1] ) %>
     <%= label_tag(option[0], option[0]) %>
 <% end %>
