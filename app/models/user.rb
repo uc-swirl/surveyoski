@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :status
+  has_many :enrollments
   
   # def surveyTemplates #This is a dev stub, remove when user is associated with SurveyTemplates
   #   SurveyTemplate.all

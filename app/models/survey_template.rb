@@ -1,7 +1,7 @@
 require 'csv'
 
 class SurveyTemplate < ActiveRecord::Base
-  attr_accessible :survey_title, :survey_description
+  attr_accessible :survey_title, :survey_description, :published, :author
   has_many :survey_fields , :dependent => :destroy
   has_many :checkbox_fields
   has_many :phone_fields
