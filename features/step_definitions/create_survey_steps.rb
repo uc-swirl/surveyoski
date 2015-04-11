@@ -1,3 +1,19 @@
+
+Given(/^I am on the edit survey template$/) do
+  @user = User.create(:email => "test@berkeley.edu", :status => "student")
+  ApplicationController.any_instance.stub(:current_user).and_return(@user)
+  User.stub(:find).and_return(@user)
+  visit edit_survey_template_path @survey.id
+end
+
+Given(/^I mark "(.*?)" as required$/) do |field_name|
+  found_field = @survey.survey_fields.find {|field| field.question_title == field_name}
+  found_field.required = true
+  @survey.save!
+end
+
+
+
 Given /I am on the new survey template page/ do
   @user = User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
