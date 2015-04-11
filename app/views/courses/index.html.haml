@@ -1,0 +1,11 @@
+= link_to "Add a course", :new_course
+<br>
+
+Your Courses
+
+<br>
+
+- @courses.each do |course|
+  = link_to course.name, edit_course_path(course)
+  = link_to "Delete this course", "/courses/#{course.id}", method: :delete
+  <br>

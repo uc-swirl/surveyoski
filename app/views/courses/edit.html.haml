@@ -1,0 +1,13 @@
+%h1 Edit course
+<br>
+= @course.name
+= @course.id
+
+<br>
+%h2 People who can edit this course
+<br>
+- @people.each do |person| 
+  = person.name
+  <br>
+
+

@@ -23,7 +23,7 @@
   get 'auth/failure', to: redirect('/')
   get 'logout', to: 'sessions#destroy', as: 'signout'
 
-
+  post 'courses/add_editor', :to => 'courses#add_editor', :as => :add_people
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

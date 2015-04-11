@@ -12,7 +12,7 @@
       <tr>
         <% if template.survey_title.to_s != '' %>
             <td>
-              <%= link_to template.survey_title.to_s, survey_template_path(template) %>
+              <%= link_to template.survey_title.to_s, edit_survey_template_path(template) %>
             </td>
         <% else %>
             <td>

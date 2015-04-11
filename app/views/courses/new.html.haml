@@ -1,0 +1,22 @@
+%h1 Edit course
+= form_tag courses_path do
+  = label_tag :course_name, "Course name"
+  - if @course 
+    = text_field_tag :course_name, @course.name
+  - else
+    = text_field_tag :course_name
+  = submit_tag "Submit"
+
+<br>
+- if @course
+  People who can edit this course
+  <br>
+  - @people.each do |person| 
+    = person.name
+    <br>
+  Add people
+  = form_tag add_people_path do
+    = hidden_field_tag :id, @course.id
+    = label_tag :editor_email, "Berkeley Email"
+    = text_field_tag :editor_email
+    = submit_tag "Add"
