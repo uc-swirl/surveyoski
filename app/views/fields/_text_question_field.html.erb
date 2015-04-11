@@ -1,2 +1,2 @@
-<%= label :submission, field.question_title, class: "field_label", id: field.id %>
-<%= text_field :submission, field.question_title, class: "field_box" %>
+<%= label_tag "submission[" + field.id.to_s + "]", field.question_title, class: "field_label", id: field.id %>
+<%= text_field_tag "submission[" + field.id.to_s + "]", nil, class: "field_box" %>

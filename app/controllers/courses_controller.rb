@@ -37,11 +37,11 @@ class CoursesController < ApplicationController
   	course = Course.find_by_id(params[:id])
   	new_editor = User.find_by_email(params[:editor_email])
   	if new_editor == nil
-  		flash[:notice] = "that user doesn't exist"
+  		flash[:notice] = "That user doesn't exist"
   	else
   		new_editor.enrollments.build(:course_id => course.id)
   		new_editor.save!
-  		flash[:notice] = "successfully added " + new_editor.name + " as an editor to " + course.name
+  		flash[:notice] = "Successfully added " + new_editor.name + " as an editor to " + course.name
   	end
   	redirect_to edit_course_path(course)
   end

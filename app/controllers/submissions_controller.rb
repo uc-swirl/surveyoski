@@ -13,6 +13,10 @@ class SubmissionsController < ApplicationController
       if all_blank
         raise "You need to at least fill out one field!"
       end
+      puts "params"
+      puts params
+      puts "params[:submission]"
+      puts params[:submission]
 
       participant = template.participants.build(:email => user.email)
       participant.save!

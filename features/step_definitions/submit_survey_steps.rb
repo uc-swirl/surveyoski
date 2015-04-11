@@ -1,10 +1,35 @@
 Given /^the following survey template exists$/ do |table|
+  class CheckboxField 
+    attr_accessible :field_options
+  end
+  class DropDownField 
+    attr_accessible :field_options
+  end
+  class RadioButtonField 
+    attr_accessible :field_options
+  end
   @survey = SurveyTemplate.create!
   table.hashes.each do |question|
-    @survey.text_question_fields.build(:question_title=>question[:question_title])
+    options = question[:options].split(",").map {|x| x.split(":").map {|x| x.strip } }
+    # puts options
+    # puts question[:type]
+    case question[:type]
+    when "text_question_fields"
+      q = @survey.text_question_fields.build(:question_title=>question[:question_title])
+    when "radio_button_fields"
+      q = @survey.radio_button_fields.build(:question_title=>question[:question_title], :field_options => options)
+    when "checkbox_fields"
+      q = @survey.checkbox_fields.build(:question_title=>question[:question_title], :field_options => options)
+    when "drop_down_fields"
+      q = @survey.drop_down_fields.build(:question_title=>question[:question_title], :field_options => options)
+    end
+    q.save!
   end
+
   @survey.save!
   @question_number = 0
+  # puts @survey.survey_fields
+  # puts SurveyField.all
 end
 
 Given /I am on the survey template/ do
@@ -12,6 +37,7 @@ Given /I am on the survey template/ do
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit survey_template_path(@survey.id)
+  # puts page.body
 end
 
 And /^I have already submitted to it/ do
@@ -20,6 +46,7 @@ And /^I have already submitted to it/ do
 end
 
 When (/^I fill in the fields with (.+)/) do |list|
+  puts page.body
   list = list.split(",").each {|t| t.strip!; t.gsub!(/\A"|"\Z/, '')}
   list.each do |answer|
     step 'I fill in the next field with "' + answer.to_s + '"'
@@ -27,7 +54,27 @@ When (/^I fill in the fields with (.+)/) do |list|
 end
 
 And /I fill in the (?:first|next) field with "(.+)"/ do |value|
-  fill_in("submission_" + @survey.survey_fields[@question_number].id.to_s, :with =>value)
+  puts @question_number.to_s
+  question_type = @survey.survey_fields[@question_number].class
+  if question_type == TextQuestionField
+    puts "TextQuestionField"
+
+    fill_in("submission_" + @survey.survey_fields[@question_number].id.to_s, :with =>value)
+  elsif question_type == CheckboxField
+    puts "CheckboxField"
+    values = value.split(":")
+    puts values
+    values.each do |v|
+      puts v
+      check "submission_4"
+    end
+  elsif question_type == RadioButtonField
+    puts "RadioButtonField"
+    choose("submission_#{@survey.survey_fields[@question_number].id}_#{value}")
+  elsif question_type == DropDownField
+    puts "DropDownField"
+    select value, :from => "submission_#{@survey.survey_fields[@question_number].id}"
+  end
   @question_number += 1
 end
 
@@ -36,10 +83,22 @@ Given(/^I press submit$/) do
 end
 
 Then /^I should see "([^\"]*)"$/ do |text|
+
+  puts FieldResponse.all
+
   if page.respond_to? :should
     page.should have_content(text)
   else
     assert page.has_content?(text)
+  end
+end
+
+
+Then /^I should not see "([^\"]*)"$/ do |text|
+  if page.respond_to? :should
+    page.should_not have_content(text)
+  else
+    assert page.have_no_content?(text)
   end
 end
 

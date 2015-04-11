@@ -18,6 +18,8 @@ module NavigationHelpers
     when /^edit survey$/ then new_survey_template_path
     when /^new survey template$/ then new_survey_template_path
     when /^survey templates$/ then survey_templates_path
+    when /^courses$/ then courses_path
+    when /^new course$/ then new_course_path
       
 		
     # Add more mappings here.

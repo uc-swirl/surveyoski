@@ -25,4 +25,32 @@ describe User do
    	expect(ben).to respond_to(:email)
   end
 
+  describe 'connecting user to surveys' do
+    before(:each) do
+      @oski = FactoryGirl.create(:user)
+      course1 = FactoryGirl.create(:course)
+      course2 = FactoryGirl.create(:course)
+      enrollment = course1.enrollments.build(:user_id => @oski.id)
+      enrollment.save!
+      course1.survey_templates.build
+      course1.survey_templates.build
+      course1.save!
+      course2.survey_templates.build
+      course2.survey_templates.build
+      course2.save!
+    end
+    it 'shows only my surveys' do 
+      puts @oski.all_surveys
+      expect(@oski.all_surveys.length).to be(2)
+      expect(SurveyTemplate.all.length).to be(4)
+    end
+    it 'see all surveys associated with my courses' do
+      orig = @oski.all_surveys.length
+      course = @oski.courses.first
+      course.survey_templates.build
+      course.save!
+      expect(@oski.all_surveys.length).to be(orig + 1)
+    end
+
+  end
 end

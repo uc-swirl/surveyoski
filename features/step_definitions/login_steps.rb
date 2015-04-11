@@ -23,6 +23,21 @@ And (/I go to that survey's page/) do
   visit survey_template_path(@surveyTemplate)
 end
 
+Then (/I go to the page for that course/) do
+  @course = Course.find_by_name(@course_name)
+  visit edit_course_path(@course)
+end
+
+Then (/I should be on the page for that course/) do
+  @course = Course.find_by_name(@course_name)
+  current_path = URI.parse(current_url).path
+  if current_path.respond_to? :should
+    current_path.should == edit_course_path(@course)
+  else
+    assert_equal edit_course_path(@course), current_path
+  end
+end
+
 Then (/I should be on that survey's page/) do
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
