@@ -96,12 +96,22 @@ SurveyBuilder = function () {
 
       if (typeof _survey_fields !== 'undefined') {
         load_survey_template();
+        setup_sortables();
       }
 
     });
 
 
   };
+
+  var setup_sortables = function () {
+
+    jQuery('.form_fields').sortable("destroy");
+    jQuery('.form_fields').sortable();
+    jQuery('.form_fields').sortable().bind('sortupdate', function() {
+      SurveyField.prototype.refreshIDs();
+    });
+  }
 
   var load_survey_template = function () {
     _survey_fields.sort(function(a, b) { return a.question_weight - b.question_weight; });
@@ -142,6 +152,7 @@ SurveyBuilder = function () {
     add_type_row(question_table, field.type);
 
     field_types[field.type](field).appendTo(question_table);
+    setup_sortables();
   }
   var add_title_row = function(question_table, field) {
     var title_row = jQuery("<tr/>").appendTo(question_table);
