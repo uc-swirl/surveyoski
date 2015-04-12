@@ -7,10 +7,10 @@ I would like to be able to delete a field.
 Background:
 
 Given the following survey template exists
-| question_title    | 
-| course name       |
-| course instructor |
-| year              |
+| question_title    | type                 | options                          |
+| course name       | text_question_fields |                                  |
+| course instructor | text_question_fields |                                  |
+| year              | text_question_fields |                                  |
 
 @javascript
 Scenario: I delete a survey field

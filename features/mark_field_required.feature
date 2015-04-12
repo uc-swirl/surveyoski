@@ -7,10 +7,10 @@ I would like to be able to mark a field as required.
 Background:
 
 Given the following survey template exists
-| question_title    | 
-| course name       |
-| course instructor |
-| year              |
+| question_title    | type                 | options                          |
+| course name       | text_question_fields |                                  |
+| course instructor | text_question_fields |                                  |
+| year              | text_question_fields |                                  |
 
 Scenario: I mark a field as required
 Given I am on the edit survey template
