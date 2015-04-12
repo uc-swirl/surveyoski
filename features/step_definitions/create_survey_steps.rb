@@ -20,15 +20,12 @@ Given(/^I drag "(.*?)" to be (above|below) "(.*?)"$/) do |field1, ab, field2|
     field1 = field2
     field2 = temp
   end
-puts "
-    var first = jQuery(\"[name='question-container-#{field1}']\").detach();
-    var second = jQuery(\"[name='question-container-#{field2}']\");
-    first.insertBefore(second);
-    "
+
   page.execute_script("
     var first = jQuery(\"[name='question-container-#{field1}']\").detach();
     var second = jQuery(\"[name='question-container-#{field2}']\");
     first.insertBefore(second);
+    SurveyField.prototype.refreshIDs();
     ");
 end
 
