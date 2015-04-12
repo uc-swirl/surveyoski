@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20150412053103) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.boolean  "required"
-    t.float    "question_wieght"
+    t.float    "question_weight"
   end
 
   create_table "survey_templates", :force => true do |t|

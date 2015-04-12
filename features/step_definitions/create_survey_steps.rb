@@ -20,21 +20,25 @@ Given(/^I drag "(.*?)" to be (above|below) "(.*?)"$/) do |field1, ab, field2|
     field1 = field2
     field2 = temp
   end
-
+puts "
+    var first = jQuery(\"[name='question-container-#{field1}']\").detach();
+    var second = jQuery(\"[name='question-container-#{field2}']\");
+    first.insertBefore(second);
+    "
   page.execute_script("
-    var first = jQuery('#question-container-#{field1}').detach();
-    var second = jQuery('#question-container-#{field2}');
-    second.insertBefore(first);
+    var first = jQuery(\"[name='question-container-#{field1}']\").detach();
+    var second = jQuery(\"[name='question-container-#{field2}']\");
+    first.insertBefore(second);
     ");
 end
 
-Then(/^"(.*?)" should come before "(.*?)" on the show survey page$/) do |field1, field2|
+Then(/^"(.*?)" should come before "(.*?)" on the edit survey page$/) do |field1, field2|
   @user = User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit edit_survey_template_path @survey.id
 
-  page.body.index('#question-container-#{field1}').should < page.body.index('#question-container-#{field2}')
+  page.body.index("question-container-#{field1}").should < page.body.index("question-container-#{field2}")
 end
 
 
