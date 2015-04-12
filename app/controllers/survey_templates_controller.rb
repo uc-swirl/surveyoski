@@ -28,13 +28,15 @@ class SurveyTemplatesController < ApplicationController
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
     @survey.survey_title = @name
     @survey.survey_fields = []
+    weight = 0.0
     @fields.each do |key, field_param| 
       field_name = field_param[:name]
       field_type = field_param[:type]
       klass = name_to_type[field_type]
-      field =  klass.new(:question_title => field_name)
+      field =  klass.new(:question_title => field_name, :question_weight => weight)
       field.parse_options field_param[:options]
       @survey.survey_fields << field
+      weight += 1.0
     end
     @survey.save
     redirect_to survey_templates_path
