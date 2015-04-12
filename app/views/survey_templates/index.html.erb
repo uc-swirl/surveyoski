@@ -2,13 +2,11 @@
 
 <table id="forms">
   <thead>
-  <tr>
-    <th colspan = "5">All Surveys</th>
-  </tr>
+    <th colspan = "6">All Surveys</th>
   </thead>
   <tbody>
       <tr>
-        <td colspan="5" >
+        <td colspan="6" >
             Sort By:
             <button class = 'sort_tag' id = 'name'><div>Survey Name</div></button>
             <button class = 'sort_tag' id='course'><div>Course</div></button>
@@ -27,6 +25,9 @@
                   <%= link_to "Survey " + template.id.to_s, survey_template_path(template) %>
                 </td>
             <% end %>
+            <td>
+              <%= link_to "View live form", survey_template_path(template), :target => "_blank" %>
+            </td>
             <td>
               <%= link_to 'All Responses', "/survey_templates/#{template.id}/all_responses" %>
             </td>
