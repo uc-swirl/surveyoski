@@ -1,12 +1,46 @@
 
+SurveyField.prototype.fields = [];
+
+
 function SurveyField(field_type, field_name, form) {
   this.type = field_type;
   this.name = field_name;
   this.form = form;
   this.options = "";
+  this.container = {};
   this.id = SurveyField.prototype._field_count;
   SurveyField.prototype._field_count += 1;
-  jQuery("<input/>", {type : "hidden", name : this.form_name("type"), value : field_type}).appendTo(form);
+  this.type_input = jQuery("<input/>", { type : "hidden", name : this.form_name("type"), value : field_type}).appendTo(form);
+  this.weight_input = jQuery("<input/>", { type : "hidden", name : this.form_name("weight"), value : this.id}).appendTo(form);
+
+  SurveyField.prototype.fields.push(this);
+}
+
+
+SurveyField.prototype.setWeight = function (weight) {
+  this.weight_input.val(weight);
+}
+
+SurveyField.prototype.findByDOMelement = function (element) {
+  var found = null;
+  jQuery.each(SurveyField.prototype.fields, function(index, field) {
+      if (field.container[0] == element) {
+        found = field;
+        return false;
+      }
+  });
+  return found;
+}
+
+SurveyField.prototype.refreshIDs = function () {
+  var weight = 0;
+  jQuery(".question_container").each(function(index, element) {
+    var found_field = SurveyField.prototype.findByDOMelement(element);
+    if (found_field) {
+      found_field.setWeight(weight);
+    }
+    weight += 1;
+  });
 }
 
 SurveyField.prototype.setOptions = function (options) {
@@ -29,8 +63,11 @@ SurveyField.prototype.coupledNameInput = function () {
   var field = this;
   var title = jQuery("<input/>", {name: field.form_name("name"), value : field.name});
   title.change(function () {
-    field.setName(jQuery(this).val());    
+    var name = jQuery(this).val();
+    field.container.attr("name", "question-container-" + name)
+    field.setName(name);    
   });
+  title.trigger("change");
   return title;
 }
 
@@ -59,15 +96,26 @@ SurveyBuilder = function () {
 
       if (typeof _survey_fields !== 'undefined') {
         load_survey_template();
+        setup_sortables();
       }
+
     });
 
 
   };
 
+  var setup_sortables = function () {
+
+    jQuery('.form_fields').sortable("destroy");
+    jQuery('.form_fields').sortable();
+    jQuery('.form_fields').sortable().bind('sortupdate', function() {
+      SurveyField.prototype.refreshIDs();
+    });
+  }
+
   var load_survey_template = function () {
+    _survey_fields.sort(function(a, b) { return a.question_weight - b.question_weight; });
     jQuery.each(_survey_fields, function (index, object) {
-      console.log(object);
       load_field(object.nice_name, object.question_title, object.field_options);
     });
   }
@@ -83,16 +131,28 @@ SurveyBuilder = function () {
     add_field(field);
   }
 
+  function add_delete_button(question_container, field_name) {
+    var del_button = jQuery("<button/>", {"class" : "delete_field_button", 
+                                          text: "X", 
+                                          name : "delete-" + field_name}).appendTo(question_container);
+
+    jQuery(del_button).click(function () {
+      question_container.detach();
+    });
+  }
+
   var add_field = function (field) {
 
     var question_container = jQuery("<div/>", {"class" : "question_container"}).appendTo(".form_fields");
-    var question_table = jQuery("<table/>", {"class" : "question_table"}).appendTo(question_container);
+    field.container = question_container;
 
+    var question_table = jQuery("<table/>", {"class" : "question_table"}).appendTo(question_container);
+    add_delete_button(question_container, field.name);
     add_title_row(question_table, field);
     add_type_row(question_table, field.type);
 
     field_types[field.type](field).appendTo(question_table);
-
+    setup_sortables();
   }
   var add_title_row = function(question_table, field) {
     var title_row = jQuery("<tr/>").appendTo(question_table);

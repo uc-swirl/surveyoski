@@ -29,13 +29,8 @@ class SurveyTemplatesController < ApplicationController
     @survey.survey_title = @name
     @survey.survey_fields = []
     @fields.each do |key, field_param| 
-      puts "K", key
-      puts "field ", field_param
-
-      field_name = field_param[:name]
-      field_type = field_param[:type]
-      klass = name_to_type[field_type]
-      field =  klass.new(:question_title => field_name)
+      klass = name_to_type[field_param[:type]]
+      field =  klass.new(:question_title => field_param[:name], :question_weight => field_param[:weight])
       field.parse_options field_param[:options]
       @survey.survey_fields << field
     end

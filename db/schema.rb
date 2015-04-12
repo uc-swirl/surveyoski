@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150412060824) do
+ActiveRecord::Schema.define(:version => 20150412053103) do
 
   create_table "courses", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -53,9 +53,14 @@ ActiveRecord::Schema.define(:version => 20150412060824) do
     t.string   "question_title"
     t.string   "question_description"
     t.string   "field_options"
+    t.string   "drop_down_options"
     t.string   "survey_fields"
+    t.string   "checkbox_options"
+    t.string   "radio_button_options"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.boolean  "required"
+    t.float    "question_weight"
   end
 
   create_table "survey_templates", :force => true do |t|
