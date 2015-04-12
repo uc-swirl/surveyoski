@@ -25,11 +25,8 @@ Given /^the following survey template exists$/ do |table|
     end
     q.save!
   end
-
   @survey.save!
   @question_number = 0
-  # puts @survey.survey_fields
-  # puts SurveyField.all
 end
 
 Given /I am on the survey template/ do
@@ -37,7 +34,6 @@ Given /I am on the survey template/ do
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit survey_template_path(@survey.id)
-  # puts page.body
 end
 
 And /^I have already submitted to it/ do
@@ -54,14 +50,14 @@ When (/^I fill in the fields with (.+)/) do |list|
 end
 
 And /I fill in the (?:first|next) field with "(.+)"/ do |value|
-  puts @question_number.to_s
+  # puts @question_number.to_s
   question_type = @survey.survey_fields[@question_number].class
   if question_type == TextQuestionField
-    puts "TextQuestionField"
-
-    fill_in("submission_" + @survey.survey_fields[@question_number].id.to_s, :with =>value)
+    # puts "TextQuestionField"
+"submission_#{field.id}_#{option[0]}"
+    fill_in("submission_#{@survey.survey_fields[@question_number].id}_#{value}", :with =>value)
   elsif question_type == CheckboxField
-    puts "CheckboxField"
+    # puts "CheckboxField"
     values = value.split(":")
     puts values
     values.each do |v|
@@ -69,10 +65,10 @@ And /I fill in the (?:first|next) field with "(.+)"/ do |value|
       check "submission_4"
     end
   elsif question_type == RadioButtonField
-    puts "RadioButtonField"
+    # puts "RadioButtonField"
     choose("submission_#{@survey.survey_fields[@question_number].id}_#{value}")
   elsif question_type == DropDownField
-    puts "DropDownField"
+    # puts "DropDownField"
     select value, :from => "submission_#{@survey.survey_fields[@question_number].id}"
   end
   @question_number += 1

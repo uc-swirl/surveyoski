@@ -13,8 +13,7 @@ class SubmissionsController < ApplicationController
       if all_blank
         raise "You need to at least fill out one field!"
       end
-      puts "params"
-      puts params
+
       puts "params[:submission]"
       puts params[:submission]
 
@@ -29,6 +28,7 @@ class SubmissionsController < ApplicationController
         answer.save!
         submission.field_responses << answer
         answer.save!
+        # puts answer
       end
       flash[:notice] = "Your submission was recorded."
       redirect_to survey_template_path(template.id)
