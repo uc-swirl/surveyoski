@@ -7,12 +7,12 @@ class SubmissionsController < ApplicationController
     user = User.find(session[:user_id])
     template = SurveyTemplate.find(params[:template_id])
     begin
-      all_blank = params[:submission].keys.all? do |key|
-        params[:submission][key] == ''
-      end
-      if all_blank
-        raise "You need to at least fill out one field!"
-      end
+      # all_blank = params[:submission].keys.all? do |key|
+      #   params[:submission][key] == ''
+      # end
+      # if all_blank
+      #   raise "You need to at least fill out one field!"
+      # end
 
       participant = template.participants.build(:email => user.email)
       participant.save!
@@ -29,6 +29,7 @@ class SubmissionsController < ApplicationController
       flash[:notice] = "Your submission was recorded."
       redirect_to survey_template_path(template.id)
     rescue Exception => e
+      participant.destroy
       flash[:notice] = e.message
       redirect_to survey_template_path(template.id)
     end

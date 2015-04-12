@@ -1,10 +1,9 @@
 class CheckboxField < SurveyField
-
+  attr_accessible :field_options, :required
   def self.nice_name
     "Checkbox"
   end
 
-  attr_accessible :checkbox_options
   def location
   	return "fields/checkbox_field"
   end

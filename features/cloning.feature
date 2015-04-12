@@ -6,10 +6,11 @@ Feature: clone a survey
 
   Background:
   Given the following survey template exists
-  | question_title    | type                 | options                          |
-  | course name       | text_question_fields |                                  |
-  | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero|
-  | year              | drop_down_fields     | 2010:1,2013:1,2014:1,2016:1      |
+  | question_title    | type                 | options                          | required|
+  | course name       | text_question_fields |                                  | true    |
+  | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero| true    |
+  | year              | drop_down_fields     | 2010:1,2013:1,2014:1,2016:1      | true    |
+  | steak             | checkbox_fields      | rare:1,medium:1,welldone:1       | true    |
 
   @omniauth_test_good
   Scenario: Successfully clone a survey as a professor

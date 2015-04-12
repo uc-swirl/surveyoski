@@ -4,9 +4,9 @@ class SurveyField < ActiveRecord::Base
   has_many :field_responses, :dependent => :destroy
   serialize :field_options, JSON
 
-  def is_valid? (response)
-    {:value => true}
-  end
+  # def is_valid? (response)
+  #   {:value => true}
+  # end
 
   def self.descendants
     ObjectSpace.each_object(Class).select { |klass| klass < self }
