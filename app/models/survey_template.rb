@@ -2,6 +2,7 @@ require 'csv'
 
 class SurveyTemplate < ActiveRecord::Base
   attr_accessible :survey_title, :survey_description
+  @@untitled_survey = 0
   has_many :survey_fields , :dependent => :destroy
   has_many :checkbox_fields
   has_many :phone_fields
@@ -11,6 +12,11 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :email_fields
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
+
+  def self.untitled_num
+    @@untitled_survey += 1
+    return @@untitled_survey.to_s
+  end
 
   def get_all_responses
     if submissions.length <= 10

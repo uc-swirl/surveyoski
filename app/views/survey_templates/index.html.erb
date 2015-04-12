@@ -16,15 +16,9 @@
 
       <% @templates.each do |template| %>
           <tr>
-            <% if template.survey_title.to_s != '' %>
-                <td>
-                  <%= link_to template.survey_title.to_s, survey_template_path(template) %>
-                </td>
-            <% else %>
-                <td>
-                  <%= link_to "Survey " + template.id.to_s, survey_template_path(template) %>
-                </td>
-            <% end %>
+            <td>
+              <%= link_to template.survey_title.to_s, edit_survey_template_path(template) %>
+            </td>
             <td>
               <%= link_to "View live form", survey_template_path(template), :target => "_blank" %>
             </td>
