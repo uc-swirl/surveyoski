@@ -42,7 +42,6 @@ And /^I have already submitted to it/ do
 end
 
 When (/^I fill in the fields with (.+)/) do |list|
-  puts page.body
   list = list.split(",").each {|t| t.strip!; t.gsub!(/\A"|"\Z/, '')}
   list.each do |answer|
     step 'I fill in the next field with "' + answer.to_s + '"'
@@ -50,25 +49,17 @@ When (/^I fill in the fields with (.+)/) do |list|
 end
 
 And /I fill in the (?:first|next) field with "(.+)"/ do |value|
-  # puts @question_number.to_s
   question_type = @survey.survey_fields[@question_number].class
   if question_type == TextQuestionField
-    # puts "TextQuestionField"
-"submission_#{field.id}_#{option[0]}"
-    fill_in("submission_#{@survey.survey_fields[@question_number].id}_#{value}", :with =>value)
+    fill_in("submission_#{@survey.survey_fields[@question_number].id}", :with =>value)
   elsif question_type == CheckboxField
-    # puts "CheckboxField"
     values = value.split(":")
-    puts values
     values.each do |v|
-      puts v
-      check "submission_4"
+      check v
     end
   elsif question_type == RadioButtonField
-    # puts "RadioButtonField"
     choose("submission_#{@survey.survey_fields[@question_number].id}_#{value}")
   elsif question_type == DropDownField
-    # puts "DropDownField"
     select value, :from => "submission_#{@survey.survey_fields[@question_number].id}"
   end
   @question_number += 1
@@ -79,9 +70,6 @@ Given(/^I press submit$/) do
 end
 
 Then /^I should see "([^\"]*)"$/ do |text|
-
-  puts FieldResponse.all
-
   if page.respond_to? :should
     page.should have_content(text)
   else

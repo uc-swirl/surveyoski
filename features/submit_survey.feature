@@ -19,11 +19,6 @@ And I press submit
 Then I should see "Your submission was recorded"
 And my submission should be recorded
 
-Scenario: Leave all fields blank
-Given I am on the survey template
-And I press submit
-Then I should see "You need to at least fill out one field!"
-
 Scenario: Submit to the same survey twice
 Given I am on the survey template
 And I have already submitted to it
