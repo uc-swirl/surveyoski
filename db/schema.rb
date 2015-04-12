@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150401181311) do
+ActiveRecord::Schema.define(:version => 20150412050307) do
 
   create_table "field_responses", :force => true do |t|
     t.string   "response"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20150401181311) do
     t.string   "radio_button_options"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.boolean  "required"
   end
 
   create_table "survey_templates", :force => true do |t|
