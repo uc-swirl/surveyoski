@@ -12,10 +12,6 @@ describe SurveyField do
     expect(@field.question_description).to eq("Between worlds")
   end
 
-  it "blank field is valid " do
-    expect(@field.is_valid? "" ).to be_true
-  end
-
   it "nice name errors" do
     expect { @field.nice_name }.to raise_error
   end
