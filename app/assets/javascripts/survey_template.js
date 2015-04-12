@@ -83,11 +83,22 @@ SurveyBuilder = function () {
     add_field(field);
   }
 
+  function add_delete_button(question_container, field_name) {
+    var del_button = jQuery("<button/>", {"class" : "delete_field_button", 
+                                          text: "X", 
+                                          name : "delete-" + field_name}).appendTo(question_container);
+
+    jQuery(del_button).click(function () {
+      question_container.detach();
+      console.log("CLICKED");
+    });
+  }
+
   var add_field = function (field) {
 
     var question_container = jQuery("<div/>", {"class" : "question_container"}).appendTo(".form_fields");
     var question_table = jQuery("<table/>", {"class" : "question_table"}).appendTo(question_container);
-
+    add_delete_button(question_container, field.name);
     add_title_row(question_table, field);
     add_type_row(question_table, field.type);
 

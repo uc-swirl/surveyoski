@@ -1,5 +1,5 @@
-Given(/^I delete the field "(.*?)"$/) do |field_name|
-  click_button "delete-" + field_name
+Given(/^I delete the field "(.*?)"$/) do |field_name| 
+  find(:xpath, "//button[contains(@name, 'delete-#{field_name}')]").click()
 
 end
 

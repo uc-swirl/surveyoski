@@ -12,6 +12,7 @@ Given the following survey template exists
 | course instructor |
 | year              |
 
+@javascript
 Scenario: I delete a survey field
 Given I am on the edit survey template
 And I delete the field "course name"
