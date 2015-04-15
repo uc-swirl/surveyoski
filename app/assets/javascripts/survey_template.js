@@ -185,12 +185,44 @@ SurveyBuilder = function () {
   }
 
   var add_multiple_option = function (field) {
-    var radio_options = jQuery("<tr/>");
-    jQuery("<td/>", {text : "Options (name : value): "}).appendTo(radio_options);
+    var container_row = jQuery("<tr/>");
+    var container_col = jQuery("<tr/>", {"colspan" : 2}).appendTo(container_row);
+/*
+    jQuery("<td/>", {text : "Options (name : value): "}).appendTo(container_row);
+    var col = jQuery("<td/>").appendTo(container_row);
+*/
+
+/*    var add_options_row = jQuery("<tr/>").appendTo(container_row);
+    jQuery("<td/>", {text : ""}).appendTo(add_options_row);
+
     var col = jQuery("<td/>").appendTo(radio_options);
-    var input = jQuery("<textarea/>", {name: field.form_name("options")}).appendTo(col);
-    input.val(field.options);
-    return radio_options;
+    var add_option = jQuery("<textarea/>", {name: field.form_name("options")}).appendTo(col);*/
+
+    var options = field.options.split("\n");
+    var options_table = jQuery("<table/>").appendTo(container_col);
+
+
+    var title_row = jQuery("<tr/>").appendTo(options_table);
+    jQuery("<td/>", {style: "font-weight: bold;",text : "Options", "colspan" : 2}).appendTo(title_row);
+
+    jQuery.each(options, function (index, value ) {
+      var name = value.split(":")[0];
+      var value = value.split(":")[1];
+      var add_option_row = jQuery("<tr/>").appendTo(options_table);
+        jQuery("<td/>", {text :name }).appendTo(add_option_row);
+        jQuery("<td/>", {text : value}).appendTo(add_option_row);
+    });
+
+
+
+    var title_row = jQuery("<tr/>").appendTo(options_table);
+    jQuery("<td/>", {style: "font-weight: bold;",text : "Options", "colspan" : 2}).appendTo(title_row);
+
+    //var input = jQuery("<textarea/>", {name: field.form_name("options")}).appendTo(col);
+    //input.val(field.options);
+
+
+    return container_row;
   }; 
 
   var add_checkbox_options = add_multiple_option;
