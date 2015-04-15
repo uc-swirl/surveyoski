@@ -25,7 +25,7 @@
   box-sizing: border-box;
 }
 
-table {
+#all_surveys {
   color: #333;
   text-align: left;
   line-height: 40px;
@@ -35,22 +35,22 @@ table {
   margin: 20px auto;
 }
 
-thead tr:first-child {
+#all_surveys thead tr:first-child {
   background: #428bca;
   color: #fff;
   border: none;
 }
 
-th {font-weight: bold;}
-th:first-child, td:first-child {padding: 0 15px 0 20px;}
+#all_surveys th {font-weight: bold;}
+#all_surveys th:first-child, td:first-child {padding: 0 15px 0 20px;}
 
-thead tr:last-child th {border-bottom: 2px solid #ddd;}
+#all_surveys thead tr:last-child th {border-bottom: 2px solid #ddd;}
 
-tbody tr:hover {background-color: #f0fbff;}
-tbody tr:last-child td {border: none;}
-tbody td {border-bottom: 1px solid #ddd;}
+#all_surveys tbody tr:hover {background-color: #f0fbff;}
+#all_surveys tbody tr:last-child td {border: none;}
+#all_surveys tbody td {border-bottom: 1px solid #ddd;}
 
-td:last-child {
+#all_surveys td:last-child {
   text-align: left;
   padding-right: 10px;
 }
