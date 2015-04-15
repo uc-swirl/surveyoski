@@ -1,3 +1,57 @@
+Given(/^I delete the field "(.*?)"$/) do |field_name| 
+  find(:xpath, "//button[contains(@name, 'delete-#{field_name}')]").click()
+
+end
+
+Then(/^the survey template should not have a field "(.*?)"$/) do |field_name|
+  page.should have_no_selector(:css, '.survey-field-' + field_name)
+end
+
+
+Then(/^the survey template should( not)? require "(.*?)" to be filled out\.$/) do |req_not, field_name|
+  found_field = @survey.survey_fields.find {|field| field.question_title == field_name}
+   expect(found_field.required).to eq(req_not != "not")
+end
+
+Given(/^I drag "(.*?)" to be (above|below) "(.*?)"$/) do |field1, ab, field2|
+  #It's currently not easily possible to test drag and drop via Capybara
+  if ab == "below"
+    temp = field1
+    field1 = field2
+    field2 = temp
+  end
+
+  page.execute_script("
+    var first = jQuery(\"[name='question-container-#{field1}']\").detach();
+    var second = jQuery(\"[name='question-container-#{field2}']\");
+    first.insertBefore(second);
+    SurveyField.prototype.refreshIDs();
+    ");
+end
+
+Then(/^"(.*?)" should come before "(.*?)" on the edit survey page$/) do |field1, field2|
+  @user = User.create(:email => "test@berkeley.edu", :status => "admin")
+  ApplicationController.any_instance.stub(:current_user).and_return(@user)
+  User.stub(:find).and_return(@user)
+  visit edit_survey_template_path @survey.id
+
+  page.body.index("question-container-#{field1}").should < page.body.index("question-container-#{field2}")
+end
+
+
+Given(/^I am on the edit survey template$/) do
+  @user = User.create(:email => "test@berkeley.edu", :status => "admin")
+  ApplicationController.any_instance.stub(:current_user).and_return(@user)
+  User.stub(:find).and_return(@user)
+  visit edit_survey_template_path @survey.id
+end
+
+Given(/^I mark "(.*?)" as required$/) do |field_name|
+  found_field = @survey.survey_fields.find {|field| field.question_title == field_name}
+  found_field.required = true
+  @survey.save!
+end
+
 Given /I am on the new survey template page/ do
   @user = User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)

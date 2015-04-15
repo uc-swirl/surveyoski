@@ -1,7 +1,8 @@
 class TextQuestionField < SurveyField
-  def is_valid? (response)
-    {:value => true}
-  end
+  attr_accessible :field_options, :required
+  # def is_valid? (response)
+  #   {:value => true}
+  # end
 
 
   def self.nice_name

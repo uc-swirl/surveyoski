@@ -16,6 +16,7 @@
   padding: 5px;
   margin: 5px;
   border: 1px solid black;
+  position: relative;
 }
 
 * {
@@ -97,4 +98,15 @@ td:last-child {
 .sort_tag div {
   position: relative;
   bottom: 11px;
+}
+
+
+.question_container .delete_field_button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin: 5px;
+  color: Red;
+  font-size: 9px;
+  font-weight: bold;
 }

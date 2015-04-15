@@ -1,27 +1,16 @@
 Given /^the following survey template exists$/ do |table|
-  class CheckboxField 
-    attr_accessible :field_options
-  end
-  class DropDownField 
-    attr_accessible :field_options
-  end
-  class RadioButtonField 
-    attr_accessible :field_options
-  end
   @survey = SurveyTemplate.create!
   table.hashes.each do |question|
     options = question[:options].split(",").map {|x| x.split(":").map {|x| x.strip } }
-    # puts options
-    # puts question[:type]
     case question[:type]
     when "text_question_fields"
-      q = @survey.text_question_fields.build(:question_title=>question[:question_title])
+      q = @survey.text_question_fields.build(:question_title=>question[:question_title], :required=>question[:required])
     when "radio_button_fields"
-      q = @survey.radio_button_fields.build(:question_title=>question[:question_title], :field_options => options)
+      q = @survey.radio_button_fields.build(:question_title=>question[:question_title], :field_options => options, :required=>question[:required])
     when "checkbox_fields"
-      q = @survey.checkbox_fields.build(:question_title=>question[:question_title], :field_options => options)
+      q = @survey.checkbox_fields.build(:question_title=>question[:question_title], :field_options => options, :required=>question[:required])
     when "drop_down_fields"
-      q = @survey.drop_down_fields.build(:question_title=>question[:question_title], :field_options => options)
+      q = @survey.drop_down_fields.build(:question_title=>question[:question_title], :field_options => options, :required=>question[:required])
     end
     q.save!
   end
