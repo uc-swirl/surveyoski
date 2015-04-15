@@ -8,9 +8,15 @@
       <tr>
         <td colspan="6" >
             Sort By:
-            <button class = 'sort_tag' id = 'name'><div>Survey Name</div></button>
-            <button class = 'sort_tag' id='course'><div>Course</div></button>
-            <button class = 'sort_tag' id='date'><div>Release Date</div></button>
+            <button class = 'sort_tag' id = 'name'>
+            <div><%= link_to "Survey Name", survey_templates_path(:sort => 'name') %></div>
+            </button>
+            <button class = 'sort_tag' id='course'>
+            <div><%= link_to "Course", survey_templates_path(:sort => 'course') %></div>
+            </button>
+            <button class = 'sort_tag' id='date'>
+            <div><%= link_to "Release Date", survey_templates_path(:sort => 'date') %></div>
+            </button>
         </td>
       </tr>
 

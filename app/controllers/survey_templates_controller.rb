@@ -66,7 +66,7 @@ class SurveyTemplatesController < ApplicationController
   
   def index
     authorize :survey_templates, :index?
-    @templates = SurveyTemplate.all
+    @templates = SurveyTemplate.sort(params[:sort])
   end
   
   def show # shows the HTML form
