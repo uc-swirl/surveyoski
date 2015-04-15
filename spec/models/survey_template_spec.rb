@@ -73,6 +73,16 @@ describe SurveyTemplate do
         r.should include("Magenta,2\n")
         r.should include("Pink,14\n")
     end
+    it 'appends an empty string when a submission does not have a response for a survey_field' do
+      11.times do
+        submis = @s.submissions.build
+        r1 = submis.field_responses.build(:response => "Lime Green")
+        r1.survey_field_id = @q1.id
+        submis.save
+      end
+      r = @s.get_all_responses
+      r.should include("Lime Green,\n")
+    end
   end
   describe 'formatting emails of participants' do
     it 'formats emails of survey participants in csv string' do

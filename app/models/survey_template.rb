@@ -48,18 +48,17 @@ class SurveyTemplate < ActiveRecord::Base
   def responses_to_array
     all_responses = []
     submissions.each do |s|
-      s.field_responses.each do |response| puts response.response end
       curr_submis = []
       survey_fields.each do |f|
-        # curr_submis << s.field_responses.where(survey_field_id: f.id).first.response
         field = s.field_responses.where(survey_field_id: f.id).first
         if field
           curr_submis << field.response
+        else
+          curr_submis << nil
         end
       end
       all_responses << curr_submis
     end
-    puts all_responses
     all_responses
   end
 
