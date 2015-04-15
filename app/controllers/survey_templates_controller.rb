@@ -23,7 +23,7 @@ class SurveyTemplatesController < ApplicationController
 
   def create
     @survey = SurveyTemplate.find_or_create_by_id(params[:id])
-    @name = if params[:form_name] then params[:form_name] else [] end 
+    @name = if params[:form_name]!='' then params[:form_name] else "Untitled("+@survey.created_at.to_s+")" end 
     @fields = if params[:fields] then params[:fields] else [] end
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
     @survey.survey_title = @name
@@ -76,6 +76,7 @@ class SurveyTemplatesController < ApplicationController
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description
+    render :layout => false
   end
   def all_responses
     authorize :survey_templates, :all_responses?
