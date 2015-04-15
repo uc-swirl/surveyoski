@@ -30,7 +30,7 @@ class SurveyTemplatesController < ApplicationController
     @survey.survey_fields = []
     @fields.each do |key, field_param| 
       klass = name_to_type[field_param[:type]]
-      field =  klass.new(:question_title => field_param[:name], :question_weight => field_param[:weight])
+      field =  klass.new(:question_title => field_param[:name], :question_weight => field_param[:weight], :required => field_param[:required])
       field.parse_options field_param[:options]
       @survey.survey_fields << field
     end

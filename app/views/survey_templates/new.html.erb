@@ -1,4 +1,4 @@
-<h1>New Form</h1>
+<h1>Form</h1>
 <%= form_tag survey_templates_path, {:id => :form_survey_template} do %>
     <%= label :form_name, "Name" %>
     <%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>

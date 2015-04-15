@@ -2,9 +2,10 @@
 SurveyField.prototype.fields = [];
 
 
-function SurveyField(field_type, field_name, form) {
+function SurveyField(field_type, field_name, form, required) {
   this.type = field_type;
   this.name = field_name;
+  this.required = required;
   this.form = form;
   this.options = "";
   this.container = {};
@@ -104,6 +105,10 @@ SurveyBuilder = function () {
 
   };
 
+  function uniqId() {
+    return "survey-id-" + Math.round(new Date().getTime() + (Math.random() * 100));
+  }
+
   var setup_sortables = function () {
 
     jQuery('.form_fields').sortable("destroy");
@@ -116,12 +121,12 @@ SurveyBuilder = function () {
   var load_survey_template = function () {
     _survey_fields.sort(function(a, b) { return a.question_weight - b.question_weight; });
     jQuery.each(_survey_fields, function (index, object) {
-      load_field(object.nice_name, object.question_title, object.field_options);
+      load_field(object.nice_name, object.question_title, object.field_options, object.required);
     });
   }
 
-  var load_field = function (field_type, field_name, options) {
-    var field = new SurveyField(field_type, field_name, jQuery(".form_fields"));
+  var load_field = function (field_type, field_name, options, required) {
+    var field = new SurveyField(field_type, field_name, jQuery(".form_fields"), required);
     if (options) {
       options.splice(0, 0, ""); //insert a "" to bootstrap the reduce
       options = options.reduce (function (previousValue, currentValue, index, array) { 
@@ -141,6 +146,15 @@ SurveyBuilder = function () {
     });
   }
 
+  function add_require_button(question_table, field) {
+    var id = uniqId();
+    var require_row = jQuery("<tr/>").appendTo(question_table);
+    var col = jQuery("<td/>").appendTo(require_row);
+    var label = jQuery("<label/>", {"for" : id, text : "Required: "}).appendTo(col);
+    col = jQuery("<td/>").appendTo(require_row);
+    jQuery("<input/>", {id: id, type : "checkbox", name : field.form_name("required"), checked : field.required}).appendTo(col);
+  }
+
   var add_field = function (field) {
 
     var question_container = jQuery("<div/>", {"class" : "question_container"}).appendTo(".form_fields");
@@ -150,8 +164,10 @@ SurveyBuilder = function () {
     add_delete_button(question_container, field.name);
     add_title_row(question_table, field);
     add_type_row(question_table, field.type);
-
     field_types[field.type](field).appendTo(question_table);
+
+    add_require_button(question_table, field);
+
     setup_sortables();
   }
   var add_title_row = function(question_table, field) {
