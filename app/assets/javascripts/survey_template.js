@@ -121,6 +121,7 @@ SurveyBuilder = function () {
   var load_survey_template = function () {
     _survey_fields.sort(function(a, b) { return a.question_weight - b.question_weight; });
     jQuery.each(_survey_fields, function (index, object) {
+      console.log(object);
       load_field(object.nice_name, object.question_title, object.field_options, object.required);
     });
   }
@@ -132,6 +133,7 @@ SurveyBuilder = function () {
       options = options.reduce (function (previousValue, currentValue, index, array) { 
         return previousValue + currentValue[0] + " : " + currentValue[1] +"\n" });
     }
+
     field.setOptions(options);
     add_field(field);
   }
@@ -184,19 +186,31 @@ SurveyBuilder = function () {
     var title = jQuery("<td/>", {text : field_type}).appendTo(type_row);
   }
 
+  var add_option_row = function(name_input,  value_input, add_button, add_row)  {
+
+    add_button.click(function (e) {
+      e.preventDefault();
+      var add_option_row = jQuery("<tr/>", {"class" : "option_row"}).insertBefore(add_row);
+
+
+      var name_col = jQuery("<td/>").appendTo(add_option_row);
+      var value_col = jQuery("<td/>", {style : "position:relative;"}).appendTo(add_option_row);
+
+      jQuery("<input/>", { value: name_input.val()}).appendTo(name_col);
+      jQuery("<input/>", { value: value_input.val()}).appendTo(value_col);
+
+      var del_button = jQuery("<button/>", {"class" : "delete_field_button", //Needs to be fixed/changed to not match the other delete
+                                        text: "X", 
+                                        name : ""}).appendTo(value_col);
+
+      name_input.val("");
+      value_input.val("");
+    });
+  }
+
   var add_multiple_option = function (field) {
     var container_row = jQuery("<tr/>");
-    var container_col = jQuery("<tr/>", {"colspan" : 2}).appendTo(container_row);
-/*
-    jQuery("<td/>", {text : "Options (name : value): "}).appendTo(container_row);
-    var col = jQuery("<td/>").appendTo(container_row);
-*/
-
-/*    var add_options_row = jQuery("<tr/>").appendTo(container_row);
-    jQuery("<td/>", {text : ""}).appendTo(add_options_row);
-
-    var col = jQuery("<td/>").appendTo(radio_options);
-    var add_option = jQuery("<textarea/>", {name: field.form_name("options")}).appendTo(col);*/
+    var container_col = jQuery("<td/>", {"colspan" : 2}).appendTo(container_row);
 
     var options = field.options.split("\n");
     var options_table = jQuery("<table/>").appendTo(container_col);
@@ -208,15 +222,33 @@ SurveyBuilder = function () {
     jQuery.each(options, function (index, value ) {
       var name = value.split(":")[0];
       var value = value.split(":")[1];
-      var add_option_row = jQuery("<tr/>").appendTo(options_table);
-        jQuery("<td/>", {text :name }).appendTo(add_option_row);
-        jQuery("<td/>", {text : value}).appendTo(add_option_row);
+      if (name != "" && value != "") {
+        var add_option_row = jQuery("<tr/>", {"class" : "option_row"}).appendTo(options_table);
+
+        var name_col = jQuery("<td/>", {text :name , }).appendTo(add_option_row);
+        var value_col = jQuery("<td/>", {text : value}).appendTo(add_option_row);
+
+        jQuery("<input/>", { value: name}).appendTo(name_col);
+        jQuery("<input/>", { value: value}).appendTo(value_col);
+      }
     });
 
-
-
     var title_row = jQuery("<tr/>").appendTo(options_table);
-    jQuery("<td/>", {style: "font-weight: bold;",text : "Options", "colspan" : 2}).appendTo(title_row);
+    jQuery("<td/>", { "colspan" : 2}).appendTo(title_row);
+
+
+    var add_row = jQuery("<tr/>").appendTo(options_table);
+
+
+    var add_name = jQuery("<td/>", {text : ""}).appendTo(add_row);
+    var add_value_name = jQuery("<input/>", {type: "text"}).appendTo(add_name);
+
+    var add_value = jQuery("<td/>", {text : ""}).appendTo(add_row);
+    var add_value_input = jQuery("<input/>", {type: "text"}).appendTo(add_value);
+
+    var add_button = jQuery("<button/>", {text : "Add"}).appendTo(add_value);
+
+    add_option_row(add_value_name, add_value_input, add_button, add_row);
 
     //var input = jQuery("<textarea/>", {name: field.form_name("options")}).appendTo(col);
     //input.val(field.options);
