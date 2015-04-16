@@ -20,12 +20,16 @@ class User < ActiveRecord::Base
   end
 
   def all_surveys
+    admin_surveys unless status != "admin"
     surveys = []
     self.reload
     self.courses.each do |course|
       surveys += course.survey_templates
     end
     surveys
+  end
+  def admin_surveys
+    SurveyTemplate.all
   end
 
 end
