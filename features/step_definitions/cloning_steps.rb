@@ -1,5 +1,11 @@
 Given(/^I clone the survey$/) do
-  expect{click_link("Clone this survey")}.to change{SurveyTemplate.count}.by(1)
+
+  course = @user.courses.create
+  Course.stub(:find_by_name).and_return(course)
+  expect{
+    click_link("Clone this survey")
+    }.to change{SurveyTemplate.count}.by(1)
+    # puts SurveyTemplate.all
 end
 
 Then(/^I should see another survey$/) do
