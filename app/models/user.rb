@@ -21,8 +21,9 @@ class User < ActiveRecord::Base
 
   def all_surveys
     surveys = []
+    self.reload
     self.courses.each do |course|
-      surveys.concat course.survey_templates
+      surveys += course.survey_templates
     end
     surveys
   end

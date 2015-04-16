@@ -5,7 +5,7 @@ Feature: clone a survey
   I want to clone surveys
 
   Background:
-  Given the following survey template exists
+  Given the following survey template exists in course "hello"
   | question_title    | type                 | options                          | required|
   | course name       | text_question_fields |                                  | true    |
   | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero| true    |
@@ -15,6 +15,7 @@ Feature: clone a survey
   @omniauth_test_good
   Scenario: Successfully clone a survey as a professor
   Given I have logged in as a professor
+  And I am in course "hello"
   And I go to the survey templates page
   And I clone the survey
   Then I should see another survey

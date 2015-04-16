@@ -41,7 +41,8 @@ class SurveyTemplatesController < ApplicationController
   def clone
     template = SurveyTemplate.find(params[:id])
     new_template = template.dup
-    new_template.save
+    template.course.survey_templates << new_template # default, just clone it to the same course??
+    new_template.save!
     amend_title(new_template)
     clone_fields(new_template, template)
     redirect_to survey_templates_path
@@ -61,12 +62,12 @@ class SurveyTemplatesController < ApplicationController
     end
     clone.save
   end
-  def clone_options(clone, field)
-  end
+  # def clone_options(clone, field)
+  # end
   
   def index
     authorize :survey_templates, :index?
-    @templates = SurveyTemplate.all
+    @templates = current_user.all_surveys
   end
   
   def show # shows the HTML form
