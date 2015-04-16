@@ -1,8 +1,10 @@
 function add_prompt_to_link(){
 	$(".clone_link").each(function(index){
-		$(this).click(function(){
+		  console.log("hm. " + $(this).text());
+			$(this).click(function(){
 			var course_name = ask_for_course_name();
-			$(this).attr("data-course-name") = course_name; //???? 
+			var url = $(this).attr('href') + "?course_name=" + course_name;
+			$(this).attr('href', url);
 		});
 	});
 }

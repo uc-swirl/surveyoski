@@ -41,10 +41,16 @@ class SurveyTemplatesController < ApplicationController
   def clone
     template = SurveyTemplate.find(params[:id])
     new_template = template.dup
-    template.course.survey_templates << new_template # default, just clone it to the same course??
-    new_template.save!
-    amend_title(new_template)
-    clone_fields(new_template, template)
+    course = Course.find_by_name(params[:course_name])
+    if course
+      course.survey_templates << new_template
+      new_template.save!
+      amend_title(new_template)
+      clone_fields(new_template, template)
+    else
+      flash[:notice] = "that course doesn't exist."
+    end
+
     redirect_to survey_templates_path
   end
 

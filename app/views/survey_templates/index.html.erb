@@ -29,7 +29,7 @@
               <%= link_to 'Emails of Participants', "/survey_templates/#{template.id}/participants" %>
             </td>
             <td>
-              <%= link_to "Clone this survey", "/survey_templates/#{template.id}/clone" %>
+              <%= link_to "Clone this survey", "/survey_templates/#{template.id}/clone", class: "clone_link" %>
             </td>
             <td>
               <%= link_to "Delete this survey", "/survey_templates/#{template.id}", method: :delete %>
