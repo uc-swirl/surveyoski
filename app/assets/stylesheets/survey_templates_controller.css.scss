@@ -1,4 +1,9 @@
-
+.page_title{
+  text-align: center;
+  font-family: Ubuntu;
+  font-size: 40px;
+  margin-top: 20px;
+}
 
 .form_fields {
   width: 400px;
@@ -30,13 +35,19 @@
   text-align: left;
   line-height: 40px;
   border-spacing: 0;
-  border: 1px solid #428bca;
-  width: 980px;
-  margin: 20px auto;
+  border: 1px solid #2980b9;
+  width: 900px;
+  margin: 50px auto;
+}
+
+.sort_text{
+  text-decoration: none;
+  color: white;
 }
 
 #all_surveys thead tr:first-child {
-  background: #428bca;
+  height: 60px;
+  background: #2980b9;
   color: #fff;
   border: none;
 }
@@ -53,6 +64,18 @@
 #all_surveys td:last-child {
   text-align: left;
   padding-right: 10px;
+}
+
+#all_surveys tr {
+  background: white;
+}
+#all_surveys tr:nth-of-type(odd) {
+  background: #f6f6f6;
+}
+
+#survey_name{
+  text-decoration: none;
+  color: black;
 }
 
 .button {
@@ -109,4 +132,15 @@
   color: Red;
   font-size: 9px;
   font-weight: bold;
+}
+
+.icons{
+  width: 50px;
+  height: 50px;
+}
+
+#all_surveys_text{
+  font-size: 20px;
+  font-family: Ubuntu;
+
 }
