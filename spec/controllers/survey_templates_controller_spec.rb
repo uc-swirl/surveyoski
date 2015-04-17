@@ -59,8 +59,13 @@ describe SurveyTemplatesController do
 
     describe "index" do
       before(:each) do
-        @survey = SurveyTemplate.create()
-        @user.stub(:all_surveys).and_return([@survey])
+        course = Course.create(:name => "new course!")
+        enrollment = @user.enrollments.build
+        enrollment.course_id = course.id
+        enrollment.save!
+        @survey = course.survey_templates.create!
+
+        # @user.stub(:all_surveys).and_return([@survey])
       end
       it 'it sets @templates and renders index' do
         post :index
