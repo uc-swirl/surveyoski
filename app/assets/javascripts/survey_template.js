@@ -227,9 +227,9 @@ SurveyBuilder = function () {
 
     var add_row = jQuery("<tr/>",{"class" : "option_row"}).appendTo(options_table);
     var add_name = jQuery("<td/>", {text : ""}).appendTo(add_row);
-    var add_value_name = jQuery("<input/>", {type: "text"}).appendTo(add_name);
+    var add_value_name = jQuery("<input/>", {name : "add_value_name", type: "text"}).appendTo(add_name);
     var add_value = jQuery("<td/>", {text : ""}).appendTo(add_row);
-    var add_value_input = jQuery("<input/>", {type: "text"}).appendTo(add_value);
+    var add_value_input = jQuery("<input/>", {name : "add_value_input", type: "text"}).appendTo(add_value);
     var add_button = jQuery("<button/>", { class : "delete_field_option_add_button",  text : "Add"}).appendTo(add_value);
 
     add_option_row(field, add_value_name, add_value_input, add_button, add_row);
