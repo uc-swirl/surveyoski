@@ -38,3 +38,4 @@ gem 'pundit'
 gem 'email_validator', '~> 1.5.0'
 gem 'omniauth-google-oauth2', "~> 0.2.1"
 gem "codeclimate-test-reporter", group: :test, require: nil
+gem 'jquery-ui-rails'

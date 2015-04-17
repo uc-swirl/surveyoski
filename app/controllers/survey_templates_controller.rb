@@ -30,7 +30,7 @@ class SurveyTemplatesController < ApplicationController
     @survey.survey_fields = []
     @fields.each do |key, field_param| 
       klass = name_to_type[field_param[:type]]
-      field =  klass.new(:question_title => field_param[:name], :question_weight => field_param[:weight])
+      field =  klass.new(:question_title => field_param[:name], :question_weight => field_param[:weight], :required => field_param[:required])
       field.parse_options field_param[:options]
       @survey.survey_fields << field
     end
@@ -39,12 +39,18 @@ class SurveyTemplatesController < ApplicationController
   end
 
   def clone
+    # puts "cloning a survey!"
     template = SurveyTemplate.find(params[:id])
     new_template = template.dup
-    new_template.save
+    course = Course.find_by_name(params[:course_name])
+    course.survey_templates << new_template
+    new_template.save!
     amend_title(new_template)
     clone_fields(new_template, template)
-    redirect_to survey_templates_path
+    flash[:notice] = "Your course was cloned successfully. "
+    flash.keep(:notice)
+    render js: "window.location = '#{survey_templates_path}'"
+    # puts "finished cloning"
   end
 
   def amend_title(clone)
@@ -60,13 +66,11 @@ class SurveyTemplatesController < ApplicationController
       clone.survey_fields << field.dup
     end
     clone.save
-  end
-  def clone_options(clone, field)
-  end
-  
+  end  
   def index
     authorize :survey_templates, :index?
-    @templates = SurveyTemplate.all
+    @courses = current_user.courses
+    @templates = SurveyTemplate.sort(params[:sort], current_user)
   end
   
   def show # shows the HTML form

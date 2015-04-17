@@ -16,8 +16,7 @@
   get 'survey_templates/:id/all_responses', :to => 'survey_templates#all_responses'
   get 'survey_templates/:id/participants', :to => 'survey_templates#participants'
   get 'survey_templates/:id/download_submissions', :to => 'survey_templates#download_submissions', :as => :download_submissions
-  get 'survey_templates/:id/clone', :to => 'survey_templates#clone'
-
+  post 'survey_templates/:id/clone', :to => 'survey_templates#clone'
 
   # for omniauth login 
   get 'auth/:provider/callback', to: 'sessions#create'

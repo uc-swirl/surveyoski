@@ -12,11 +12,11 @@ class SurveyField < ActiveRecord::Base
     ObjectSpace.each_object(Class).select { |klass| klass < self }
   end
 
+  #input : {"1"=>{"name"=>"one1", "value"=>"1"}, "2"=>{"name"=>"two2", "value"=>"2"}}
+  #set self.field_options : [["one1", "1"]. ["two2", "2"]]
   def parse_options (options)
-    #parses options into an array like [["option1", "value1"], ["option1", "value1"]]  
-    if options
-      lines = options.split("\r\n").map {|x| x.split(":").map {|x| x.strip } }
-      self.field_options = lines
+    if options.kind_of?(Hash)
+      self.field_options = options.values.map { |x| [x[:name], x[:value]]}
     end
   end
 

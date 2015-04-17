@@ -5,7 +5,7 @@ describe SurveyTemplatesController do
 
   describe "survey actions while logged in" do
     before(:each) do
-      ApplicationController.any_instance.stub(:current_user).and_return(@user = mock('user', :status => "admin"))
+      ApplicationController.any_instance.stub(:current_user).and_return(@user = FactoryGirl.create(:user))
     end
 
     describe "new" do
@@ -59,7 +59,13 @@ describe SurveyTemplatesController do
 
     describe "index" do
       before(:each) do
-        @survey = SurveyTemplate.create()
+        course = Course.create(:name => "new course!")
+        enrollment = @user.enrollments.build
+        enrollment.course_id = course.id
+        enrollment.save!
+        @survey = course.survey_templates.create!
+
+        # @user.stub(:all_surveys).and_return([@survey])
       end
       it 'it sets @templates and renders index' do
         post :index

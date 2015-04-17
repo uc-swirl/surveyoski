@@ -18,7 +18,9 @@ describe DropDownField do
   end
 
   it "parses it's options" do
-    @sel.parse_options("A:1\r\nB:2\r\nC:3")
+    @sel.parse_options({"1" => {:value => "1", :name => "A"},
+      "2" => {:value => "2", :name => "B"}, 
+      "3" => {:value => "3", :name => "C"}})
 
     expect(@sel.field_options).to eq([["A", "1"], ["B", "2"], ["C", "3"]])
   end

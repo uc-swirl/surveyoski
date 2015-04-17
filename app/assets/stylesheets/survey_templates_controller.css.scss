@@ -1,22 +1,57 @@
-
+.page_title{
+  text-align: center;
+  font-family: Ubuntu;
+  font-size: 40px;
+  margin-top: 20px;
+}
 
 .form_fields {
-  width: 400px;
+  width: 600px;
   min-height: 300px;
-  border: 1px solid black;
+  border: 1px solid rgb(0, 58, 112);
+  padding: 9px;
+  background: rgb(0, 58, 112);
 }
 
 
 .form_fields_list > * {
   margin: 3px;
 }
+.delete_field_option_add_button {
+  margin-left: 10px;
+}
 
+.form_add_field_container {
+  border: 1px solid black;
+  padding: 9px;
+  background: rgb(147, 147, 147);
+  margin-bottom: 100px;
+}
+
+.option_row td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.option_row  {
+  border: 1px solid red;
+}
+
+#form_survey_template {
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+
+}
 
 .question_container {
   padding: 5px;
   margin: 5px;
   border: 1px solid black;
   position: relative;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 2px 1px 2px rgb(61, 55, 42);
 }
 
 * {
@@ -25,34 +60,57 @@
   box-sizing: border-box;
 }
 
-table {
+#all_surveys {
   color: #333;
   text-align: left;
   line-height: 40px;
   border-spacing: 0;
-  border: 1px solid #428bca;
-  width: 980px;
-  margin: 20px auto;
+  border: 1px solid #2980b9;
+  width: 900px;
+  margin: 50px auto;
 }
 
-thead tr:first-child {
-  background: #428bca;
+.sort_text{
+  text-decoration: none;
+  color: white;
+}
+
+.sort_text:hover{
+  text-decoration: none;
+  color: white;
+}
+
+#all_surveys thead tr:first-child {
+  height: 60px;
+  background: #2980b9;
   color: #fff;
   border: none;
 }
 
-th {font-weight: bold;}
-th:first-child, td:first-child {padding: 0 15px 0 20px;}
+#all_surveys th {font-weight: bold;}
+#all_surveys th:first-child, td:first-child {padding: 0 15px 0 20px;}
 
-thead tr:last-child th {border-bottom: 2px solid #ddd;}
+#all_surveys thead tr:last-child th {border-bottom: 2px solid #ddd;}
 
-tbody tr:hover {background-color: #f0fbff;}
-tbody tr:last-child td {border: none;}
-tbody td {border-bottom: 1px solid #ddd;}
+#all_surveys tbody tr:hover {background-color: #f0fbff;}
+#all_surveys tbody tr:last-child td {border: none;}
+#all_surveys tbody td {border-bottom: 1px solid #ddd;}
 
-td:last-child {
+#all_surveys td:last-child {
   text-align: left;
   padding-right: 10px;
+}
+
+#all_surveys tr {
+  background: white;
+}
+#all_surveys tr:nth-of-type(odd) {
+  background: #f6f6f6;
+}
+
+#survey_name{
+  text-decoration: none;
+  color: black;
 }
 
 .button {
@@ -74,7 +132,7 @@ td:last-child {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   height: 30px;
   position: relative;
-  top: 7px;
+  top: 10px;
   text-align: center;
   padding: 5px;
 }
@@ -109,4 +167,96 @@ td:last-child {
   color: Red;
   font-size: 9px;
   font-weight: bold;
+}
+
+.icons{
+  width: 50px;
+  height: 50px;
+}
+
+#all_surveys_text{
+  font-size: 20px;
+  font-family: Ubuntu;
+
+}
+
+#sort_by{
+  display: inline-block;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  font-size: 18px;
+}
+
+#survey_show {
+  background: url('../assets/wood.png'), url('../assets/blue.png');
+  color: #222;
+  font-weight: 300;
+  line-height: 1.625;
+  color: rgb(119,119,119);
+  font-weight: 400;
+  font-size: 1.080rem;
+  font-style: normal;
+}
+
+#survey_title{
+  color: rgb(80,80,80);
+  font-weight: 400;
+  font-size: 30px;
+  font-style: normal;
+  font-family: Ubuntu;
+  text-align: left;
+  display: block;
+  padding-left: 39px;
+  padding-right: 39px;
+  padding-top: 52px;
+  margin-bottom: 39px;
+}
+
+#frame{
+  border-color: rgb(212,212,212);
+  background-color: rgb(255,255,255);
+  border-radius: 2px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  margin: 0.75rem auto;
+  padding: 0;
+  max-width: 900px;
+  min-width: 280px;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+.question_title{
+  color: rgb(80,80,80);
+  font-weight: 700;
+  font-size: 20px;
+  font-style: normal;
+}
+
+.question_choices{
+  font-size: 20px;
+  margin: .75rem 0 0;
+}
+
+#survey_submit{
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+  color: white;
+  background-color: #428bca;
+  border-color: #357ebd;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+
+}
+#survey_submit:hover{
+  color: white;
+  background-color: #3071a9;
+  border-color: #285e8e;
 }

@@ -101,6 +101,10 @@ Given /I add a select field "(.+)" with options "(.+)"/ do |name, options|
   fill_in 'new_field_name', :with => name
   select('Select List', :from => 'new_field_type')
   click_button 'Add Field'
+
+ // add_value_name
+  //add_value_input
+
   fill_in "fields[" + @field_id.to_s + "][options]", :with => options.sub(",", "\n")
   
   @field_id +=1 

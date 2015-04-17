@@ -5,7 +5,7 @@ So that I can give my feedback to professors
 I would like to be able to fill out course surveys
 
 Background:
-Given the following survey template exists
+Given the following survey template exists in course "cs169"
 | question_title    | type                 | options                          | required|
 | course name       | text_question_fields |                                  | true    |
 | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero| true    |
