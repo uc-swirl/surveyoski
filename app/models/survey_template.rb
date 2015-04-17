@@ -11,7 +11,6 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :email_fields
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
-  belongs_to :course
 
   def get_all_responses
     if submissions.length <= 10
@@ -75,7 +74,7 @@ class SurveyTemplate < ActiveRecord::Base
     if s == 'name'
       return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'LOWER(survey_title)')
     elsif s == 'course'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses})
+      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order => '{Courses.find(:course_id).name}')
     elsif s == 'date'
       return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'created_at')
     else

@@ -69,6 +69,7 @@ class SurveyTemplatesController < ApplicationController
   end  
   def index
     authorize :survey_templates, :index?
+    @courses = current_user.courses
     @templates = SurveyTemplate.sort(params[:sort], current_user)
   end
   
