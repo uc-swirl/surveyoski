@@ -1,26 +1,22 @@
 Given(/^I clone the survey$/) do
-
+  @orig = SurveyTemplate.all.length
   course = @user.courses.create
-  Course.stub(:find_by_name).and_return(course)
-  expect{
-    click_link("Clone this survey")
-    }.to change{SurveyTemplate.count}.by(1)
-    # puts SurveyTemplate.all
+  puts @orig
+  first(:button, "Clone this survey").click()
+  first(:button, "Submit").click()
+  page.should have_content "SurveyOski"
+  page.should_not have_content "slow down, rspec. and let phantomjs finish cloning the survey."
 end
 
 Then(/^I should see another survey$/) do
-  # puts "user surveys"
-  puts @user.all_surveys
-  # puts "end of user surveys"
-  # puts "all surveys"
-  # puts SurveyTemplate.all
-  # puts "end of all surveys"
   page.should have_content("cloned")
 end
 
 Then(/^this survey should have the same fields as the first survey$/) do
   original = @survey
   clone = SurveyTemplate.last
+  puts SurveyTemplate.all.length
+  expect(SurveyTemplate.all.length).to be(@orig + 1)
   original.survey_fields.each do |f|
     clone.survey_fields.where(question_title: f.question_title).length.should be 1
   end

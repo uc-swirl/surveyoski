@@ -13,6 +13,7 @@ Feature: clone a survey
   | steak             | checkbox_fields      | rare:1,medium:1,welldone:1       | true    |
 
   @omniauth_test_good
+  @javascript
   Scenario: Successfully clone a survey as a professor
   Given I have logged in as a professor
   And I am in course "hello"

@@ -39,19 +39,18 @@ class SurveyTemplatesController < ApplicationController
   end
 
   def clone
+    # puts "cloning a survey!"
     template = SurveyTemplate.find(params[:id])
     new_template = template.dup
     course = Course.find_by_name(params[:course_name])
-    if course
-      course.survey_templates << new_template
-      new_template.save!
-      amend_title(new_template)
-      clone_fields(new_template, template)
-    else
-      flash[:notice] = "that course doesn't exist."
-    end
-
-    redirect_to survey_templates_path
+    course.survey_templates << new_template
+    new_template.save!
+    amend_title(new_template)
+    clone_fields(new_template, template)
+    flash[:notice] = "Your course was cloned successfully. "
+    flash.keep(:notice)
+    render js: "window.location = '#{survey_templates_path}'"
+    # puts "finished cloning"
   end
 
   def amend_title(clone)
@@ -74,6 +73,7 @@ class SurveyTemplatesController < ApplicationController
   def index
     authorize :survey_templates, :index?
     @templates = current_user.all_surveys
+    @courses = current_user.courses
   end
   
   def show # shows the HTML form

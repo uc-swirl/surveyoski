@@ -29,7 +29,7 @@
               <%= link_to 'Emails of Participants', "/survey_templates/#{template.id}/participants" %>
             </td>
             <td>
-              <%= link_to "Clone this survey", "/survey_templates/#{template.id}/clone", class: "clone_link" %>
+              <button><div class = "clone_button" data-template-id = <%= template.id.to_s %> >Clone this survey</div></button>
             </td>
             <td>
               <%= link_to "Delete this survey", "/survey_templates/#{template.id}", method: :delete %>
@@ -39,3 +39,16 @@
       <% end %>
   </tbody>
 </table>
+
+<div id = "clone_dialog" data-template-id = "" style="display:none"> 
+  <form>
+    Which course would you like to clone this survey to?
+    <select id="select_course_name">
+      <%- @courses.each do |course| %>
+        <option value=<%= course.name %>><%= course.name %></option>
+      <% end %>
+    </select>
+    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+  </form>
+</div>

@@ -1,18 +1,42 @@
-function add_prompt_to_link(){
-	$(".clone_link").each(function(index){
-		  console.log("hm. " + $(this).text());
-			$(this).click(function(){
-			var course_name = ask_for_course_name();
-			var url = $(this).attr('href') + "?course_name=" + course_name;
-			$(this).attr('href', url);
-		});
+function add_prompt_to_link(){  
+  $(".clone_button").each(function(index){
+    var button = $(this);
+    var dialog = $("#clone_dialog");
+    dialog.dialog({
+      autoOpen: false,
+      buttons: {
+        "Submit": function(){
+        	clone_survey(dialog);
+        	dialog.dialog("close");
+        	},
+        Cancel: function() {
+          dialog.dialog("close");
+        }
+      }
+    });
+
+    button.click(function(){
+	    // console.log(button.attr("data-template-id"));
+    	dialog.attr("data-template-id", button.attr("data-template-id"));
+      dialog.dialog("open");
+    });
+  });
+}
+
+function clone_survey(dialog_box){
+	id = dialog_box.attr("data-template-id");
+	// console.log(id);
+	form = dialog_box.find("form");
+	course_name = form.find("select").val();
+	// console.log(course_name);
+	$.ajax({
+	  type: "POST",
+	  url: "/survey_templates/"+id+"/clone",
+	  data: {course_name: course_name},
+	  success: function(data, textStatus) {
+	  	console.log("data: " + data);
+    }
 	});
-}
+};
 
-function ask_for_course_name() {
-	
-	var course_name = prompt("Course name:"); // should probably make this a more restricted thing later
-	return course_name;
-}
-
-$(document).ready(add_prompt_to_link());
+$(document).ready(add_prompt_to_link);
