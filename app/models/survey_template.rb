@@ -11,6 +11,7 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :email_fields
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
+  belongs_to :course
 
   def get_all_responses
     if submissions.length <= 10

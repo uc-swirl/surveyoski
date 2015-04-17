@@ -11,6 +11,7 @@ class SurveyTemplatesController < ApplicationController
   def new
     authorize :survey_templates, :new?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
+    @courses = current_user.courses
   end
 
   def edit
@@ -18,6 +19,7 @@ class SurveyTemplatesController < ApplicationController
     @survey = SurveyTemplate.find(params[:id])
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
+    @courses = current_user.courses
     render :new
   end
 
@@ -28,6 +30,7 @@ class SurveyTemplatesController < ApplicationController
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
     @survey.survey_title = @name
     @survey.survey_fields = []
+    @survey.course = Course.find_by_id(params[:course_id])
     @fields.each do |key, field_param| 
       klass = name_to_type[field_param[:type]]
       field =  klass.new(:question_title => field_param[:name], :question_weight => field_param[:weight], :required => field_param[:required])
