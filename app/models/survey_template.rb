@@ -71,14 +71,7 @@ class SurveyTemplate < ActiveRecord::Base
   private :number_to_name, :few_responses_message, :titles_to_array, :responses_to_array
 
   def self.sort(s, user)
-    if s == 'name'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'LOWER(survey_title)')
-    elsif s == 'course'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order => 'course_id')
-    elsif s == 'date'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'created_at')
-    else
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses})
-    end
+    id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}
+    return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>id_conversion[s])
   end
 end
