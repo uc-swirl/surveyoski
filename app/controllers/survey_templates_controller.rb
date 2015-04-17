@@ -76,7 +76,7 @@ class SurveyTemplatesController < ApplicationController
   def show # shows the HTML form
     authorize :survey_templates, :show?
   	template = SurveyTemplate.find(params[:id])
-    @fields = template.survey_fields
+    @fields = template.survey_fields.sort_by {|field| field.question_weight}
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description
