@@ -1,5 +1,6 @@
-Given /^the following survey template exists$/ do |table|
-  @survey = SurveyTemplate.create!
+Given /^the following survey template exists in course "(.+)"$/ do |course_name, table|
+  @course = Course.create(:name => course_name)
+  @survey = @course.survey_templates.build(:survey_title => "meep")
   table.hashes.each do |question|
     options = question[:options].split(",").map {|x| x.split(":").map {|x| x.strip } }
     case question[:type]
@@ -14,9 +15,31 @@ Given /^the following survey template exists$/ do |table|
     end
     q.save!
   end
-  @survey.save!
+  @course.save!
   @question_number = 0
 end
+
+Given(/^the following survey template exists$/) do |table|
+  @course = Course.create(:name => "untitled")
+  @survey = @course.survey_templates.build(:survey_title => "meep")
+  table.hashes.each do |question|
+    options = question[:options].split(",").map {|x| x.split(":").map {|x| x.strip } }
+    case question[:type]
+    when "text_question_fields"
+      q = @survey.text_question_fields.build(:question_title=>question[:question_title], :required=>question[:required])
+    when "radio_button_fields"
+      q = @survey.radio_button_fields.build(:question_title=>question[:question_title], :field_options => options, :required=>question[:required])
+    when "checkbox_fields"
+      q = @survey.checkbox_fields.build(:question_title=>question[:question_title], :field_options => options, :required=>question[:required])
+    when "drop_down_fields"
+      q = @survey.drop_down_fields.build(:question_title=>question[:question_title], :field_options => options, :required=>question[:required])
+    end
+    q.save!
+  end
+  @course.save!
+  @question_number = 0
+end
+
 
 Given /I am on the survey template/ do
   @user = User.create(:email => "test@berkeley.edu", :status => "student")

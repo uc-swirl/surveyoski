@@ -1,4 +1,3 @@
-
 SurveyField.prototype.fields = [];
 
 
@@ -191,3 +190,4 @@ SurveyBuilder = function () {
 
 
 SurveyBuilder.init();
+

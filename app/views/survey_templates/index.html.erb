@@ -7,14 +7,14 @@
   <tbody>
       <tr>
         <td colspan="6" >
-            Sort By:
+            <div id = 'sort_by'>Sort by</div>
             <button class = 'sort_tag' id = 'name'>
             <div><%= link_to "Survey Name", survey_templates_path(:sort => 'name'), :class=>"sort_text" %></div>
             </button>
-            <button class = 'sort_tag' id='course'>
+            <button class = 'sort_tag' id= 'course'>
             <div><%= link_to "Course", survey_templates_path(:sort => 'course'),:class=>"sort_text" %></div>
             </button>
-            <button class = 'sort_tag' id='date'>
+            <button class = 'sort_tag' id= 'date'>
             <div><%= link_to "Release Date", survey_templates_path(:sort => 'date'),:class=>"sort_text" %></div>
             </button>
         </td>
@@ -35,7 +35,8 @@
               <%= link_to image_tag("email.png", :width=>30, :height=>30, :title=>'Emails of participants'), "/survey_templates/#{template.id}/participants" %>
             </td>
             <td>
-              <%= link_to image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey'), "/survey_templates/#{template.id}/clone" %>
+                <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.id.to_s ) %>
+                </div>
             </td>
             <td>
               <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), "/survey_templates/#{template.id}", method: :delete %>
@@ -45,3 +46,16 @@
       <% end %>
   </tbody>
 </table>
+
+<div id = "clone_dialog" data-template-id = "" style="display:none"> 
+  <form>
+    Which course would you like to clone this survey to?
+    <select id="select_course_name">
+      <%- @courses.each do |course| %>
+        <option value=<%= course.name %>><%= course.name %></option>
+      <% end %>
+    </select>
+    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+  </form>
+</div>
