@@ -12,12 +12,12 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
 
-  def get_all_responses
+  def submissions_to_csv
     if submissions.length <= 10
       return few_responses_message
     end
     output = titles_to_array.to_csv
-    responses_to_array.shuffle.each {|r| output += r.to_csv}
+    submissions_to_array.shuffle.each {|r| output += r.to_csv}
     output
   end
 
@@ -45,7 +45,7 @@ class SurveyTemplate < ActiveRecord::Base
     titles
   end
 
-  def responses_to_array
+  def submissions_to_array
     all_responses = []
     submissions.each do |s|
       curr_submis = []
@@ -59,7 +59,7 @@ class SurveyTemplate < ActiveRecord::Base
       end
       all_responses << curr_submis
     end
-    all_responses
+    all_responses.shuffle
   end
 
   def number_to_name(num)
@@ -68,6 +68,6 @@ class SurveyTemplate < ActiveRecord::Base
     conversion[num]
   end
 
-  private :number_to_name, :few_responses_message, :titles_to_array, :responses_to_array
+  private :number_to_name
 
 end

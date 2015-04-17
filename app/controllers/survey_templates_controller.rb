@@ -81,10 +81,22 @@ class SurveyTemplatesController < ApplicationController
   def all_responses
     authorize :survey_templates, :all_responses?
   	@survey_template = SurveyTemplate.find(params[:id])
+    if @survey_template.submissions.length <= 10
+      flash[:notice] = @survey_template.few_responses_message
+      redirect_to survey_templates_path
+    else
+      @questions = @survey_template.titles_to_array
+      @submissions = @survey_template.submissions_to_array #shuffle them inside the model, this is just embedded array of strings
+    end
   end
   def participants
     authorize :survey_templates, :participants?
   	@survey_template = SurveyTemplate.find(params[:id])
+  end
+
+  def download_submissions
+    authorize :survey_templates, :all_responses?
+    @survey_template = SurveyTemplate.find(params[:id])
   end
 
   def destroy

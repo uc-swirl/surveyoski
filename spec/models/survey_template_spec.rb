@@ -20,7 +20,7 @@ describe SurveyTemplate do
       @s.save
     end
     it 'gives a proper message when there have been no submissions yet' do
-      @s.get_all_responses.should eq "There have been no submissions yet."
+      @s.submissions_to_csv.should eq "There have been no submissions yet."
     end
     it 'gives a proper message when there has been one submission' do
       submis = @s.submissions.build
@@ -29,7 +29,7 @@ describe SurveyTemplate do
       r2 = submis.field_responses.build(:response => "0")
       r2.survey_field_id = @q2.id
       submis.save
-      @s.get_all_responses.should eq "There has only been one submission so far."
+      @s.submissions_to_csv.should eq "There has only been one submission so far."
     end
     it 'does not format results if there have been fewer than 11 submissions' do
       5.times do
@@ -40,7 +40,7 @@ describe SurveyTemplate do
         r2.survey_field_id = @q2.id
         submis.save
       end
-      @s.get_all_responses.should eq "There have only been five submissions so far."
+      @s.submissions_to_csv.should eq "There have only been five submissions so far."
     end
     it 'formats submissions into csv string when there have been more than 10 responses' do
       3.times do
@@ -67,7 +67,7 @@ describe SurveyTemplate do
         r2.survey_field_id = @q2.id
         submis.save
       end
-        r = @s.get_all_responses
+        r = @s.submissions_to_csv
         r.should include("Favorite Color,Number of Pets\n")
         r.should include("Lime Green,25\n")
         r.should include("Magenta,2\n")
@@ -80,7 +80,7 @@ describe SurveyTemplate do
         r1.survey_field_id = @q1.id
         submis.save
       end
-      r = @s.get_all_responses
+      r = @s.submissions_to_csv
       r.should include("Lime Green,\n")
     end
   end

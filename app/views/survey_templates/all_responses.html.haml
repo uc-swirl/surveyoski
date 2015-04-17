@@ -1,1 +1,10 @@
-= simple_format(@survey_template.get_all_responses)
+%table
+  = link_to "Download CSV", download_submissions_path(params[:id])
+  %tbody
+    %tr
+    - @questions.each do |title|
+      %td= title
+    - @submissions.each do |submission|
+      %tr
+        - submission.each do |response|
+          %td= response
