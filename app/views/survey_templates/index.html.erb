@@ -1,38 +1,47 @@
-<h1>SurveyOski Evaluation</h1>
+<!--<div class="page_title">SurveyOski Evaluation</div>-->
 
-<table id="forms">
+<table id="all_surveys">
   <thead>
-    <th colspan = "6">All Surveys</th>
+    <th colspan = "6", id="all_surveys_text">All Surveys</th>
   </thead>
   <tbody>
       <tr>
         <td colspan="6" >
             Sort By:
-            <button class = 'sort_tag' id = 'name'><div>Survey Name</div></button>
-            <button class = 'sort_tag' id='course'><div>Course</div></button>
-            <button class = 'sort_tag' id='date'><div>Release Date</div></button>
+            <button class = 'sort_tag' id = 'name'>
+            <div><%= link_to "Survey Name", survey_templates_path(:sort => 'name'), :class=>"sort_text" %></div>
+            </button>
+            <button class = 'sort_tag' id='course'>
+            <div><%= link_to "Course", survey_templates_path(:sort => 'course'),:class=>"sort_text" %></div>
+            </button>
+            <button class = 'sort_tag' id='date'>
+            <div><%= link_to "Release Date", survey_templates_path(:sort => 'date'),:class=>"sort_text" %></div>
+            </button>
         </td>
       </tr>
 
       <% @templates.each do |template| %>
           <tr>
             <td>
-              <%= link_to template.survey_title.to_s, edit_survey_template_path(template) %>
+              <%= link_to template.survey_title.to_s, edit_survey_template_path(template),:id=>"survey_name" %>
             </td>
             <td>
-              <%= link_to "View live form", survey_template_path(template), :target => "_blank" %>
+              <%= link_to image_tag("view.png", :width=>30, :height=>30, :title=>'View live survey'), survey_template_path(template), :target => "_blank"%>
             </td>
             <td>
-              <%= link_to 'All Responses', "/survey_templates/#{template.id}/all_responses" %>
+              <%= link_to image_tag("response.png", :width=>30, :height=>30, :title=>'See responses'), "/survey_templates/#{template.id}/all_responses" %>
             </td>
             <td>
-              <%= link_to 'Emails of Participants', "/survey_templates/#{template.id}/participants" %>
+              <%= link_to image_tag("email.png", :width=>30, :height=>30, :title=>'Emails of participants'), "/survey_templates/#{template.id}/participants" %>
             </td>
             <td>
-              <button><div class = "clone_button" data-template-id = <%= template.id.to_s %> >Clone this survey</div></button>
+              <button class= "cloning_button">
+                <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.id.to_s ) %>
+                </div>
+              </button>
             </td>
             <td>
-              <%= link_to "Delete this survey", "/survey_templates/#{template.id}", method: :delete %>
+              <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), "/survey_templates/#{template.id}", method: :delete %>
             </td>
 
           </tr>

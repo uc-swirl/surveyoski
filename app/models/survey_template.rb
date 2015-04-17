@@ -71,4 +71,15 @@ class SurveyTemplate < ActiveRecord::Base
 
   private :number_to_name, :few_responses_message, :titles_to_array, :responses_to_array
 
+  def self.sort(surveys, sort_param)
+    if sort_param == 'name'
+      return surveys.sort_by {|survey| survey.survey_title}
+    elsif sort_param == 'course'
+      return surveys.sort_by {|survey| Course.find(survey.course_id).name}
+    elsif sort_param == 'date'
+      return surveys.sort_by {|survey| survey.created_at}
+    else
+      return surveys
+    end
+  end
 end

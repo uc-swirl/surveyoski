@@ -2,7 +2,7 @@ Given(/^I clone the survey$/) do
   @orig = SurveyTemplate.all.length
   course = @user.courses.create
   puts @orig
-  first(:button, "Clone this survey").click()
+  first("img.clone_button").click
   first(:button, "Submit").click()
   page.should have_content "SurveyOski"
   page.should_not have_content "slow down, rspec. and let phantomjs finish cloning the survey."

@@ -66,13 +66,10 @@ class SurveyTemplatesController < ApplicationController
       clone.survey_fields << field.dup
     end
     clone.save
-  end
-  # def clone_options(clone, field)
-  # end
-  
+  end  
   def index
     authorize :survey_templates, :index?
-    @templates = current_user.all_surveys
+    @templates = SurveyTemplate.sort(current_user.all_surveys, params[:sort])
     @courses = current_user.courses
   end
   
