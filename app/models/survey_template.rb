@@ -70,4 +70,15 @@ class SurveyTemplate < ActiveRecord::Base
 
   private :number_to_name, :few_responses_message, :titles_to_array, :responses_to_array
 
+  def self.sort(s)
+    if s == 'name'
+      return SurveyTemplate.find(:all, :order =>'LOWER(survey_title)')
+    elsif s == 'course'
+      return SurveyTemplate.all
+    elsif s == 'date'
+      return SurveyTemplate.find(:all, :order =>'created_at')
+    else
+      return SurveyTemplate.all
+    end
+  end
 end
