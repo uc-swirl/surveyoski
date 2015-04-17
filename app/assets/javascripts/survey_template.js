@@ -1,12 +1,14 @@
 SurveyField.prototype.fields = [];
 
 
-function SurveyField(field_type, field_name, form) {
+function SurveyField(field_type, field_name, form, required) {
   this.type = field_type;
   this.name = field_name;
+  this.required = required;
   this.form = form;
   this.options = "";
   this.container = {};
+  this.optionsCount = 0;
   this.id = SurveyField.prototype._field_count;
   SurveyField.prototype._field_count += 1;
   this.type_input = jQuery("<input/>", { type : "hidden", name : this.form_name("type"), value : field_type}).appendTo(form);
@@ -58,6 +60,11 @@ SurveyField.prototype.form_name = function (name) {
   return "fields[" +this.id+ "]["+name+"]";
 }
 
+SurveyField.prototype.form_option_name = function () {
+  this.optionsCount++;
+  return "fields[" +this.id+ "][options]["+this.optionsCount+"]";
+}
+
 SurveyField.prototype.coupledNameInput = function () {
   var field = this;
   var title = jQuery("<input/>", {name: field.form_name("name"), value : field.name});
@@ -103,8 +110,11 @@ SurveyBuilder = function () {
 
   };
 
-  var setup_sortables = function () {
+  function uniqId() {
+    return "survey-id-" + Math.round(new Date().getTime() + (Math.random() * 100));
+  }
 
+  var setup_sortables = function () {
     jQuery('.form_fields').sortable("destroy");
     jQuery('.form_fields').sortable();
     jQuery('.form_fields').sortable().bind('sortupdate', function() {
@@ -115,18 +125,17 @@ SurveyBuilder = function () {
   var load_survey_template = function () {
     _survey_fields.sort(function(a, b) { return a.question_weight - b.question_weight; });
     jQuery.each(_survey_fields, function (index, object) {
-      load_field(object.nice_name, object.question_title, object.field_options);
+      console.log(object);
+      load_field(object.nice_name, object.question_title, object.field_options, object.required);
     });
   }
 
-  var load_field = function (field_type, field_name, options) {
-    var field = new SurveyField(field_type, field_name, jQuery(".form_fields"));
+  var load_field = function (field_type, field_name, options, required) {
+    var field = new SurveyField(field_type, field_name, jQuery(".form_fields"), required);
     if (options) {
-      options.splice(0, 0, ""); //insert a "" to bootstrap the reduce
-      options = options.reduce (function (previousValue, currentValue, index, array) { 
-        return previousValue + currentValue[0] + " : " + currentValue[1] +"\n" });
+      field.setOptions(options);
     }
-    field.setOptions(options);
+
     add_field(field);
   }
 
@@ -140,6 +149,15 @@ SurveyBuilder = function () {
     });
   }
 
+  function add_require_button(question_table, field) {
+    var id = uniqId();
+    var require_row = jQuery("<tr/>").appendTo(question_table);
+    var col = jQuery("<td/>").appendTo(require_row);
+    var label = jQuery("<label/>", {"for" : id, text : "Required: "}).appendTo(col);
+    col = jQuery("<td/>").appendTo(require_row);
+    jQuery("<input/>", {id: id, type : "checkbox", name : field.form_name("required"), checked : field.required}).appendTo(col);
+  }
+
   var add_field = function (field) {
 
     var question_container = jQuery("<div/>", {"class" : "question_container"}).appendTo(".form_fields");
@@ -150,7 +168,9 @@ SurveyBuilder = function () {
     add_title_row(question_table, field);
     add_type_row(question_table, field.type);
 
+    add_require_button(question_table, field);
     field_types[field.type](field).appendTo(question_table);
+
     setup_sortables();
   }
   var add_title_row = function(question_table, field) {
@@ -167,13 +187,62 @@ SurveyBuilder = function () {
     var title = jQuery("<td/>", {text : field_type}).appendTo(type_row);
   }
 
+  var add_option_row = function(field, name_input,  value_input, add_button, add_row)  {
+
+    add_button.click(function (e) {
+      e.preventDefault();
+      add_option_inputs(field, add_row, name_input.val(), value_input.val());
+      name_input.val("");
+      value_input.val("");
+    });
+  }
+
+  var add_option_inputs = function (field, add_row, name, value) {
+    var add_option_row = jQuery("<tr/>", {"class" : "option_row"}).insertBefore(add_row);
+    var name_col = jQuery("<td/>").appendTo(add_option_row);
+    var value_col = jQuery("<td/>", {style : "position:relative;"}).appendTo(add_option_row);
+
+    var option_id = field.form_option_name();
+
+    jQuery("<input/>", { name: option_id + "[name]", value: name}).appendTo(name_col);
+    jQuery("<input/>", { name: option_id + "[value]", value: value}).appendTo(value_col);
+
+    var del_button = jQuery("<button/>", {"class" : "delete_field_button", //Needs to be fixed/changed to not match the other delete
+                              text: "X", 
+                              name : ""}).appendTo(value_col);
+    del_button.click (function () {
+      add_option_row.detach();
+    });
+  }
+
   var add_multiple_option = function (field) {
-    var radio_options = jQuery("<tr/>");
-    jQuery("<td/>", {text : "Options (name : value): "}).appendTo(radio_options);
-    var col = jQuery("<td/>").appendTo(radio_options);
-    var input = jQuery("<textarea/>", {name: field.form_name("options")}).appendTo(col);
-    input.val(field.options);
-    return radio_options;
+    var container_row = jQuery("<tr/>");
+    var container_col = jQuery("<td/>", {"colspan" : 2}).appendTo(container_row);
+
+
+    var options_table = jQuery("<table/>").appendTo(container_col);
+
+    var title_row = jQuery("<tr/>").appendTo(options_table);
+    jQuery("<td/>", {style: "font-weight: bold;",text : "Options", "colspan" : 2}).appendTo(title_row);
+
+    var add_row = jQuery("<tr/>",{"class" : "option_row"}).appendTo(options_table);
+    var add_name = jQuery("<td/>", {text : ""}).appendTo(add_row);
+    var add_value_name = jQuery("<input/>", {type: "text"}).appendTo(add_name);
+    var add_value = jQuery("<td/>", {text : ""}).appendTo(add_row);
+    var add_value_input = jQuery("<input/>", {type: "text"}).appendTo(add_value);
+    var add_button = jQuery("<button/>", { class : "delete_field_option_add_button",  text : "Add"}).appendTo(add_value);
+
+    add_option_row(field, add_value_name, add_value_input, add_button, add_row);
+
+    jQuery.each(field.options, function (index, value) {
+      var name = value[0];
+      var value = value[1];
+      if (name != "" && value != "") {
+        add_option_inputs(field, add_row, name, value);
+      }
+    });
+
+    return container_row;
   }; 
 
   var add_checkbox_options = add_multiple_option;
