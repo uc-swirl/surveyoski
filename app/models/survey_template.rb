@@ -74,7 +74,7 @@ class SurveyTemplate < ActiveRecord::Base
     if s == 'name'
       return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'LOWER(survey_title)')
     elsif s == 'course'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order => '{Courses.find(:course_id).name}')
+      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses})
     elsif s == 'date'
       return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'created_at')
     else
