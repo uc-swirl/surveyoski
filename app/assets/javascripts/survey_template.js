@@ -84,12 +84,23 @@ SurveyField.prototype._field_count = 0;
 SurveyBuilder = function () {
   var field_types = {};
   var init = function () {
+
   field_types = {"Checkbox" : add_checkbox_options,
                      "Select List": add_select_list_options,
                      "Radio Buttons": add_radio_buttons_options,
                      "Text": add_text_options
                     };
     jQuery(document).ready(function () {
+
+      jQuery("#form_survey_template").keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+        }
+      });
+
+    jQuery(".add_field_button").bind("click");
+    jQuery(".add_field_button").prop('type', 'button');
+
       jQuery(".add_field_button").click(function (event) {
         event.preventDefault();
 
@@ -144,7 +155,10 @@ SurveyBuilder = function () {
                                           text: "X", 
                                           name : "delete-" + field_name}).appendTo(question_container);
 
-    jQuery(del_button).click(function () {
+    del_button.unbind("click");
+    del_button.prop('type', 'button');
+
+    del_button.click(function () {
       question_container.detach();
     });
   }
@@ -201,7 +215,10 @@ SurveyBuilder = function () {
     var del_button = jQuery("<button/>", {"class" : "delete_field_button", //Needs to be fixed/changed to not match the other delete
                               text: "X", 
                               name : ""}).appendTo(value_col);
-    del_button.click (function () {
+
+    del_button.unbind("click");
+    del_button.prop('type', 'button');
+    del_button.click (function (e) {
       add_option_row.detach();
     });
   }
@@ -222,6 +239,8 @@ SurveyBuilder = function () {
 
     var add_button = jQuery("<button/>", { class : "option_add_button",  text : "Add Option"}).appendTo(add_value);
 
+    add_button.unbind("click");
+    add_button.prop('type', 'button');
     add_button.click(function (e) {
       e.preventDefault();
       add_option_inputs(field, add_row, "", "");
