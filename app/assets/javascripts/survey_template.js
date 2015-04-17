@@ -187,15 +187,6 @@ SurveyBuilder = function () {
     var title = jQuery("<td/>", {text : field_type}).appendTo(type_row);
   }
 
-  var add_option_row = function(field, name_input,  value_input, add_button, add_row)  {
-
-    add_button.click(function (e) {
-      e.preventDefault();
-      add_option_inputs(field, add_row, name_input.val(), value_input.val());
-      name_input.val("");
-      value_input.val("");
-    });
-  }
 
   var add_option_inputs = function (field, add_row, name, value) {
     var add_option_row = jQuery("<tr/>", {"class" : "option_row"}).insertBefore(add_row);
@@ -204,8 +195,8 @@ SurveyBuilder = function () {
 
     var option_id = field.form_option_name();
 
-    jQuery("<input/>", { name: option_id + "[name]", value: name}).appendTo(name_col);
-    jQuery("<input/>", { name: option_id + "[value]", value: value}).appendTo(value_col);
+    jQuery("<input/>", { "class" : "name_input_option", name: option_id + "[name]", value: name}).appendTo(name_col);
+    jQuery("<input/>", { "class" : "value_input_option", name: option_id + "[value]", value: value}).appendTo(value_col);
 
     var del_button = jQuery("<button/>", {"class" : "delete_field_button", //Needs to be fixed/changed to not match the other delete
                               text: "X", 
@@ -222,17 +213,19 @@ SurveyBuilder = function () {
 
     var options_table = jQuery("<table/>").appendTo(container_col);
 
-    var title_row = jQuery("<tr/>").appendTo(options_table);
-    jQuery("<td/>", {style: "font-weight: bold;",text : "Options", "colspan" : 2}).appendTo(title_row);
+    var title_row = jQuery("<tr/>", {"class" : "option_row"}).appendTo(options_table);
+    jQuery("<td/>", {text : "Option Name"}).appendTo(title_row);
+    jQuery("<td/>", {text : "Option Value (Default is Name)"}).appendTo(title_row);
 
     var add_row = jQuery("<tr/>",{"class" : "option_row"}).appendTo(options_table);
-    var add_name = jQuery("<td/>", {text : ""}).appendTo(add_row);
-    var add_value_name = jQuery("<input/>", {name : "add_value_name", type: "text"}).appendTo(add_name);
-    var add_value = jQuery("<td/>", {text : ""}).appendTo(add_row);
-    var add_value_input = jQuery("<input/>", {name : "add_value_input", type: "text"}).appendTo(add_value);
-    var add_button = jQuery("<button/>", { class : "delete_field_option_add_button",  text : "Add"}).appendTo(add_value);
+    var add_value = jQuery("<td/>", {text : "",  "colspan" : 2}).appendTo(add_row);
 
-    add_option_row(field, add_value_name, add_value_input, add_button, add_row);
+    var add_button = jQuery("<button/>", { class : "option_add_button",  text : "Add Option"}).appendTo(add_value);
+
+    add_button.click(function (e) {
+      e.preventDefault();
+      add_option_inputs(field, add_row, "", "");
+    });
 
     jQuery.each(field.options, function (index, value) {
       var name = value[0];

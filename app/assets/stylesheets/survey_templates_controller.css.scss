@@ -1,3 +1,16 @@
+.option_add_button {
+  margin: 5px;
+  float: right;
+  margin-right: 20px;
+}
+.name_input_option {
+  width: 96%;
+}
+
+.value_input_option {
+  width: 80%;
+}
+
 .page_title{
   text-align: center;
   font-family: Ubuntu;
@@ -33,9 +46,7 @@
   padding: 8px;
 }
 
-.option_row  {
-  border: 1px solid red;
-}
+
 
 #form_survey_template {
   margin-left: auto;

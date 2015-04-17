@@ -4,6 +4,8 @@
     <div class="form_header">
         <h1>Form         
 </h1>
+    <%= label :course_id, "Course" %>
+    <%=  select_tag(:course_id, options_from_collection_for_select(@courses, 'id', 'name')) %>
 
         <%= label :form_name, "Name" %><%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
     </div>
