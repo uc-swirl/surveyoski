@@ -1,20 +1,28 @@
 <% # this is show view for the SurveyTemplate model views/survey_template/show.html.haml %>
-<%= render 'layouts/messages' %>
-<h2>
-  <%= @survey_title %>
-</h2>
-<h5>
-  <%= @survey_description %>
-</h5>
-<%= form_tag submissions_path :template_id => @id do %>
-    <% @fields.each do |field| %>
-        <%= render partial: field.location, locals: {field: field} %>
-        <br>
-    <% end %>
-    <br>
 
-    <div >
-      <%= submit_tag 'Submit', id: "survey_submit", class: "submit"%>
+<head>
+  <link href="http://fonts.googleapis.com/css?family=Ubuntu:400,500" rel="stylesheet" type="text/css">
+</head>
+<%= stylesheet_link_tag "survey_templates_controller" %>
+<body id = 'survey_show'>
+    <div id = 'frame'>
+        <%= render 'layouts/messages' %>
+        <div id='survey_title' >
+          <%= @survey_title%>
+        </div>
+        <div>
+          <%= @survey_description %>
+        </div>
+        <%= form_tag submissions_path :template_id => @id do%>
+            <% @fields.each do |field| %>
+                <%= render partial: field.location, locals: {field: field} %>
+                <br>
+            <% end %>
+            <br>
+            <div>
+              <%= submit_tag 'Submit', :id=>'survey_submit'%>
+            </div>
+
+        <% end %>
     </div>
-
-<% end %>
+</body>

@@ -7,14 +7,14 @@
   <tbody>
       <tr>
         <td colspan="6" >
-            Sort By:
+            <div id = 'sort_by'>Sort by</div>
             <button class = 'sort_tag' id = 'name'>
             <div><%= link_to "Survey Name", survey_templates_path(:sort => 'name'), :class=>"sort_text" %></div>
             </button>
-            <button class = 'sort_tag' id='course'>
+            <button class = 'sort_tag' id= 'course'>
             <div><%= link_to "Course", survey_templates_path(:sort => 'course'),:class=>"sort_text" %></div>
             </button>
-            <button class = 'sort_tag' id='date'>
+            <button class = 'sort_tag' id= 'date'>
             <div><%= link_to "Release Date", survey_templates_path(:sort => 'date'),:class=>"sort_text" %></div>
             </button>
         </td>
