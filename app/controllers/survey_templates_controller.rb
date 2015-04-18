@@ -130,19 +130,17 @@ end
     @emails = @survey_template.get_participants
   end
 
-  def download_submissions
+  def download_data
     authorize :survey_templates, :all_responses?
+    authorize :survey_templates, :participants?
     @survey_template = SurveyTemplate.find(params[:id])
-    send_data @survey_template.submissions_to_csv,
-              filename: "#{@survey_template.survey_title}.csv",
-              type: "application/csv"
-  end
-
-  def download_participants
-    authorize :survey_templates, :all_responses?
-    @survey_template = SurveyTemplate.find(params[:id])
-    send_data @survey_template.participants_to_csv,
-              filename: "#{@survey_template.survey_title}_participants.csv",
+    if params[:type] == 'submissions'
+      data = @survey_template.submissions_to_csv
+    else
+      data = @survey_template.participants_to_csv
+    end
+    send_data data,
+              filename: "#{@survey_template.survey_title} #{params[:type]}.csv",
               type: "application/csv"
   end
 

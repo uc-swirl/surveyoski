@@ -15,8 +15,7 @@
 
   get 'survey_templates/:id/all_responses', :to => 'survey_templates#all_responses', :as => :all_responses
   get 'survey_templates/:id/participants', :to => 'survey_templates#participants', :as => :all_participants
-  get 'survey_templates/:id/download_submissions', :to => 'survey_templates#download_submissions', :as => :download_submissions
-  get 'survey_templates/:id/download_participants', :to => 'survey_templates#download_participants', :as => :download_participants
+  get 'survey_templates/:id/download_:type', :to => 'survey_templates#download_data', :as => :download_data
   post 'survey_templates/:id/clone', :to => 'survey_templates#clone'
 
   get 'survey_templates/:id/status', :to => 'survey_templates#status', :as => :survey_template_status
