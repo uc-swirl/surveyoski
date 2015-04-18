@@ -24,6 +24,7 @@ And I should see "That user doesn't exist"
 Scenario: users can only see their own course surveys
 When I go to the courses page
 Then I should see "CS169"
+When I have not logged in as a professor
 When I have logged in as a professor
 And I go to the new course page
 And I make a new course called "Cog Sci 1"

@@ -29,8 +29,8 @@ end
   end
 
   def edit
-    authorize :survey_templates, :edit?
     @survey = SurveyTemplate.find(params[:id])
+    authorize @survey, :edit?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
     @courses = current_user.courses
@@ -99,9 +99,11 @@ end
   end
   
   def show # shows the HTML form
-    authorize :survey_templates, :show?
-  	template = SurveyTemplate.find(params[:id])
+
+    template = SurveyTemplate.find(params[:id])
+    authorize template
     @fields = template.survey_fields.sort_by {|field| field.question_weight}
+
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description

@@ -21,15 +21,15 @@ function add_publish_survey_template_button(container) {
           var stage_verb;
           var next_stage;
           var disable = false;
-          if (data == "unpublished") {
+          if (data === "unpublished") {
             stage_verb = "Publish";
             next_stage = "published";
-          } else if (data == "published") {
+          } else if (data === "published") {
             stage_verb = "Close";
             next_stage = "closed";
-          } else if (data == "closed") {
+          } else if (data === "closed") {
             disable = true;
-            stage_verb = "Closed"
+            stage_verb = "Closed";
           }
 
           next_stage_button = jQuery("<button/>", {"class" : "survey_status_button", 
@@ -37,7 +37,7 @@ function add_publish_survey_template_button(container) {
           if (!disable) {
             next_stage_button.click(function () {
               var yes = confirm(stage_verb + " form?");
-              if (yes == true) { 
+              if (yes === true) { 
                 send_update_survey_template_status(container.attr("data-update-status-route"), next_stage, container, next_stage_button);
               } 
             }); 
@@ -72,18 +72,18 @@ function SurveyField(field_db_id, field_type, field_name, form, required) {
 
 SurveyField.prototype.setWeight = function (weight) {
   this.weight_input.val(weight);
-}
+};
 
 SurveyField.prototype.findByDOMelement = function (element) {
   var found = null;
   jQuery.each(SurveyField.prototype.fields, function(index, field) {
-      if (field.container[0] == element) {
+      if (field.container[0] === element) {
         found = field;
         return false;
       }
   });
   return found;
-}
+};
 
 SurveyField.prototype.refreshIDs = function () {
   var weight = 0;
@@ -94,46 +94,46 @@ SurveyField.prototype.refreshIDs = function () {
     }
     weight += 1;
   });
-}
+};
 
 SurveyField.prototype.setOptions = function (options) {
   this.options = options;
-}
+};
 
 SurveyField.prototype.setType = function (field_type) {
   this.type = field_type;
-}
+};
 
 SurveyField.prototype.setName = function (field_name) {
   this.name = field_name;
-}
+};
 
 SurveyField.prototype.form_name = function (name) {
   return "fields[" +this.id+ "]["+name+"]";
-}
+};
 
 SurveyField.prototype.form_option_name = function () {
   this.optionsCount++;
   return "fields[" +this.id+ "][options]["+this.optionsCount+"]";
-}
+};
 
 SurveyField.prototype.coupledNameInput = function () {
   var field = this;
   var title = jQuery("<input/>", {name: field.form_name("name"), value : field.name});
   title.change(function () {
     var name = jQuery(this).val();
-    field.container.attr("name", "question-container-" + name)
+    field.container.attr("name", "question-container-" + name);
     field.setName(name);    
   });
   title.trigger("change");
   return title;
-}
+};
 
 SurveyField.prototype._field_count = 0;
 
 ///////////////////////////////////////////////////
 
-SurveyBuilder = function () {
+var SurveyBuilder = (function () {
   var field_types = {};
   var init = function () {
 
@@ -145,7 +145,7 @@ SurveyBuilder = function () {
     jQuery(document).ready(function () {
 
       jQuery("#form_survey_template").keydown(function(event){
-        if(event.keyCode == 13) {
+        if(event.keyCode === 13) {
           event.preventDefault();
         }
       });
@@ -160,7 +160,7 @@ SurveyBuilder = function () {
         var field_name = jQuery("#new_field_name").val();
         var field = new SurveyField(null, field_type, field_name, jQuery(".form_fields"));
 
-        add_field(field) 
+        add_field(field);
       });
 
       if (typeof _survey_fields !== 'undefined') {
@@ -186,7 +186,7 @@ SurveyBuilder = function () {
     jQuery('.form_fields').sortable().bind('sortupdate', function() {
       SurveyField.prototype.refreshIDs();
     });
-  }
+  };
 
   var load_survey_template = function () {
     _survey_fields.sort(function(a, b) { return a.question_weight - b.question_weight; });
@@ -194,7 +194,7 @@ SurveyBuilder = function () {
       console.log(object);
       load_field(object.id, object.nice_name, object.question_title, object.field_options, object.required);
     });
-  }
+  };
 
   var load_field = function (field_id, field_type, field_name, options, required) {
     var field = new SurveyField(field_id, field_type, field_name, jQuery(".form_fields"), required);
@@ -222,7 +222,7 @@ SurveyBuilder = function () {
     var id = uniqId();
     var require_row = jQuery("<tr/>").appendTo(question_table);
     var col = jQuery("<td/>").appendTo(require_row);
-    var label = jQuery("<label/>", {"for" : id, text : "Required: "}).appendTo(col);
+    jQuery("<label/>", {"for" : id, text : "Required: "}).appendTo(col);
     col = jQuery("<td/>").appendTo(require_row);
     jQuery("<input/>", {id: id, type : "checkbox", name : field.form_name("required"), checked : field.required}).appendTo(col);
   }
@@ -241,20 +241,20 @@ SurveyBuilder = function () {
     field_types[field.type](field).appendTo(question_table);
 
     setup_sortables();
-  }
+  };
   var add_title_row = function(question_table, field) {
     var title_row = jQuery("<tr/>").appendTo(question_table);
     jQuery("<td/>", {text : "Title: "}).appendTo(title_row);
     var title = jQuery("<td/>").appendTo(title_row);
-    var title_input = field.coupledNameInput().appendTo(title);
+    field.coupledNameInput().appendTo(title);
 
-  }
+  };
 
   var add_type_row = function(question_table, field_type) {
     var type_row = jQuery("<tr/>").appendTo(question_table);
     jQuery("<td/>", {text : "Question Type: "}).appendTo(type_row);
-    var title = jQuery("<td/>", {text : field_type}).appendTo(type_row);
-  }
+    jQuery("<td/>", {text : field_type}).appendTo(type_row);
+  };
 
 
   var add_option_inputs = function (field, add_row, name, value) {
@@ -273,8 +273,19 @@ SurveyBuilder = function () {
 
     del_button.unbind("click");
     del_button.prop('type', 'button');
-    del_button.click (function (e) {
+    del_button.click (function () {
       add_option_row.detach();
+    });
+  };
+
+  var create_add_button = function (container) { 
+    var add_button = jQuery("<button/>", { class : "option_add_button",  text : "Add Option"}).appendTo(container);
+
+    add_button.unbind("click");
+    add_button.prop('type', 'button');
+    add_button.click(function (e) {
+    e.preventDefault();
+    add_option_inputs(field, add_row, "", "");
     });
   }
 
@@ -292,19 +303,12 @@ SurveyBuilder = function () {
     var add_row = jQuery("<tr/>",{"class" : "option_row"}).appendTo(options_table);
     var add_value = jQuery("<td/>", {text : "",  "colspan" : 2}).appendTo(add_row);
 
-    var add_button = jQuery("<button/>", { class : "option_add_button",  text : "Add Option"}).appendTo(add_value);
-
-    add_button.unbind("click");
-    add_button.prop('type', 'button');
-    add_button.click(function (e) {
-      e.preventDefault();
-      add_option_inputs(field, add_row, "", "");
-    });
+    create_add_button(add_row);
 
     jQuery.each(field.options, function (index, value) {
       var name = value[0];
-      var value = value[1];
-      if (name != "" && value != "") {
+      value = value[1];
+      if (name !== "" && value !== "") {
         add_option_inputs(field, add_row, name, value);
       }
     });
@@ -316,13 +320,13 @@ SurveyBuilder = function () {
   var add_select_list_options = add_multiple_option;
   var add_radio_buttons_options = add_multiple_option;
 
-  var add_text_options = function (field) {
+  var add_text_options = function () {
     return jQuery("");
   }; 
 
 
   return {init : init};
-}();
+}());
 
 
 SurveyBuilder.init();

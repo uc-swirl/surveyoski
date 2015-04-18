@@ -13,12 +13,6 @@ Then(/^the survey template should( not)? require "(.*?)" to be filled out\.$/) d
    expect(found_field.required).to eq(req_not != "not")
 end
 
-
-
-Given(/^I publish the survey$/) do
-  
-end
-
 Given(/^I drag "(.*?)" to be (above|below) "(.*?)"$/) do |field1, ab, field2|
   #It's currently not easily possible to test drag and drop via Capybara
   if ab == "below"
@@ -36,7 +30,7 @@ Given(/^I drag "(.*?)" to be (above|below) "(.*?)"$/) do |field1, ab, field2|
 end
 
 Then(/^"(.*?)" should come before "(.*?)" on the edit survey page$/) do |field1, field2|
-  @user = User.create(:email => "test@berkeley.edu", :status => "admin")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit edit_survey_template_path @survey.id
@@ -46,21 +40,22 @@ end
 
 
 Then(/^"(.*?)" should come before "(.*?)" on the show survey page$/) do |field1, field2|
-  @user = User.create(:email => "test@berkeley.edu", :status => "student")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "student")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit survey_template_path @survey.id
-
   page.body.index("field-#{field1}").should < page.body.index("field-#{field2}")
 end
 
 
 
 Given(/^I am on the edit survey template$/) do
-  @user = User.create(:email => "test@berkeley.edu", :status => "admin")
+
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit edit_survey_template_path @survey.id
+
 end
 
 Given(/^I mark "(.*?)" as required$/) do |field_name|
@@ -70,7 +65,7 @@ Given(/^I mark "(.*?)" as required$/) do |field_name|
 end
 
 Given /I am on the new survey template page/ do
-  @user = User.create(:email => "test@berkeley.edu", :status => "admin")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit new_survey_template_path
@@ -118,9 +113,6 @@ Given /I add a select field "(.+)" with options "(.+)"/ do |name, options|
   fill_in 'new_field_name', :with => name
   select('Select List', :from => 'new_field_type')
   click_button 'Add question'
-
-
-
   fill_in "fields[" + @field_id.to_s + "][options]", :with => options.sub(",", "\n")
   
   @field_id +=1 

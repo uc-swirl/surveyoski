@@ -1,6 +1,6 @@
 
 And /^(?:am|is) in course "(.+)"$/ do |course_name|
-  puts Course.all
+  # puts Course.all
   Course.find_by_name(course_name).users << @user
   @user.save!
   expect(@user.courses.length).to be(1)
@@ -23,4 +23,13 @@ end
 Given(/^I am in course "(.*?)"$/) do |course_name|
   enrollment = Course.find_by_name(course_name).enrollments.build(:user_id => @user.id)
   enrollment.save!
+end
+
+Given(/^I am not in course "(.*?)"$/) do |course_name|
+  # remove myself from this course 
+  courses = @user.courses.select {|course| course.name == course_name }
+  if courses.length > 0
+    enrollment = course[0].enrollments.select {|person| person.id == @user.id }
+    enrollment.destroy
+  end
 end
