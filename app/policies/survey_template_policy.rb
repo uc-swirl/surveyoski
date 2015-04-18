@@ -17,7 +17,7 @@ class SurveyTemplatePolicy < ApplicationPolicy
   	@user.status != "student"
   end
   def show?
-    if @user and @template.course.users.include? @user or @user.status == "admin"
+    if @template.can_view(@user)
       true
     else
       @template.status == "published"
