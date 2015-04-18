@@ -30,7 +30,7 @@ Given(/^I drag "(.*?)" to be (above|below) "(.*?)"$/) do |field1, ab, field2|
 end
 
 Then(/^"(.*?)" should come before "(.*?)" on the edit survey page$/) do |field1, field2|
-  @user = User.create(:email => "test@berkeley.edu", :status => "admin")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit edit_survey_template_path @survey.id
@@ -40,7 +40,7 @@ end
 
 
 Then(/^"(.*?)" should come before "(.*?)" on the show survey page$/) do |field1, field2|
-  @user = User.create(:email => "test@berkeley.edu", :status => "student")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "student")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit survey_template_path @survey.id
@@ -51,10 +51,13 @@ end
 
 
 Given(/^I am on the edit survey template$/) do
-  @user = User.create(:email => "test@berkeley.edu", :status => "admin")
+
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit edit_survey_template_path @survey.id
+  puts @user
+  puts page.body
 end
 
 Given(/^I mark "(.*?)" as required$/) do |field_name|
@@ -64,7 +67,7 @@ Given(/^I mark "(.*?)" as required$/) do |field_name|
 end
 
 Given /I am on the new survey template page/ do
-  @user = User.create(:email => "test@berkeley.edu", :status => "admin")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit new_survey_template_path

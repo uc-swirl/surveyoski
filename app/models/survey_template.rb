@@ -1,8 +1,6 @@
 require 'csv'
 
 class SurveyTemplate < ActiveRecord::Base
-<<<<<<< HEAD
-
   attr_accessible :survey_title, :survey_description, :status, :user_id
 
   has_many :survey_fields , :dependent => :destroy
