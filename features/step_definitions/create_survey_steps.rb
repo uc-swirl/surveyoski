@@ -39,6 +39,17 @@ Then(/^"(.*?)" should come before "(.*?)" on the edit survey page$/) do |field1,
 end
 
 
+Then(/^"(.*?)" should come before "(.*?)" on the show survey page$/) do |field1, field2|
+  @user = User.create(:email => "test@berkeley.edu", :status => "student")
+  ApplicationController.any_instance.stub(:current_user).and_return(@user)
+  User.stub(:find).and_return(@user)
+  visit survey_template_path @survey.id
+
+  page.body.index("field-#{field1}").should < page.body.index("field-#{field2}")
+end
+
+
+
 Given(/^I am on the edit survey template$/) do
   @user = User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
