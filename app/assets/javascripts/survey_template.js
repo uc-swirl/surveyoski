@@ -1,18 +1,47 @@
-function add_publish_survey_template_button(container) {
-  var next_stage_button = jQuery("<button/>", {type: "button", text : "Publish"}).appendTo(container);
+function send_update_survey_template_status (path, stage_verb, container, next_stage_button) {
+    jQuery.ajax({
+      method: "PUT",
+      data: { status : stage_verb},
+      url: path, 
+      success: function (data) {
+        next_stage_button.detach();
+        add_publish_survey_template_button(container);
+      }
+    });
+}
 
-  next_stage_button.click(function () {
-    var yes = prompt("");
+function add_publish_survey_template_button(container) {
     jQuery.ajax({
       method: "GET",
       url: container.attr("data-status-route") ,
-      data: {},
       success: function (data) {
-          console.log(data);
+          var next_stage_button;
+          var stage_verb;
+          var next_stage;
+          var disable = false;
+          if (data == "unpublished") {
+            stage_verb = "Publish";
+            next_stage = "published";
+          } else if (data == "published") {
+            stage_verb = "Close";
+            next_stage = "closed";
+          } else if (data == "closed") {
+            disable = true;
+            stage_verb = "Closed"
+          }
+
+          next_stage_button = jQuery("<button/>", {"class" : "survey_status_button", 
+            disabled : disable, type: "button", text : stage_verb}).appendTo(container);
+          if (!disable) {
+            next_stage_button.click(function () {
+              var yes = confirm(stage_verb + " form?");
+              if (yes == true) { 
+                send_update_survey_template_status(container.attr("data-update-status-route"), next_stage, container, next_stage_button);
+              } 
+            }); 
+          }
         }
     });
-  });
-
 }
 
 
@@ -34,7 +63,7 @@ function SurveyField(field_db_id, field_type, field_name, form, required) {
   if (field_db_id) {
     this.id_input = jQuery("<input/>", { type : "hidden", name : this.form_name("id"), value : field_db_id }).appendTo(form);
   }
-  
+
   SurveyField.prototype.fields.push(this);
 }
 
@@ -136,7 +165,7 @@ SurveyBuilder = function () {
         load_survey_template();
         setup_sortables();
       }
-
+      add_publish_survey_template_button(jQuery(".publish_button_container"));
     });
 
 

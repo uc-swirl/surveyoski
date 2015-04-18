@@ -8,7 +8,12 @@
     <%=  select_tag(:course_id, options_from_collection_for_select(@courses, 'id', 'name')) %>
 
         <%= label :form_name, "Name" %><%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
-      <span class="publish_button_container" data-status-route="<%= if @survey then survey_template_status_path(@survey) else "" end %>"></span>
+      <span class="publish_button_container" 
+        data-status-route="<%= if @survey then survey_template_status_path(@survey) else "" end %>"
+        data-update-status-route="<%= if @survey then update_survey_template_status_path(@survey) else "" end %>"
+        >
+
+      </span>
     </div>
 
 
