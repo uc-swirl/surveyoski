@@ -16,7 +16,6 @@ Given(/^"(.*?)" is in course "(.*?)"$/) do |name, course_name|
   person = User.find_by_name(name)
   enrollment = Course.find_by_name(course_name).enrollments.build(:user_id => person.id)
   enrollment.save!
-  puts person.courses
 end
 
 

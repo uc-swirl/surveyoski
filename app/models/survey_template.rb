@@ -95,4 +95,15 @@ class SurveyTemplate < ActiveRecord::Base
     id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}
     return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>id_conversion[s])
   end
+
+  def can_view(accessing_user)
+    if accessing_user == nil
+      return false
+    elsif accessing_user.id == self.user.id
+      return true
+    else 
+      self.course and self.course.users.include? accessing_user
+    end
+  end
+
 end

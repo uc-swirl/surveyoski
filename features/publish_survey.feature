@@ -20,6 +20,7 @@ Given the following survey template exists in course "cs10"
 | year              | drop_down_fields     | 2010:1,2013:1,2014:1,2016:1      | false   |
 | hello             | checkbox_fields      | hi:1,hello:1,salutations:1       | false   | 
 And the survey is not published
+Given I have logged in as a professor
 Given I am not in course "cs10"
 When I am on the survey template
 Then I should see "This survey is not published."
