@@ -12,14 +12,14 @@ class SurveyTemplatesController < ApplicationController
       puts "ID ", params[:id]
       @survey = SurveyTemplate.find(params[:id])
       puts @survey.status
-      render :plain,  @survey.status
+      render :text =>  @survey.status
   end
 
 def update_status
     @survey = SurveyTemplate.find(params[:id])
     @survey.status = params[:status]
     @survey.save! 
-    render :plain,  @survey.status
+    render :text =>  @survey.status
 end
 
   def new
