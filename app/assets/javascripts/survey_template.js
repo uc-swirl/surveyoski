@@ -1,17 +1,15 @@
-
-
 function add_publish_survey_template_button(container) {
-
-  jQuery("<button/>", {type: "button", text : "Publish"}).appendTo(container);
-  jQuery.ajax({
-    method: "GET",
-    url: container.attr("data-status-route") ,
-    data: {},
-    success: function (data) {
-      console.log(data);
-    }
+    jQuery("<button/>", {type: "button", text : "Publish"}).appendTo(container);
+      jQuery.ajax({
+      method: "GET",
+      url: container.attr("data-status-route") ,
+      data: {},
+      success: function (data) {
+        console.log(data);
+      }
   });
 }
+
 
 SurveyField.prototype.fields = [];
 
