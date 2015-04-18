@@ -43,9 +43,9 @@ Then(/^"(.*?)" should come before "(.*?)" on the show survey page$/) do |field1,
   @user = User.create(:email => "test@berkeley.edu", :status => "student")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
-  visit show_survey_template_path @survey.id
+  visit survey_template_path @survey.id
 
-  page.body.index("field-" + field1).should < page.body.index("field-" + field2).should
+  page.body.index("field-#{field1}").should < page.body.index("field-#{field2}")
 end
 
 
