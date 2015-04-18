@@ -8,9 +8,24 @@ class SurveyTemplatesController < ApplicationController
       end
   end
 
+  def status
+    puts "ID ", params[:id]
+    @survey = SurveyTemplate.find(params[:id])
+    puts @survey.status
+    render :plain,  @survey.status
+  end
+
+  def update_status
+    @survey = SurveyTemplate.find(params[:id])
+    @survey.status = params[:status]
+    @survey.save! 
+    render :plain,  @survey.status
+  end
+
   def new
     authorize :survey_templates, :new?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
+    @courses = current_user.courses
   end
 
   def edit
@@ -18,6 +33,7 @@ class SurveyTemplatesController < ApplicationController
     authorize @survey, :edit?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
+    @courses = current_user.courses
     render :new
   end
 
@@ -28,6 +44,7 @@ class SurveyTemplatesController < ApplicationController
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
     @survey.survey_title = @name
     @survey.survey_fields = []
+    @survey.course = Course.find_by_id(params[:course_id])
     @fields.each do |key, field_param| 
       klass = name_to_type[field_param[:type]]
       field =  klass.new(:question_title => field_param[:name], :question_weight => field_param[:weight], :required => field_param[:required])
@@ -74,9 +91,11 @@ class SurveyTemplatesController < ApplicationController
   end
   
   def show # shows the HTML form
+
     template = SurveyTemplate.find(params[:id])
     authorize template
-    @fields = template.survey_fields
+    @fields = template.survey_fields.sort_by {|field| field.question_weight}
+
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description
@@ -85,10 +104,34 @@ class SurveyTemplatesController < ApplicationController
   def all_responses
     authorize :survey_templates, :all_responses?
   	@survey_template = SurveyTemplate.find(params[:id])
+    if @survey_template.submissions.length <= 10
+      flash[:notice] = @survey_template.few_responses_message
+      redirect_to survey_templates_path
+    else
+      @questions = @survey_template.titles_to_array
+      @submissions = @survey_template.submissions_to_array #shuffle them inside the model, this is just embedded array of strings
+    end
   end
   def participants
     authorize :survey_templates, :participants?
   	@survey_template = SurveyTemplate.find(params[:id])
+    @emails = @survey_template.get_participants
+  end
+
+  def download_submissions
+    authorize :survey_templates, :all_responses?
+    @survey_template = SurveyTemplate.find(params[:id])
+    send_data @survey_template.submissions_to_csv,
+              filename: "#{@survey_template.survey_title}.csv",
+              type: "application/csv"
+  end
+
+  def download_participants
+    authorize :survey_templates, :all_responses?
+    @survey_template = SurveyTemplate.find(params[:id])
+    send_data @survey_template.participants_to_csv,
+              filename: "#{@survey_template.survey_title}_participants.csv",
+              type: "application/csv"
   end
 
   def destroy

@@ -13,19 +13,34 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :participants, :dependent => :destroy
   belongs_to :course
 
-  def get_all_responses
+  validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
+  before_save :pepper_up
+
+  def submissions_to_csv
     if submissions.length <= 10
       return few_responses_message
     end
     output = titles_to_array.to_csv
-    responses_to_array.shuffle.each {|r| output += r.to_csv}
+    submissions_to_array.shuffle.each {|r| output += r.to_csv}
     output
   end
 
+  def pepper_up 
+    if self.status.nil?
+      self.status = "unpublished"
+    end
+  end
+
+  def participants_to_csv
+    p_csv = ""
+    get_participants.each {|p| p_csv += p + "\n" }
+    p_csv
+  end
+
   def get_participants
-    emails = ["Student Email"].to_csv
+    emails = ["Student Email"]
     participants.each do |response| 
-      emails += [response.email].to_csv
+      emails += [response.email]
     end
     emails
   end
@@ -46,7 +61,7 @@ class SurveyTemplate < ActiveRecord::Base
     titles
   end
 
-  def responses_to_array
+  def submissions_to_array
     all_responses = []
     submissions.each do |s|
       curr_submis = []
@@ -60,7 +75,7 @@ class SurveyTemplate < ActiveRecord::Base
       end
       all_responses << curr_submis
     end
-    all_responses
+    all_responses.shuffle
   end
 
   def number_to_name(num)
@@ -69,17 +84,10 @@ class SurveyTemplate < ActiveRecord::Base
     conversion[num]
   end
 
-  private :number_to_name, :few_responses_message, :titles_to_array, :responses_to_array
+  private :number_to_name
 
   def self.sort(s, user)
-    if s == 'name'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'LOWER(survey_title)')
-    elsif s == 'course'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order => 'course_id')
-    elsif s == 'date'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'created_at')
-    else
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses})
-    end
+    id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}
+    return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>id_conversion[s])
   end
 end

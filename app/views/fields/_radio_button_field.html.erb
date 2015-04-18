@@ -2,7 +2,7 @@
 <% field.field_options.each do |option| %>
 	<br>
     <label for= <%="submission_#{field.id}_#{option[0]}"%> > <%=option[0]%>
-    <%= radio_button_tag("submission[" + field.id.to_s + "]", option[0]) %>
+    <%= radio_button_tag("submission[" + field.id.to_s + "]", option[1]) %>
 	</label>
 
 

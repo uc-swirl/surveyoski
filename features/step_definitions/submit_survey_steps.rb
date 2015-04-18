@@ -1,6 +1,8 @@
 Given /^the following survey template exists in course "(.+)"$/ do |course_name, table|
   @course = Course.create(:name => course_name)
+  # puts "what"
   @survey = @course.survey_templates.build(:survey_title => "meep")
+  # puts "happened"
   table.hashes.each do |question|
     options = question[:options].split(",").map {|x| x.split(":").map {|x| x.strip } }
     case question[:type]
@@ -15,7 +17,9 @@ Given /^the following survey template exists in course "(.+)"$/ do |course_name,
     end
     q.save!
   end
+  puts "!!!"
   @course.save!
+  puts "????"
   @question_number = 0
 end
 

@@ -29,10 +29,10 @@
               <%= link_to image_tag("view.png", :width=>30, :height=>30, :title=>'View live survey'), survey_template_path(template), :target => "_blank"%>
             </td>
             <td>
-              <%= link_to image_tag("response.png", :width=>30, :height=>30, :title=>'See responses'), "/survey_templates/#{template.id}/all_responses" %>
+              <%= link_to image_tag("response.png", :width=>30, :height=>30, :title=>'See responses'), all_responses_path(template.id) %>
             </td>
             <td>
-              <%= link_to image_tag("email.png", :width=>30, :height=>30, :title=>'Emails of participants'), "/survey_templates/#{template.id}/participants" %>
+              <%= link_to image_tag("email.png", :width=>30, :height=>30, :title=>'Emails of participants'), all_participants_path(template.id) %>
             </td>
             <td>
                 <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.id.to_s ) %>
