@@ -9,13 +9,15 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-
-
   private
 
-  def user_not_authorized
-    flash[:notice] = "You are not authorized to perform this action. "
+  def user_not_authorized (exception)
+    policy_name = exception.policy.class.to_s
+    if policy_name == "SurveyTemplatePolicy"
+      flash[:notice] = "This survey is not published."
+    else
+      flash[:notice] = "You are not authorized to perform this action."
+    end
     redirect_to(request.referrer || dashboard_login_path)
   end
-
 end

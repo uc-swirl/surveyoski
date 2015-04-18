@@ -122,7 +122,7 @@ describe SurveyTemplatesController do
         expect(assigns(:survey_template)).to eq(@survey)
       end
       it 'sets the survey_template var for submissions downalod' do
-        get :download_submissions, :id => @survey.id
+        get :download_data, :id => @survey.id, :type => "submissions"
         expect(assigns(:survey_template)).to eq(@survey)
       end
     end

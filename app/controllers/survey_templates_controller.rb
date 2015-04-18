@@ -29,8 +29,8 @@ end
   end
 
   def edit
-    authorize :survey_templates, :edit?
     @survey = SurveyTemplate.find(params[:id])
+    authorize @survey, :edit?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
     @courses = current_user.courses
@@ -107,9 +107,11 @@ end
   end
   
   def show # shows the HTML form
-    authorize :survey_templates, :show?
-  	template = SurveyTemplate.find(params[:id])
+
+    template = SurveyTemplate.find(params[:id])
+    authorize template
     @fields = template.survey_fields.sort_by {|field| field.question_weight}
+
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description
@@ -136,19 +138,17 @@ end
     @emails = @survey_template.get_participants
   end
 
-  def download_submissions
+  def download_data
     authorize :survey_templates, :all_responses?
+    authorize :survey_templates, :participants?
     @survey_template = SurveyTemplate.find(params[:id])
-    send_data @survey_template.submissions_to_csv,
-              filename: "#{@survey_template.survey_title}.csv",
-              type: "application/csv"
-  end
-
-  def download_participants
-    authorize :survey_templates, :all_responses?
-    @survey_template = SurveyTemplate.find(params[:id])
-    send_data @survey_template.participants_to_csv,
-              filename: "#{@survey_template.survey_title}_participants.csv",
+    if params[:type] == 'submissions'
+      data = @survey_template.submissions_to_csv
+    else
+      data = @survey_template.participants_to_csv
+    end
+    send_data data,
+              filename: "#{@survey_template.survey_title} #{params[:type]}.csv",
               type: "application/csv"
   end
 

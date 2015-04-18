@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
     end
 
     def update_user
-      authorize :dashboard_controller, :update_user?
+      authorize :dashboard_controller
     end
     def change_user
       user = User.find_by_email(params[:email])
@@ -22,7 +22,7 @@ class DashboardController < ApplicationController
     end
 
     def index
-      authorize :dashboard_controller, :index?
+      authorize :dashboard_controller
       render :action => "index", :layout => "dashboard"
     end
 
