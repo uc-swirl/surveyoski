@@ -1,5 +1,5 @@
 Given /^the following survey template exists in course "(.+)"$/ do |course_name, table|
-  @user ||= User.create(:email => "test@berkeley.edu", :status => "student", :name => "OSKIGOBRSSSS")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "student", :name => "john")
   @course = Course.create(:name => course_name)
   @survey = @course.survey_templates.build(:survey_title => "meep", :status => "published", :user_id => @user.id)
 

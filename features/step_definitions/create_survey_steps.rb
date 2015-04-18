@@ -44,7 +44,6 @@ Then(/^"(.*?)" should come before "(.*?)" on the show survey page$/) do |field1,
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit survey_template_path @survey.id
-
   page.body.index("field-#{field1}").should < page.body.index("field-#{field2}")
 end
 
@@ -56,8 +55,7 @@ Given(/^I am on the edit survey template$/) do
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit edit_survey_template_path @survey.id
-  puts @user
-  puts page.body
+
 end
 
 Given(/^I mark "(.*?)" as required$/) do |field_name|

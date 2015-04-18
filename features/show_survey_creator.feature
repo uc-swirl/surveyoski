@@ -1,8 +1,8 @@
-Feature: Check the disclaimer on the survey page
+Feature: Always display survey creator on the survey
 
   As a student
-  So that I can express my opinions freely
-  I want to for sure know that even though I've signed in with my berkeley.edu that my response will remain anonymous
+  So that I can take the correct survey
+  I want to be able to tell who (which instructor) created the survey.
 
   Background:
     Given the following survey template exists in course "cs169"
@@ -14,4 +14,4 @@ Feature: Check the disclaimer on the survey page
 
   Scenario: Successfully fill out survey
     Given I am on the survey template
-    Then I should see "NOTICE: Your CalNet ID is used for authentication and authorization to the system. Your survey responses are stored anonymously. Identification information is used expressly for the purpose of verifying that you are a registered UCB student."
+    Then I should see "Created by john"
