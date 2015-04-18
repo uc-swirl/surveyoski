@@ -100,6 +100,7 @@ end
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description
+    @author = template.author
     render :layout => false
   end
   def all_responses
