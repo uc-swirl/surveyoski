@@ -2,18 +2,20 @@ Given /^I have logged in as a(?:n?) ([a-zA-Z]+)$/ do |role|
   class User
     attr_accessible :provider, :uid
   end
-  @user ||= User.create(:email => "test@berkeley.edu", :status => role, :name => "TEST USER")
+  @user = User.create(:email => "test@berkeley.edu", :status => role, :name => "TEST USER")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit dashboard_path
 end
 
 Given /^I have not logged in as a(?:n?) (?:[a-zA-Z]+)$/ do
+  @user = nil
   visit signout_path
 end
 
 Given /^I have( | not )logged in as a student for a survey template$/ do |negative|
-  @surveyTemplate = SurveyTemplate.create
+  course = Course.create!
+  @surveyTemplate = course.survey_templates.create(:status => "published")
   @admin = User.create(:email => "prof@berkeley.edu", :status => 'prof', :name => "PROFESSOR")
   @surveyTemplate.user_id = @admin.id
   @surveyTemplate.save

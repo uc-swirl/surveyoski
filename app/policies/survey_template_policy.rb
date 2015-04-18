@@ -3,8 +3,6 @@ class SurveyTemplatePolicy < ApplicationPolicy
   def initialize(user, record)
     @user = user
     @template = record
-    puts @template
-    puts @user
   end
   def index?
     @user.status != "student"  
