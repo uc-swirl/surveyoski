@@ -1,6 +1,7 @@
 require 'csv'
 
 class SurveyTemplate < ActiveRecord::Base
+<<<<<<< HEAD
 
   attr_accessible :survey_title, :survey_description, :status, :user_id
 
@@ -26,6 +27,9 @@ class SurveyTemplate < ActiveRecord::Base
   end
 
   def submissions_to_csv
+    if self.status != "closed"
+      return "You cannot see responses until your survey is closed."
+    end
     if submissions.length <= 10
       return few_responses_message
     end

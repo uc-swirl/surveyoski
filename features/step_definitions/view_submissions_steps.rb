@@ -13,6 +13,8 @@ Given (/^there are 11 submissions filled out with (.+)/) do |list|
 end
 
 Given /I am on the survey responses page/ do
+  @survey.status = 'closed'
+  @survey.save
   @user = User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)

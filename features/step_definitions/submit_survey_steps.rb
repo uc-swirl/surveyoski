@@ -1,8 +1,8 @@
 Given /^the following survey template exists in course "(.+)"$/ do |course_name, table|
   @user ||= User.create(:email => "test@berkeley.edu", :status => "student", :name => "OSKIGOBRSSSS")
   @course = Course.create(:name => course_name)
-
   @survey = @course.survey_templates.build(:survey_title => "meep", :status => "published", :user_id => @user.id)
+
   table.hashes.each do |question|
     options = question[:options].split(",").map {|x| x.split(":").map {|x| x.strip } }
     case question[:type]

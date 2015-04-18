@@ -1,5 +1,5 @@
 <div>
-  <%= label_tag "submission[" + field.id.to_s + "]", field.question_title, class: "question_title", id: field.id %>
+  <%= label_tag "submission[" + field.id.to_s + "]", field.question_title, class: "question_title", id: field.id, name: "field-" + field.question_title  %>
 </div>
 
 <% field.field_options.each do |option| %>

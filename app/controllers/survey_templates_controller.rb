@@ -9,7 +9,6 @@ class SurveyTemplatesController < ApplicationController
   end
 
   def status
-      puts "ID ", params[:id]
       @survey = SurveyTemplate.find(params[:id])
       puts @survey.status
       render :text =>  @survey.status
@@ -110,7 +109,10 @@ end
   def all_responses
     authorize :survey_templates, :all_responses?
   	@survey_template = SurveyTemplate.find(params[:id])
-    if @survey_template.submissions.length <= 10
+    if @survey_template.status != "closed"
+      flash[:notice] = "You cannot see responses until your survey is closed."
+      redirect_to survey_templates_path
+    elsif @survey_template.submissions.length <= 10
       flash[:notice] = @survey_template.few_responses_message
       redirect_to survey_templates_path
     else
