@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150412060824) do
+ActiveRecord::Schema.define(:version => 20150418004532) do
 
   create_table "courses", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -65,9 +65,9 @@ ActiveRecord::Schema.define(:version => 20150412060824) do
     t.string   "survey_description"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.boolean  "published"
     t.string   "author"
     t.integer  "course_id"
+    t.string   "status"
   end
 
   add_index "survey_templates", ["course_id"], :name => "index_survey_templates_on_course_id"

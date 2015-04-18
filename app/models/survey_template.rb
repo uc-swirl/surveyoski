@@ -12,6 +12,16 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
   belongs_to :course
+  before_validation :pepper_up
+  validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
+
+  def pepper_up 
+    if self.status.nil?
+      self.status = "unpublished"
+    end
+  end
+
+
 
   def submissions_to_csv
     if submissions.length <= 10
