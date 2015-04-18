@@ -13,6 +13,12 @@ Then(/^the survey template should( not)? require "(.*?)" to be filled out\.$/) d
    expect(found_field.required).to eq(req_not != "not")
 end
 
+
+
+Given(/^I publish the survey$/) do
+  
+end
+
 Given(/^I drag "(.*?)" to be (above|below) "(.*?)"$/) do |field1, ab, field2|
   #It's currently not easily possible to test drag and drop via Capybara
   if ab == "below"

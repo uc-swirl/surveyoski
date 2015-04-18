@@ -14,12 +14,14 @@ describe SurveyTemplate do
   end
   describe 'formating survey submissions into a csv-formatted string' do
     before :each do
-      @s = SurveyTemplate.create
+      @s = SurveyTemplate.create(:status => 'published')
       @q1 = @s.text_question_fields.build(:question_title => "Favorite Color")
       @q2 = @s.text_question_fields.build(:question_title => "Number of Pets")
       @s.save
     end
     it 'gives a proper message when there have been no submissions yet' do
+      @s.status = 'closed'
+      @s.save
       @s.submissions_to_csv.should eq "There have been no submissions yet."
     end
     it 'gives a proper message when there has been one submission' do
@@ -29,6 +31,8 @@ describe SurveyTemplate do
       r2 = submis.field_responses.build(:response => "0")
       r2.survey_field_id = @q2.id
       submis.save
+      @s.status = 'closed'
+      @s.save
       @s.submissions_to_csv.should eq "There has only been one submission so far."
     end
     it 'does not format results if there have been fewer than 11 submissions' do
@@ -40,6 +44,8 @@ describe SurveyTemplate do
         r2.survey_field_id = @q2.id
         submis.save
       end
+      @s.status = 'closed'
+      @s.save
       @s.submissions_to_csv.should eq "There have only been five submissions so far."
     end
     it 'formats submissions into csv string when there have been more than 10 responses' do
@@ -67,6 +73,8 @@ describe SurveyTemplate do
         r2.survey_field_id = @q2.id
         submis.save
       end
+        @s.status = 'closed'
+        @s.save
         r = @s.submissions_to_csv
         r.should include("Favorite Color,Number of Pets\n")
         r.should include("Lime Green,25\n")
@@ -80,13 +88,15 @@ describe SurveyTemplate do
         r1.survey_field_id = @q1.id
         submis.save
       end
+      @s.status = 'closed'
+      @s.save
       r = @s.submissions_to_csv
       r.should include("Lime Green,\n")
     end
   end
   describe 'formatting emails of participants' do
     it 'formats emails of survey participants in csv string' do
-      s = SurveyTemplate.create
+      s = SurveyTemplate.create(:status => 'published')
       p1 = double('participant')
       p2 = double('participant')
       p3 = double('participant')
@@ -94,6 +104,8 @@ describe SurveyTemplate do
       p1.should_receive(:email).and_return("pancakes@berkeley.edu")
       p2.should_receive(:email).and_return("pizza@berkeley.edu")
       p3.should_receive(:email).and_return("potatoes@berkeley.edu")
+      s.status = 'closed'
+      s.save
       s.participants_to_csv.should eq "Student Email\npancakes@berkeley.edu\npizza@berkeley.edu\npotatoes@berkeley.edu\n"
     end
   end
