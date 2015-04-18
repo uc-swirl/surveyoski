@@ -26,7 +26,7 @@ class SubmissionsController < ApplicationController
       if submission
         submission.destroy
       end
-      flash[:notice] = e.message
+      flash[:notice] = e.message.split(":")[-1]
       redirect_to survey_template_path(template.id)
     end
 

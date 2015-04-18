@@ -24,3 +24,8 @@ Given(/^I am in course "(.*?)"$/) do |course_name|
   enrollment = Course.find_by_name(course_name).enrollments.build(:user_id => @user.id)
   enrollment.save!
 end
+
+Given(/^I am not in course "(.*?)"$/) do |course_name|
+  course = @user.courses.select {|course| course.name == course_name }
+  puts course
+end

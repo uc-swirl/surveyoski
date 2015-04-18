@@ -22,7 +22,7 @@ class SurveyTemplatePolicy < ApplicationPolicy
     if @user and @template.course.users.include? @user or @user.status == "admin"
       true
     else
-      @template.published
+      @template.status == "published"
     end
   end
   def all_responses?
