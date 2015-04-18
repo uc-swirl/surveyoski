@@ -72,7 +72,7 @@ Given /I am on the new survey template page/ do
 end
 
 Given /I save the survey/ do 
-  click_button 'Submit'
+  click_button 'Send survey'
 end
 
 Given /I name the survey "(.+)"/ do |name|
@@ -104,14 +104,14 @@ end
 Given /I add a text field "(.+)"/ do |name| 
   fill_in 'new_field_name', :with => name
   select('Text', :from => 'new_field_type')
-  click_button 'Add Field'
+  click_button 'Add question'
   @field_id +=1 
 end
 
 Given /I add a select field "(.+)" with options "(.+)"/ do |name, options| 
   fill_in 'new_field_name', :with => name
   select('Select List', :from => 'new_field_type')
-  click_button 'Add Field'
+  click_button 'Add question'
 
 
 
@@ -123,7 +123,7 @@ end
 Given /I add a radio button field "(.+)"/ do |name| 
   fill_in 'new_field_name', :with => name
   select('Radio Buttons', :from => 'new_field_type')
-  click_button 'Add Field'
+  click_button 'Add Question'
   @field_id +=1 
 end
 
@@ -131,7 +131,7 @@ end
 Given /I add a Checkbox field "(.+)"/ do |name| 
   fill_in 'new_field_name', :with => name
   select('Checkbox', :from => 'new_field_type')
-  click_button 'Add Field'
+  click_button 'Add Question'
   @field_id +=1 
 end
 

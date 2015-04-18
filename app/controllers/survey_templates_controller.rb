@@ -53,6 +53,7 @@ end
       field.parse_options field_param[:options]
       @survey.survey_fields << field
     end
+    @survey.user_id ||= current_user.id
     @survey.save
     redirect_to survey_templates_path
   end
@@ -100,6 +101,7 @@ end
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description
+    @author = template.user.name
     render :layout => false
   end
   def all_responses
