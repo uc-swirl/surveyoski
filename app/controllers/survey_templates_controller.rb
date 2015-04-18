@@ -29,8 +29,8 @@ end
   end
 
   def edit
-    authorize :survey_templates, :edit?
     @survey = SurveyTemplate.find(params[:id])
+    authorize @survey, :edit?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
     @courses = current_user.courses
@@ -40,22 +40,26 @@ end
 
   def create
     @survey = SurveyTemplate.find_or_create_by_id(params[:id])
-    @name = if params[:form_name]!='' then params[:form_name] else "Untitled("+@survey.created_at.to_s+")" end 
+    @name = if params[:form_name]!='' then params[:form_name] else 'Untitled('+@survey.created_at.to_s+')' end
     @fields = if params[:fields] then params[:fields] else [] end
-    name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
+    attach
+    @survey.save
+    redirect_to survey_templates_path
+  end
+
+  def attach
     @survey.survey_title = @name
     @survey.survey_fields = []
     @survey.course = Course.find_by_id(params[:course_id])
-    @fields.each do |key, field_param| 
+    @survey.user_id ||= current_user.id
+    name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
+    @fields.each do |key, field_param|
       klass = name_to_type[field_param[:type]]
       field =  klass.find_or_create_by_id(field_param[:id] )
       field.update_attributes(:question_title => field_param[:name], :question_weight => field_param[:weight], :required => field_param[:required])
       field.parse_options field_param[:options]
       @survey.survey_fields << field
     end
-    @survey.user_id ||= current_user.id
-    @survey.save
-    redirect_to survey_templates_path
   end
 
   def clone
@@ -95,9 +99,11 @@ end
   end
   
   def show # shows the HTML form
-    authorize :survey_templates, :show?
-  	template = SurveyTemplate.find(params[:id])
+
+    template = SurveyTemplate.find(params[:id])
+    authorize template
     @fields = template.survey_fields.sort_by {|field| field.question_weight}
+
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description

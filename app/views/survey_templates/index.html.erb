@@ -42,7 +42,6 @@
             </td>
             <td>
                 <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.id.to_s ) %>
-                </div>
             </td>
             <td>
               <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), "/survey_templates/#{template.id}", method: :delete %>
