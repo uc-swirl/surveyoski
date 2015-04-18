@@ -14,8 +14,8 @@ class SurveyTemplatesController < ApplicationController
   end
 
   def edit
-    authorize :survey_templates, :edit?
     @survey = SurveyTemplate.find(params[:id])
+    authorize @survey, :edit?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
     render :new
@@ -74,8 +74,8 @@ class SurveyTemplatesController < ApplicationController
   end
   
   def show # shows the HTML form
-    authorize :survey_templates, :show?
-  	template = SurveyTemplate.find(params[:id])
+    template = SurveyTemplate.find(params[:id])
+    authorize template
     @fields = template.survey_fields
     @id = params[:id]
     @survey_title = template.survey_title
