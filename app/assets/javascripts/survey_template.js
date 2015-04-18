@@ -1,4 +1,5 @@
 function send_update_survey_template_status (path, stage_verb, container, next_stage_button) {
+    container = jQuery(container);
     jQuery.ajax({
       method: "PUT",
       data: { status : stage_verb},
@@ -11,6 +12,7 @@ function send_update_survey_template_status (path, stage_verb, container, next_s
 }
 
 function add_publish_survey_template_button(container) {
+    container = jQuery(container);
     jQuery.ajax({
       method: "GET",
       url: container.attr("data-status-route") ,
@@ -165,7 +167,10 @@ SurveyBuilder = function () {
         load_survey_template();
         setup_sortables();
       }
-      add_publish_survey_template_button(jQuery(".publish_button_container"));
+      jQuery(".publish_button_container").each(function (index, element) {
+        console.log(element);
+        add_publish_survey_template_button(element);
+      });
     });
 
 

@@ -60,6 +60,7 @@ end
     # puts "cloning a survey!"
     template = SurveyTemplate.find(params[:id])
     new_template = template.dup
+    new_template.status = nil
     course = Course.find_by_name(params[:course_name])
     course.survey_templates << new_template
     new_template.save!
