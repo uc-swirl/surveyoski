@@ -14,6 +14,9 @@ end
 
 Given /^I have( | not )logged in as a student for a survey template$/ do |negative|
   @surveyTemplate = SurveyTemplate.create
+  @admin = User.create(:email => "prof@berkeley.edu", :status => 'prof', :name => "PROFESSOR")
+  @surveyTemplate.user_id = @admin.id
+  @surveyTemplate.save
   if negative
     visit signout_path
   end

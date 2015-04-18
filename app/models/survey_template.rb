@@ -1,7 +1,7 @@
 require 'csv'
 
 class SurveyTemplate < ActiveRecord::Base
-  attr_accessible :survey_title, :survey_description, :published, :author
+  attr_accessible :survey_title, :survey_description, :published, :user_id
   has_many :survey_fields , :dependent => :destroy
   has_many :checkbox_fields
   has_many :phone_fields
@@ -12,6 +12,7 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
   belongs_to :course
+  belongs_to :user
   before_validation :pepper_up
   before_save :pepper_up
   validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
