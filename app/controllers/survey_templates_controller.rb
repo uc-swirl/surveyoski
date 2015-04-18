@@ -10,7 +10,6 @@ class SurveyTemplatesController < ApplicationController
 
   def status
       @survey = SurveyTemplate.find(params[:id])
-      puts @survey.status
       render :text =>  @survey.status
   end
 
@@ -115,7 +114,7 @@ end
     @id = params[:id]
     @survey_title = template.survey_title
     @survey_description = template.survey_description
-    @author = template.user.name
+    @author = template.user.name ? template.user.name  : ""
     render :layout => false
   end
   def all_responses
