@@ -1,49 +1,88 @@
-.page_title{
+/* line 1, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 3, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 4, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 5, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.page_title {
   text-align: center;
   font-family: Ubuntu;
   font-size: 40px;
   margin-top: 20px;
 }
 
+/* line 8, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 11, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 13, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 15, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .form_fields {
-  width: 600px;
+  width: 900px;
   min-height: 300px;
-  border: 1px solid rgb(0, 58, 112);
+  border: 2px solid #003a70;
   padding: 9px;
-  background: rgb(0, 58, 112);
+  background: aliceblue;
+  margin: 0 auto;
+  margin-top: 40px;
 }
 
-
+/* line 17, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 21, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 25, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 28, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .form_fields_list > * {
   margin: 3px;
 }
+
+/* line 20, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 26, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 31, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 35, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .delete_field_option_add_button {
   margin-left: 10px;
 }
 
+/* line 24, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 31, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 37, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 42, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .form_add_field_container {
   border: 1px solid black;
   padding: 9px;
-  background: rgb(147, 147, 147);
+  background: #2980b9;
   margin-bottom: 100px;
+  width: 900px;
+  margin: 0 auto;
+  color: white;
 }
 
+/* line 31, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 39, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 49, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 55, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .option_row td {
   border: 1px solid black;
   padding: 8px;
 }
 
-.option_row  {
+/* line 36, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 45, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 56, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 63, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.option_row {
   border: 1px solid red;
 }
 
+/* line 40, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 50, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 62, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 70, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #form_survey_template {
   margin-left: auto;
   margin-right: auto;
-  width: 600px;
-
 }
 
+/* line 46, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 56, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 69, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 78, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .question_container {
   padding: 5px;
   margin: 5px;
@@ -51,15 +90,23 @@
   position: relative;
   background: white;
   border-radius: 5px;
-  box-shadow: 2px 1px 2px rgb(61, 55, 42);
+  box-shadow: 2px 1px 2px #3d372a;
 }
 
+/* line 56, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 67, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 81, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 91, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* line 62, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 74, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 89, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 100, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #all_surveys {
   color: #333;
   text-align: left;
@@ -70,16 +117,28 @@
   margin: 50px auto;
 }
 
-.sort_text{
+/* line 72, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 85, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 101, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 113, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.sort_text {
   text-decoration: none;
   color: white;
 }
 
-.sort_text:hover{
+/* line 77, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 91, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 108, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 121, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.sort_text:hover {
   text-decoration: none;
   color: white;
 }
 
+/* line 82, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 97, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 115, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 129, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #all_surveys thead tr:first-child {
   height: 60px;
   background: #2980b9;
@@ -87,32 +146,92 @@
   border: none;
 }
 
-#all_surveys th {font-weight: bold;}
-#all_surveys th:first-child, td:first-child {padding: 0 15px 0 20px;}
+/* line 89, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 105, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 124, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 139, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#all_surveys th {
+  font-weight: bold;
+}
 
-#all_surveys thead tr:last-child th {border-bottom: 2px solid #ddd;}
+/* line 90, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 110, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 130, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 146, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#all_surveys th:first-child, td:first-child {
+  padding: 0 15px 0 20px;
+}
 
-#all_surveys tbody tr:hover {background-color: #f0fbff;}
-#all_surveys tbody tr:last-child td {border: none;}
-#all_surveys tbody td {border-bottom: 1px solid #ddd;}
+/* line 92, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 115, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 136, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 153, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#all_surveys thead tr:last-child th {
+  border-bottom: 2px solid #ddd;
+}
 
+/* line 94, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 120, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 142, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 160, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#all_surveys tbody tr:hover {
+  background-color: #f0fbff;
+}
+
+/* line 95, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 125, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 148, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 167, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#all_surveys tbody tr:last-child td {
+  border: none;
+}
+
+/* line 96, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 130, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 154, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 174, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#all_surveys tbody td {
+  border-bottom: 1px solid #ddd;
+}
+
+/* line 98, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 135, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 160, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 181, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #all_surveys td:last-child {
   text-align: left;
   padding-right: 10px;
 }
 
+/* line 103, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 141, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 167, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 189, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #all_surveys tr {
   background: white;
 }
+
+/* line 106, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 146, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 173, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 196, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #all_surveys tr:nth-of-type(odd) {
   background: #f6f6f6;
 }
 
-#survey_name{
+/* line 110, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 151, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 179, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 203, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#survey_name {
   text-decoration: none;
   color: black;
 }
 
+/* line 115, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 157, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 186, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 211, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .button {
   color: #428bca;
   text-align: center;
@@ -120,11 +239,19 @@
   padding-left: 15px;
 }
 
+/* line 122, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 165, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 195, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 221, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .button:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
+/* line 127, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 171, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 202, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 229, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .sort_tag {
   position: relative;
   color: white;
@@ -137,28 +264,51 @@
   padding: 5px;
 }
 
+/* line 139, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 184, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 216, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 244, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #name {
-  background: rgb(28, 184, 65); /* this is a green */
+  background: #1cb841;
+  /* this is a green */
 }
 
+/* line 143, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 190, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 223, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 252, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #course {
-  background: rgb(202, 60, 60); /* this is a maroon */
+  background: #ca3c3c;
+  /* this is a maroon */
 }
 
+/* line 147, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 196, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 230, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 260, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #date {
-  background: rgb(223, 117, 20); /* this is an orange */
+  background: #df7514;
+  /* this is an orange */
 }
 
 /*.button-secondary {
-  background: rgb(66, 184, 221); *//* this is a light blue *//*
+  background: rgb(66, 184, 221); */
+/* this is a light blue */
+/*
 }*/
-
+/* line 155, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 207, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 242, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 273, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .sort_tag div {
   position: relative;
   bottom: 11px;
 }
 
-
+/* line 161, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 213, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 249, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 281, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .question_container .delete_field_button {
   position: absolute;
   top: 0px;
@@ -169,37 +319,56 @@
   font-weight: bold;
 }
 
-.icons{
+/* line 171, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 224, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 261, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 294, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.icons {
   width: 50px;
   height: 50px;
 }
 
-#all_surveys_text{
+/* line 176, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 230, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 268, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 302, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#all_surveys_text {
   font-size: 20px;
   font-family: Ubuntu;
-
 }
 
-#sort_by{
+/* line 182, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 236, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 275, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 310, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#sort_by {
   display: inline-block;
   padding-right: 20px;
   padding-bottom: 5px;
   font-size: 18px;
 }
 
+/* line 189, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 244, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 284, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 320, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #survey_show {
-  background: url('../assets/wood.png'), url('../assets/blue.png');
+  background: url("../assets/wood.png"), url("../assets/blue.png");
   color: #222;
   font-weight: 300;
   line-height: 1.625;
-  color: rgb(119,119,119);
+  color: #777777;
   font-weight: 400;
   font-size: 1.080rem;
   font-style: normal;
 }
 
-#survey_title{
-  color: rgb(80,80,80);
+/* line 200, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 256, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 297, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 334, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#survey_title {
+  color: #505050;
   font-weight: 400;
   font-size: 30px;
   font-style: normal;
@@ -212,11 +381,15 @@
   margin-bottom: 39px;
 }
 
-#frame{
-  border-color: rgb(212,212,212);
-  background-color: rgb(255,255,255);
+/* line 214, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 271, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 313, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 351, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#frame {
+  border-color: #d4d4d4;
+  background-color: white;
   border-radius: 2px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   margin: 0.75rem auto;
   padding: 0;
@@ -226,8 +399,12 @@
   border: 1px solid #ccc;
 }
 
-.question_title{
-  color: rgb(80,80,80);
+/* line 228, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 286, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 329, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 368, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.question_title {
+  color: #505050;
   font-weight: 700;
   font-size: 20px;
   font-style: normal;
@@ -235,13 +412,21 @@
   font-family: Ubuntu;
 }
 
-.question_choices{
+/* line 237, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 296, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 340, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 380, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.question_choices {
   font-size: 20px;
   padding-left: 39px;
   font-family: Ubuntu;
 }
 
-#survey_submit{
+/* line 243, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 303, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 348, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 389, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.survey_submit {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
@@ -258,27 +443,99 @@
   white-space: nowrap;
   margin-left: 39px;
   margin-bottom: 50px;
-
 }
-#survey_submit:hover{
+
+/* line 262, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 323, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 369, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 411, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+.survey_submit:hover {
   color: white;
   background-color: #3071a9;
   border-color: #285e8e;
 }
 
-#text_field{
+/* line 268, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 330, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 377, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 420, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#text_field {
   width: 160px;
   height: 30px;
   font-size: 15px;
 }
 
-#footer{
+/* line 274, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 337, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 385, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 429, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#footer {
   border-top: 1px solid #ddd;
   padding-top: 50px;
   padding-bottom: 50px;
 }
 
-#create{
+/* line 280, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 344, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 393, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 438, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#create {
   margin-left: 39px;
   font-family: Ubuntu;
+}
+
+/* line 285, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 350, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 400, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 446, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#flash_notice {
+  color: #3071a9;
+  margin-left: 39px;
+}
+
+/* line 290, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 356, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 407, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 454, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#form_header {
+  font-family: Ubuntu;
+  width: 900px;
+  margin: 0 auto;
+  font-size: 25px;
+  margin-top: 30px;
+}
+
+/* line 411, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+/* line 463, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#disclaim {
+  width: 800px;
+  margin: 0 auto;
+  font-size: 13px;
+  margin-bottom: 20px;
+  font-family: Ubuntu;
+  font-weight: bolder;
+}
+
+/* line 472, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#new_survey_submit {
+  margin-left: 188px;
+  margin-top: 20px;
+}
+
+/* line 477, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
+#survey_name {
+  width: 900px;
+  margin: 0 auto;
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+#add_question_button{
+  background: #fecd61;
+  padding: 5px;
+  color: black;
+}
+
+#new_field_name{
+  color: black;
 }

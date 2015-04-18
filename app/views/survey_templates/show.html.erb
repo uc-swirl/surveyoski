@@ -11,8 +11,13 @@
           <%= @survey_title%>
         </div>
         <div>
-          <%= @survey_description %>
+        <%= @survey_description %>
         </div>
+        <div id = 'disclaim'>NOTICE: Your CalNet ID is used for authentication
+          and authorization to the system. Your survey responses are stored anonymously.
+          Identification information is used expressly for the purpose of verifying
+          that you are a registered UCB student.</div>
+
         <%= form_tag submissions_path :template_id => @id do%>
             <% @fields.each do |field| %>
                 <%= render partial: field.location, locals: {field: field} %>
@@ -20,7 +25,7 @@
             <% end %>
             <br>
             <div>
-              <%= submit_tag 'Submit', :id=>'survey_submit'%>
+              <%= submit_tag 'Submit', :class=>'survey_submit'%>
             </div>
 
         <% end %>

@@ -1,11 +1,18 @@
 
 <%= form_tag survey_templates_path, {:id => :form_survey_template} do %>
 
-    <div class="form_header">
-        <h1>Form         
-</h1>
+    <div id="form_header">
+        <div>Create a new survey</div>
+    </div>
 
-        <%= label :form_name, "Name" %><%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
+    <div id='survey_name'>
+      <div>
+        <%= label :form_name, "Survey name" %>
+      </div>
+      <div>
+        <%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
+      </div>
+
     </div>
 
 
@@ -17,14 +24,18 @@
     <% end %>
     <div class="form_fields"></div>
     <div class="form_add_field_container">
-    <%= label :new_field_name, 'Field Name' %>
-    <%= text_field_tag :new_field_name %>
-    <br/>
-    <%= label :new_field_type, 'Field Type' %>
-    <%= select_tag :new_field_type, options_for_select(@field_types) %>
-    <br/>
-    <button class="add_field_button">Add Field</button>
-    <input name="commit" type="submit" value="Submit" style="float: right">
+        <div>
+          <%= label :new_field_name, 'Question Name' %>
+          <%= text_field_tag :new_field_name%>
+        </div>
+
+        <div>
+          <%= label :new_field_type, 'Question Type' %>
+          <%= select_tag :new_field_type, options_for_select(@field_types) %>
+        </div>
+
+    <button class = 'add_field_button' id = 'add_question_button'>Add question</button>
     </div>
 
+    <div><%= submit_tag 'Send survey', :class=>'survey_submit', :id=>'new_survey_submit'%></div>
 <% end %>
