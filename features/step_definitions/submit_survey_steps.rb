@@ -1,7 +1,7 @@
 Given /^the following survey template exists in course "(.+)"$/ do |course_name, table|
   @course = Course.create(:name => course_name)
   # puts "what"
-  @survey = @course.survey_templates.build(:survey_title => "meep")
+  @survey = @course.survey_templates.build(:survey_title => "meep", :status => "unpublished")
   # puts "happened"
   table.hashes.each do |question|
     options = question[:options].split(",").map {|x| x.split(":").map {|x| x.strip } }
@@ -17,9 +17,7 @@ Given /^the following survey template exists in course "(.+)"$/ do |course_name,
     end
     q.save!
   end
-  puts "!!!"
   @course.save!
-  puts "????"
   @question_number = 0
 end
 
@@ -46,7 +44,7 @@ end
 
 
 Given /I am on the survey template/ do
-  @user = User.create(:email => "test@berkeley.edu", :status => "student")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "student")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit survey_template_path(@survey.id)

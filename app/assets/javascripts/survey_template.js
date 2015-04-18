@@ -1,22 +1,25 @@
-
-
 function add_publish_survey_template_button(container) {
+  var next_stage_button = jQuery("<button/>", {type: "button", text : "Publish"}).appendTo(container);
 
-  jQuery("<button/>", {type: "button", text : "Publish"}).appendTo(container);
-  jQuery.ajax({
-    method: "GET",
-    url: container.attr("data-status-route") ,
-    data: {},
-    success: function (data) {
-      console.log(data);
-    }
+  next_stage_button.click(function () {
+    var yes = prompt("");
+    jQuery.ajax({
+      method: "GET",
+      url: container.attr("data-status-route") ,
+      data: {},
+      success: function (data) {
+          console.log(data);
+        }
+    });
   });
+
 }
+
 
 SurveyField.prototype.fields = [];
 
 
-function SurveyField(field_type, field_name, form, required) {
+function SurveyField(field_db_id, field_type, field_name, form, required) {
   this.type = field_type;
   this.name = field_name;
   this.required = required;
@@ -28,7 +31,10 @@ function SurveyField(field_type, field_name, form, required) {
   SurveyField.prototype._field_count += 1;
   this.type_input = jQuery("<input/>", { type : "hidden", name : this.form_name("type"), value : field_type}).appendTo(form);
   this.weight_input = jQuery("<input/>", { type : "hidden", name : this.form_name("weight"), value : this.id}).appendTo(form);
-
+  if (field_db_id) {
+    this.id_input = jQuery("<input/>", { type : "hidden", name : this.form_name("id"), value : field_db_id }).appendTo(form);
+  }
+  
   SurveyField.prototype.fields.push(this);
 }
 
@@ -121,7 +127,7 @@ SurveyBuilder = function () {
 
         var field_type = jQuery("#new_field_type").val();
         var field_name = jQuery("#new_field_name").val();
-        var field = new SurveyField(field_type, field_name, jQuery(".form_fields"));
+        var field = new SurveyField(null, field_type, field_name, jQuery(".form_fields"));
 
         add_field(field) 
       });
@@ -152,12 +158,12 @@ SurveyBuilder = function () {
     _survey_fields.sort(function(a, b) { return a.question_weight - b.question_weight; });
     jQuery.each(_survey_fields, function (index, object) {
       console.log(object);
-      load_field(object.nice_name, object.question_title, object.field_options, object.required);
+      load_field(object.id, object.nice_name, object.question_title, object.field_options, object.required);
     });
   }
 
-  var load_field = function (field_type, field_name, options, required) {
-    var field = new SurveyField(field_type, field_name, jQuery(".form_fields"), required);
+  var load_field = function (field_id, field_type, field_name, options, required) {
+    var field = new SurveyField(field_id, field_type, field_name, jQuery(".form_fields"), required);
     if (options) {
       field.setOptions(options);
     }

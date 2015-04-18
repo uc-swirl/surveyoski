@@ -22,6 +22,7 @@
   get 'survey_templates/:id/status', :to => 'survey_templates#status', :as => :survey_template_status
   put 'survey_templates/:id/status', :to => 'survey_templates#update_status', :as => :update_survey_template_status
 
+
   # for omniauth login 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')

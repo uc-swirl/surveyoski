@@ -12,9 +12,20 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
   belongs_to :course
+<<<<<<< HEAD
 
   validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
+=======
+  before_validation :pepper_up
+>>>>>>> d6d176cd3f0f4e7e9df9d5bdd037edc7c3f5dfdd
   before_save :pepper_up
+  validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
+
+  def pepper_up 
+    if self.status.nil?
+      self.status = "unpublished"
+    end
+  end
 
   def submissions_to_csv
     if submissions.length <= 10
@@ -23,12 +34,6 @@ class SurveyTemplate < ActiveRecord::Base
     output = titles_to_array.to_csv
     submissions_to_array.shuffle.each {|r| output += r.to_csv}
     output
-  end
-
-  def pepper_up 
-    if self.status.nil?
-      self.status = "unpublished"
-    end
   end
 
   def participants_to_csv

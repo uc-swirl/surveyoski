@@ -2,7 +2,7 @@ Given /^I have logged in as a(?:n?) ([a-zA-Z]+)$/ do |role|
   class User
     attr_accessible :provider, :uid
   end
-  @user = User.create(:email => "test@berkeley.edu", :status => role, :name => "TEST USER")
+  @user ||= User.create(:email => "test@berkeley.edu", :status => role, :name => "TEST USER")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
   visit dashboard_path

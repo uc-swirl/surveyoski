@@ -9,18 +9,18 @@ class SurveyTemplatesController < ApplicationController
   end
 
   def status
-    puts "ID ", params[:id]
-    @survey = SurveyTemplate.find(params[:id])
-    puts @survey.status
-    render :plain,  @survey.status
+      puts "ID ", params[:id]
+      @survey = SurveyTemplate.find(params[:id])
+      puts @survey.status
+      render :text =>  @survey.status
   end
 
-  def update_status
+def update_status
     @survey = SurveyTemplate.find(params[:id])
     @survey.status = params[:status]
     @survey.save! 
-    render :plain,  @survey.status
-  end
+    render :text =>  @survey.status
+end
 
   def new
     authorize :survey_templates, :new?
@@ -47,7 +47,8 @@ class SurveyTemplatesController < ApplicationController
     @survey.course = Course.find_by_id(params[:course_id])
     @fields.each do |key, field_param| 
       klass = name_to_type[field_param[:type]]
-      field =  klass.new(:question_title => field_param[:name], :question_weight => field_param[:weight], :required => field_param[:required])
+      field =  klass.find_or_create_by_id(field_param[:id] )
+      field.update_attributes(:question_title => field_param[:name], :question_weight => field_param[:weight], :required => field_param[:required])
       field.parse_options field_param[:options]
       @survey.survey_fields << field
     end
