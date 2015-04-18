@@ -11,6 +11,7 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :email_fields
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
+  belongs_to :course
 
   def submissions_to_csv
     if submissions.length <= 10
@@ -77,14 +78,7 @@ class SurveyTemplate < ActiveRecord::Base
   private :number_to_name
 
   def self.sort(s, user)
-    if s == 'name'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'LOWER(survey_title)')
-    elsif s == 'course'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order => 'course_id')
-    elsif s == 'date'
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>'created_at')
-    else
-      return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses})
-    end
+    id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}
+    return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>id_conversion[s])
   end
 end
