@@ -1,3 +1,6 @@
-<%= label_tag "submission[" + field.id.to_s + "]", field.question_title, class: "field_label", id: field.id %>
-<br>
-<%= select_tag("submission[" + field.id.to_s + "]", options_for_select(field.field_options)) %>
+<div>
+  <%= label_tag "submission[" + field.id.to_s + "]", field.question_title, class: "question_title", id: field.id %>
+</div>
+<div class="question_choices">
+  <%= select_tag("submission[" + field.id.to_s + "]", options_for_select(field.field_options)) %>
+</div>

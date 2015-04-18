@@ -26,6 +26,7 @@ end
     authorize :survey_templates, :new?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @courses = current_user.courses
+    @title = "Create a new survey"
   end
 
   def edit
@@ -34,6 +35,7 @@ end
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
     @courses = current_user.courses
+    @title = "Edit survey"
     render :new
   end
 
