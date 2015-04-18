@@ -163,7 +163,7 @@ SurveyBuilder = function () {
   }
 
   var load_field = function (field_id, field_type, field_name, options, required) {
-    var field = new SurveyField(field_id, ield_type, field_name, jQuery(".form_fields"), required);
+    var field = new SurveyField(field_id, field_type, field_name, jQuery(".form_fields"), required);
     if (options) {
       field.setOptions(options);
     }
