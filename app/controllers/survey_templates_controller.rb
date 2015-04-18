@@ -9,7 +9,6 @@ class SurveyTemplatesController < ApplicationController
   end
 
   def status
-      puts "ID ", params[:id]
       @survey = SurveyTemplate.find(params[:id])
       puts @survey.status
       render :text =>  @survey.status
