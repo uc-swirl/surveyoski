@@ -1,1 +1,6 @@
-= simple_format(@survey_template.get_participants)
+%table
+  = link_to "Download CSV", download_participants_path(params[:id])
+  %tbody
+    - @emails.each do |email|
+      %tr
+        %td= email

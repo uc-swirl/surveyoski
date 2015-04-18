@@ -21,10 +21,16 @@ class SurveyTemplate < ActiveRecord::Base
     output
   end
 
+  def participants_to_csv
+    p_csv = ""
+    get_participants.each {|p| p_csv += p + "\n" }
+    p_csv
+  end
+
   def get_participants
-    emails = ["Student Email"].to_csv
+    emails = ["Student Email"]
     participants.each do |response| 
-      emails += [response.email].to_csv
+      emails += [response.email]
     end
     emails
   end

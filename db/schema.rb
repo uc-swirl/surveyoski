@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20150412060824) do
     t.string   "question_title"
     t.string   "question_description"
     t.string   "field_options"
+    t.string   "survey_fields"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.boolean  "required"

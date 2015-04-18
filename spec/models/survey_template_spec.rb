@@ -94,7 +94,7 @@ describe SurveyTemplate do
       p1.should_receive(:email).and_return("pancakes@berkeley.edu")
       p2.should_receive(:email).and_return("pizza@berkeley.edu")
       p3.should_receive(:email).and_return("potatoes@berkeley.edu")
-      s.get_participants.should eq "Student Email\npancakes@berkeley.edu\npizza@berkeley.edu\npotatoes@berkeley.edu\n"
+      s.participants_to_csv.should eq "Student Email\npancakes@berkeley.edu\npizza@berkeley.edu\npotatoes@berkeley.edu\n"
     end
   end
 end

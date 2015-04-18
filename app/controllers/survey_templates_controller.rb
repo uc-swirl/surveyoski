@@ -96,11 +96,23 @@ class SurveyTemplatesController < ApplicationController
   def participants
     authorize :survey_templates, :participants?
   	@survey_template = SurveyTemplate.find(params[:id])
+    @emails = @survey_template.get_participants
   end
 
   def download_submissions
     authorize :survey_templates, :all_responses?
     @survey_template = SurveyTemplate.find(params[:id])
+    send_data @survey_template.submissions_to_csv,
+              filename: "#{@survey_template.survey_title}.csv",
+              type: "application/csv"
+  end
+
+  def download_participants
+    authorize :survey_templates, :all_responses?
+    @survey_template = SurveyTemplate.find(params[:id])
+    send_data @survey_template.participants_to_csv,
+              filename: "#{@survey_template.survey_title}_participants.csv",
+              type: "application/csv"
   end
 
   def destroy
