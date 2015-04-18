@@ -231,11 +231,14 @@
   font-weight: 700;
   font-size: 20px;
   font-style: normal;
+  padding-left: 39px;
+  font-family: Ubuntu;
 }
 
 .question_choices{
   font-size: 20px;
-  margin: .75rem 0 0;
+  padding-left: 39px;
+  font-family: Ubuntu;
 }
 
 #survey_submit{
@@ -253,10 +256,29 @@
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
+  margin-left: 39px;
+  margin-bottom: 50px;
 
 }
 #survey_submit:hover{
   color: white;
   background-color: #3071a9;
   border-color: #285e8e;
+}
+
+#text_field{
+  width: 160px;
+  height: 30px;
+  font-size: 15px;
+}
+
+#footer{
+  border-top: 1px solid #ddd;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#create{
+  margin-left: 39px;
+  font-family: Ubuntu;
 }

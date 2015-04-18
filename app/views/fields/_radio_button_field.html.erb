@@ -1,9 +1,14 @@
-<%= label_tag "submission[" + field.id.to_s + "]", field.question_title, class: "field_label", id: field.id %>
+<div>
+  <%= label_tag "submission[" + field.id.to_s + "]", field.question_title, class: "question_title", id: field.id %>
+</div>
+
 <% field.field_options.each do |option| %>
-	<br>
-    <label for= <%="submission_#{field.id}_#{option[0]}"%> > <%=option[0]%>
-    <%= radio_button_tag("submission[" + field.id.to_s + "]", option[0]) %>
-	</label>
+
+    <div class="question_choices">
+      <%= radio_button_tag("submission[" + field.id.to_s + "]", option[0]) %>
+      <label for= <%="submission_#{field.id}_#{option[0]}"%> > <%=option[0]%></label>
+    </div>
+
 
 
     
