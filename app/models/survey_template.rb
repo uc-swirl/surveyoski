@@ -13,6 +13,17 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :participants, :dependent => :destroy
   belongs_to :course
 
+  before_save :pepper_up
+
+  def pepper_up 
+    if self.status.nil?
+      self.status = "unpublished"
+    end
+  end
+
+
+  validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
+
   def get_all_responses
     if submissions.length <= 10
       return few_responses_message

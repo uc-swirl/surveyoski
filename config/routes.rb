@@ -17,6 +17,10 @@
   get 'survey_templates/:id/participants', :to => 'survey_templates#participants'
   post 'survey_templates/:id/clone', :to => 'survey_templates#clone'
 
+  get 'survey_templates/:id/status', :to => 'survey_templates#status', :as => :survey_template_status
+  put 'survey_templates/:id/status', :to => 'survey_templates#update_status', :as => :update_survey_template_status
+
+
 
   # for omniauth login 
   get 'auth/:provider/callback', to: 'sessions#create'

@@ -8,6 +8,20 @@ class SurveyTemplatesController < ApplicationController
       end
   end
 
+  def status
+    puts "ID ", params[:id]
+    @survey = SurveyTemplate.find(params[:id])
+    puts @survey.status
+    render :plain,  @survey.status
+  end
+
+  def update_status
+    @survey = SurveyTemplate.find(params[:id])
+    @survey.status = params[:status]
+    @survey.save! 
+    render :plain,  @survey.status
+  end
+
   def new
     authorize :survey_templates, :new?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}

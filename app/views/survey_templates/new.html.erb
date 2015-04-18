@@ -8,7 +8,8 @@
 
         <%= label :form_name, "Name" %><%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
 
-        <span class="publish_button_container"></span>
+        <span class="publish_button_container" data-status-route="<%= survey_template_status_path %>"></span>
+
     </div>
 
 
