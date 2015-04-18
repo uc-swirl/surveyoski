@@ -18,6 +18,7 @@ Given I am on the edit survey template
 And I drag "year" to be above "course name"
 And I save the survey
 Then "year" should come before "course name" on the edit survey page
+And "year" should come before "course name" on the show survey page
 
 @javascript
 Scenario: I drag a field to the bottom
@@ -25,3 +26,4 @@ Given I am on the edit survey template
 And I drag "course name" to be below "year"
 And I save the survey
 Then "year" should come before "course name" on the edit survey page
+And "year" should come before "course name" on the show survey page
