@@ -40,18 +40,26 @@ end
 
   def create
     @survey = SurveyTemplate.find_or_create_by_id(params[:id])
-    @name = if params[:form_name]!='' then params[:form_name] else 'Untitled('+@survey.created_at.to_s+')' end
+    @name = create_name
     @fields = if params[:fields] then params[:fields] else [] end
-    attach
+    attach_survey_basic
+    attach_survey_fields
     @survey.save
     redirect_to survey_templates_path
   end
 
-  def attach
+  def attach_survey_basic
     @survey.survey_title = @name
     @survey.survey_fields = []
     @survey.course = Course.find_by_id(params[:course_id])
     @survey.user_id ||= current_user.id
+  end
+
+  def create_name
+    if params[:form_name]!='' then params[:form_name] else 'Untitled('+@survey.created_at.to_s+')' end
+  end
+
+  def attach_survey_fields
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
     @fields.each do |key, field_param|
       klass = name_to_type[field_param[:type]]
@@ -130,19 +138,17 @@ end
     @emails = @survey_template.get_participants
   end
 
-  def download_submissions
+  def download_data
     authorize :survey_templates, :all_responses?
+    authorize :survey_templates, :participants?
     @survey_template = SurveyTemplate.find(params[:id])
-    send_data @survey_template.submissions_to_csv,
-              filename: "#{@survey_template.survey_title}.csv",
-              type: "application/csv"
-  end
-
-  def download_participants
-    authorize :survey_templates, :all_responses?
-    @survey_template = SurveyTemplate.find(params[:id])
-    send_data @survey_template.participants_to_csv,
-              filename: "#{@survey_template.survey_title}_participants.csv",
+    if params[:type] == 'submissions'
+      data = @survey_template.submissions_to_csv
+    else
+      data = @survey_template.participants_to_csv
+    end
+    send_data data,
+              filename: "#{@survey_template.survey_title} #{params[:type]}.csv",
               type: "application/csv"
   end
 
