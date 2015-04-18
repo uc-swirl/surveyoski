@@ -24,6 +24,9 @@ class SurveyTemplate < ActiveRecord::Base
   end
 
   def submissions_to_csv
+    if self.status != "closed"
+      return "You cannot see responses until your survey is closed."
+    end
     if submissions.length <= 10
       return few_responses_message
     end
