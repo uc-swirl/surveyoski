@@ -1,5 +1,5 @@
 %table
-  = link_to "Download CSV", download_submissions_path(params[:id])
+  = link_to "Download CSV", download_data_path(params[:id], "submissions")
   %tbody
     %tr
     - @questions.each do |title|
