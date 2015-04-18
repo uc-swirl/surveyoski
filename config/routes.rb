@@ -19,6 +19,9 @@
   get 'survey_templates/:id/download_participants', :to => 'survey_templates#download_participants', :as => :download_participants
   post 'survey_templates/:id/clone', :to => 'survey_templates#clone'
 
+  get 'survey_templates/:id/status', :to => 'survey_templates#status', :as => :survey_template_status
+  put 'survey_templates/:id/status', :to => 'survey_templates#update_status', :as => :update_survey_template_status
+
   # for omniauth login 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
