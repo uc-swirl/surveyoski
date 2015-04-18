@@ -2,7 +2,7 @@
 <% field.field_options.each do |option| %>
 	<br>
 	<label for=<%="submission_#{field.id}_#{option[0]}"%>><%=option[0]%>
-	<%= check_box_tag("submission[" + field.id.to_s + "][]", option[0], false, :id => "submission_#{field.id}_#{option[0]}") %>
+	<%= check_box_tag("submission[" + field.id.to_s + "][]", option[1], false, :id => "submission_#{field.id}_#{option[0]}") %>
 	</label>
     
 <% end %>
