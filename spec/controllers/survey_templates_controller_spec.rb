@@ -78,13 +78,13 @@ describe SurveyTemplatesController do
       before(:each) do
         @user = User.create(:email => "test@berkeley.edu", :status => "student", :name => "IMPROFESSOR")
         @field = TextQuestionField.new(:question_title => "TextTest")
-        @survey = SurveyTemplate.create(:survey_title => "Gunpowder", :survey_description => "Green")
+        @survey = SurveyTemplate.create(:survey_title => "Gunpowder", :survey_description => "Green", :status => "published")
         @survey.user_id = @user.id
         @survey.survey_fields << @field
         @survey.save
       end
       it 'sets various instance vars' do
-        post :show, :id => @survey.id
+        get :show, :id => @survey.id
         expect(response).to render_template("show") 
 
         expect(assigns(:fields)).to include (@field)

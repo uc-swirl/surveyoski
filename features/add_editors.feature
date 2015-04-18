@@ -1,6 +1,6 @@
 Feature: As an Instructor 
-So that I can share surveys for my course
-I want to be able to create a course
+So that my TAs can edit my surveys
+I want to be able to make a course and add TAs to it
 
 Background:
 Given I have logged in as a professor
