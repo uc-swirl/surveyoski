@@ -1,3 +1,9 @@
+
+
+function add_publish_survey_template_button(container) {
+  jQuery("<button/>", {type: "button", text : "Publish"}).appendTo(container);
+}
+
 SurveyField.prototype.fields = [];
 
 
