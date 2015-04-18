@@ -2,7 +2,7 @@
 <%= form_tag survey_templates_path, {:id => :form_survey_template} do %>
 
     <div id="form_header">
-        <div>Create a new survey</div>
+        <div><%= @title %></div>
     </div>
 
     <div id='survey_name'>
@@ -14,8 +14,10 @@
       <div>
         <%= label :course_id, "Course" %>
         <%=  select_tag(:course_id, options_from_collection_for_select(@courses, 'id', 'name')) %>
-
-        <span class="publish_button_container" data-status-route="<%= if @survey then survey_template_status_path(@survey) else "" end %>"></span>
+      <span class="publish_button_container" 
+      data-status-route="<%= if @survey then survey_template_status_path(@survey) else "" end %>"
+      data-update-status-route="<%= if @survey then update_survey_template_status_path(@survey) else "" end %>"
+      >
       </div>
 
     </div>

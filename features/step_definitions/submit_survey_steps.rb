@@ -1,8 +1,8 @@
 Given /^the following survey template exists in course "(.+)"$/ do |course_name, table|
+  @user ||= User.create(:email => "test@berkeley.edu", :status => "student", :name => "OSKIGOBRSSSS")
   @course = Course.create(:name => course_name)
-  # puts "what"
-  @survey = @course.survey_templates.build(:survey_title => "meep", :status => "unpublished")
-  # puts "happened"
+
+  @survey = @course.survey_templates.build(:survey_title => "meep", :status => "unpublished", :user_id => @user.id)
   table.hashes.each do |question|
     options = question[:options].split(",").map {|x| x.split(":").map {|x| x.strip } }
     case question[:type]
@@ -65,7 +65,7 @@ end
 And /I fill in the (?:first|next) field with "(.+)"/ do |value|
   question_type = @survey.survey_fields[@question_number].class
   if question_type == TextQuestionField
-    fill_in("submission_#{@survey.survey_fields[@question_number].id}", :with =>value)
+    fill_in("submission[#{@survey.survey_fields[@question_number].id}]", :with =>value)
   elsif question_type == CheckboxField
     values = value.split(":")
     values.each do |v|
@@ -80,7 +80,7 @@ And /I fill in the (?:first|next) field with "(.+)"/ do |value|
 end
 
 Given(/^I press submit$/) do
-  click_button("survey_submit")
+  click_button("Submit")
 end
 
 Then /^I should see "([^\"]*)"$/ do |text|
