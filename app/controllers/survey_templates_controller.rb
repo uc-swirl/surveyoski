@@ -40,18 +40,26 @@ end
 
   def create
     @survey = SurveyTemplate.find_or_create_by_id(params[:id])
-    @name = if params[:form_name]!='' then params[:form_name] else 'Untitled('+@survey.created_at.to_s+')' end
+    @name = create_name
     @fields = if params[:fields] then params[:fields] else [] end
-    attach
+    attach_survey_basic
+    attach_survey_fields
     @survey.save
     redirect_to survey_templates_path
   end
 
-  def attach
+  def attach_survey_basic
     @survey.survey_title = @name
     @survey.survey_fields = []
     @survey.course = Course.find_by_id(params[:course_id])
     @survey.user_id ||= current_user.id
+  end
+
+  def create_name
+    if params[:form_name]!='' then params[:form_name] else 'Untitled('+@survey.created_at.to_s+')' end
+  end
+
+  def attach_survey_fields
     name_to_type = Hash[SurveyField.descendants.map {|klass| [klass.nice_name, klass]}]
     @fields.each do |key, field_param|
       klass = name_to_type[field_param[:type]]
