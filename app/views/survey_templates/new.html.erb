@@ -8,9 +8,14 @@
     <div id='survey_name'>
       <div>
         <%= label :form_name, "Survey name" %>
+        <%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
+
       </div>
       <div>
-        <%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
+        <%= label :course_id, "Course" %>
+        <%=  select_tag(:course_id, options_from_collection_for_select(@courses, 'id', 'name')) %>
+
+        <span class="publish_button_container" data-status-route="<%= if @survey then survey_template_status_path(@survey) else "" end %>"></span>
       </div>
 
     </div>
@@ -34,7 +39,8 @@
           <%= select_tag :new_field_type, options_for_select(@field_types) %>
         </div>
 
-    <button class = 'add_field_button' id = 'add_question_button'>Add question</button>
+      <button class = 'add_field_button' id = 'add_question_button'>Add question</button>
+
     </div>
 
     <div><%= submit_tag 'Send survey', :class=>'survey_submit', :id=>'new_survey_submit'%></div>

@@ -11,20 +11,37 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :email_fields
   has_many :submissions, :dependent => :destroy
   has_many :participants, :dependent => :destroy
+  belongs_to :course
+  before_validation :pepper_up
+  validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
 
-  def get_all_responses
+  def pepper_up 
+    if self.status.nil?
+      self.status = "unpublished"
+    end
+  end
+
+
+
+  def submissions_to_csv
     if submissions.length <= 10
       return few_responses_message
     end
     output = titles_to_array.to_csv
-    responses_to_array.shuffle.each {|r| output += r.to_csv}
+    submissions_to_array.shuffle.each {|r| output += r.to_csv}
     output
   end
 
+  def participants_to_csv
+    p_csv = ""
+    get_participants.each {|p| p_csv += p + "\n" }
+    p_csv
+  end
+
   def get_participants
-    emails = ["Student Email"].to_csv
+    emails = ["Student Email"]
     participants.each do |response| 
-      emails += [response.email].to_csv
+      emails += [response.email]
     end
     emails
   end
@@ -45,7 +62,7 @@ class SurveyTemplate < ActiveRecord::Base
     titles
   end
 
-  def responses_to_array
+  def submissions_to_array
     all_responses = []
     submissions.each do |s|
       curr_submis = []
@@ -59,7 +76,7 @@ class SurveyTemplate < ActiveRecord::Base
       end
       all_responses << curr_submis
     end
-    all_responses
+    all_responses.shuffle
   end
 
   def number_to_name(num)
@@ -68,7 +85,7 @@ class SurveyTemplate < ActiveRecord::Base
     conversion[num]
   end
 
-  private :number_to_name, :few_responses_message, :titles_to_array, :responses_to_array
+  private :number_to_name
 
   def self.sort(s, user)
     id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}

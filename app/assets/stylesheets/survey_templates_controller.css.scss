@@ -1,8 +1,18 @@
-/* line 1, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-/* line 3, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-/* line 4, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-/* line 5, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-.page_title {
+
+.option_add_button {
+  margin: 5px;
+  float: right;
+  margin-right: 20px;
+}
+.name_input_option {
+  width: 96%;
+}
+
+.value_input_option {
+  width: 80%;
+}
+
+.page_title{
   text-align: center;
   font-family: Ubuntu;
   font-size: 40px;
@@ -62,13 +72,10 @@
   padding: 8px;
 }
 
-/* line 36, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-/* line 45, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-/* line 56, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-/* line 63, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .option_row {
   border: 1px solid red;
 }
+
 
 /* line 40, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 /* line 50, ../../app/assets/stylesheets/survey_templates_controller.css.scss */

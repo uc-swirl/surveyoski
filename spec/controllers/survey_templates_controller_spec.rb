@@ -110,15 +110,17 @@ describe SurveyTemplatesController do
         @survey = SurveyTemplate.create(:survey_title => "Gunpowder", :survey_description => "Green")
         @survey.survey_fields << @field
       end
-      it 'all_responses sets the survey_template var' do
-        post :all_responses, :id => @survey.id
+      it 'sets the survey_template var for all_responses' do
+        get :all_responses, :id => @survey.id
         expect(assigns(:survey_template)).to eq(@survey)
-
       end
-      it 'participants sets the survey_template var' do
-        post :participants, :id => @survey.id
+      it 'sets the survey_template var for participants' do
+        get :participants, :id => @survey.id
         expect(assigns(:survey_template)).to eq(@survey)
-
+      end
+      it 'sets the survey_template var for submissions downalod' do
+        get :download_submissions, :id => @survey.id
+        expect(assigns(:survey_template)).to eq(@survey)
       end
     end
 
