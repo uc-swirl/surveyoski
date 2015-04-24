@@ -278,14 +278,14 @@ var SurveyBuilder = (function () {
     });
   };
 
-  var create_add_button = function (container) { 
-    var add_button = jQuery("<button/>", { class : "option_add_button",  text : "Add Option"}).appendTo(container);
+  var create_add_button = function (field, add_row, add_value) { 
+    var add_button = jQuery("<button/>", { class : "option_add_button",  text : "Add Option"}).appendTo(add_value);
 
     add_button.unbind("click");
     add_button.prop('type', 'button');
     add_button.click(function (e) {
-    e.preventDefault();
-    add_option_inputs(field, add_row, "", "");
+      e.preventDefault();
+      add_option_inputs(field, add_row, "", "");
     });
   }
 
@@ -303,7 +303,7 @@ var SurveyBuilder = (function () {
     var add_row = jQuery("<tr/>",{"class" : "option_row"}).appendTo(options_table);
     var add_value = jQuery("<td/>", {text : "",  "colspan" : 2}).appendTo(add_row);
 
-    create_add_button(add_row);
+    create_add_button(field, add_row, add_value);
 
     jQuery.each(field.options, function (index, value) {
       var name = value[0];
