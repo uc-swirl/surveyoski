@@ -18,6 +18,7 @@ class SurveyTemplate < ActiveRecord::Base
   before_save :pepper_up
   validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
 
+
   def pepper_up 
     if self.status.nil?
       self.status = "unpublished"
@@ -91,9 +92,10 @@ class SurveyTemplate < ActiveRecord::Base
 
   private :number_to_name
 
-  def self.sort(s, user)
+  def self.sort(s, user, p)
     id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}
-    return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>id_conversion[s])
+    #return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>id_conversion[s])
+    return SurveyTemplate.where(:course_id => user.courses).paginate(:page => p, :per_page => 10).order(id_conversion[s])
   end
 
   def can_view(accessing_user)

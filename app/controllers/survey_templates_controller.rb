@@ -102,7 +102,8 @@ end
   def index
     authorize :survey_templates, :index?
     @courses = current_user.courses
-    @templates = SurveyTemplate.sort(params[:sort], current_user)
+    #params[:page] ||= 1
+    @templates = SurveyTemplate.sort(params[:sort], current_user, params[:page])
   end
   
   def show # shows the HTML form

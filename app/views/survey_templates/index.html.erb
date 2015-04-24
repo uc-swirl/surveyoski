@@ -19,7 +19,6 @@
             </button>
         </td>
       </tr>
-
       <% @templates.each do |template| %>
           <tr>
             <td>
@@ -49,6 +48,7 @@
 
           </tr>
       <% end %>
+      <%= will_paginate @templates %>
   </tbody>
 </table>
 

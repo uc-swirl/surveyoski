@@ -17,6 +17,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'will_paginate', '~> 3.0.5'
 end
 
 group :production do
