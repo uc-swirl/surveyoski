@@ -32,7 +32,7 @@ function add_publish_survey_template_button(container) {
             stage_verb = "Closed";
           }
 
-          next_stage_button = jQuery("<button/>", {"class" : "survey_status_button", 
+          next_stage_button = jQuery("<button/>", {"class" : "survey_status_button " , 
             disabled : disable, type: "button", text : stage_verb}).appendTo(container);
           if (!disable) {
             next_stage_button.click(function () {
