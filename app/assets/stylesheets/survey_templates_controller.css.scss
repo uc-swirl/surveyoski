@@ -6,7 +6,21 @@
 }
 
 .survey_status_button {
-  line-height: 2em;  
+  line-height: 2em;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  position: relative;
+  left: 20px;
+}
+
+.survey_status_button:disabled {
+  color: indianred;
+}
+
+.survey_status_button:hover:not([disabled]) {
+  color: #ffffff;
 }
 
 .name_input_option {
