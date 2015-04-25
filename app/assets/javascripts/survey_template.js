@@ -252,7 +252,7 @@ var SurveyBuilder = (function () {
 
   var add_type_row = function(question_table, field_type) {
     var type_row = jQuery("<tr/>").appendTo(question_table);
-    jQuery("<td/>", {text : "Question Type: "}).appendTo(type_row);
+    jQuery("<td/>", {text : "Question Type: "}).appendTo(type_row).addClass("hi");
     jQuery("<td/>", {text : field_type}).appendTo(type_row);
   };
 
