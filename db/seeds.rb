@@ -10,6 +10,9 @@
 @template.user = @user
 @template.course = @course
 
+
+@template.survey_fields << CheckboxField.create :field_options => [["one1", "1"]. ["two2", "2"]]
+
 @template.save!
 
 @enrollment = @user.enrollments.build 
