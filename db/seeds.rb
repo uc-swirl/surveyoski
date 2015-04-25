@@ -26,13 +26,21 @@
 
 
 
+(0..10).each do |i|
+  @submission =@template.submissions.build 
+  @submission.survey_template = @template
+  @submission.field_responses << @check.field_responses.build(:response => i)
 
-@submission = Submission.create 
-@submission.survey_template = @template
+  @submission.field_responses << @text.field_responses.build(:response => "Text response")
+end
 
-@submission.field_responses << @check.field_responses.build :response => "1"
+(0..10).each do |i|
+  @submission =@template.submissions.build 
+  @submission.survey_template = @template
+  @submission.field_responses << @check.field_responses.build(:response => 2*i)
 
-@submission.field_responses << @text.field_responses.build :response => "Text response"
+  @submission.field_responses << @text.field_responses.build(:response => "Different")
+end
 
 @user.save!
 
