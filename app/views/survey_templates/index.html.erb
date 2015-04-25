@@ -25,11 +25,10 @@
               <%= link_to template.survey_title.to_s, edit_survey_template_path(template),:id=>"survey_name" %>
             </td>
             <td class="">
-            <span class="publish_button_container" 
-            data-status-route="<%= if template then survey_template_status_path(template) else "" end %>"
-            data-update-status-route="<%= if template then update_survey_template_status_path(template) else "" end %>"
-            >
-         </td>
+                <span class="publish_button_container"
+                data-status-route="<%= if template then survey_template_status_path(template) else "" end %>"
+                data-update-status-route="<%= if template then update_survey_template_status_path(template) else "" end %>"></span>
+            </td>
             <td>
               <%= link_to image_tag("view.png", :width=>30, :height=>30, :title=>'View live survey'), survey_template_path(template), :target => "_blank"%>
             </td>
@@ -48,8 +47,10 @@
 
           </tr>
       <% end %>
-      <%= will_paginate @templates %>
+
+      <td colspan ="7" class="apple_pagination"><%= will_paginate @templates %></td>
   </tbody>
+
 </table>
 
 <div id = "clone_dialog" data-template-id = "" style="display:none"> 
