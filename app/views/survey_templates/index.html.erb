@@ -2,11 +2,11 @@
 
 <table id="all_surveys" class="admin_table">
   <thead>
-    <th colspan = "7", id="all_surveys_text">All Surveys</th>
+    <th colspan = "8", id="all_surveys_text">All Surveys</th>
   </thead>
   <tbody>
       <tr>
-        <td colspan="7" >
+        <td colspan="8" >
             <div id = 'sort_by'>Sort by</div>
             <button class = 'sort_tag' id = 'name'>
             <div><%= link_to "Survey Name", survey_templates_path(:sort => 'name'), :class=>"sort_text" %></div>
@@ -24,20 +24,22 @@
             <td>
               <%= link_to template.survey_title.to_s, edit_survey_template_path(template),:id=>"survey_name" %>
             </td>
+            <td>
+                <%=template.course.name %>
+            </td>
             <td class="">
-            <span class="publish_button_container" 
-            data-status-route="<%= if template then survey_template_status_path(template) else "" end %>"
-            data-update-status-route="<%= if template then update_survey_template_status_path(template) else "" end %>"
-            >
-         </td>
+                <span class="publish_button_container"
+                data-status-route="<%= if template then survey_template_status_path(template) else "" end %>"
+                data-update-status-route="<%= if template then update_survey_template_status_path(template) else "" end %>"></span>
+            </td>
             <td>
               <%= link_to image_tag("view.png", :width=>30, :height=>30, :title=>'View live survey'), survey_template_path(template), :target => "_blank"%>
             </td>
             <td>
-              <%= link_to image_tag("response.png", :width=>30, :height=>30, :title=>'See responses'), all_responses_path(template.id) %>
+              <%= link_to image_tag("response.png", :width=>30, :height=>30, :title=>'See responses'), all_responses_path(template.id), :target => "_blank" %>
             </td>
             <td>
-              <%= link_to image_tag("email.png", :width=>30, :height=>30, :title=>'Emails of participants'), all_participants_path(template.id) %>
+              <%= link_to image_tag("email.png", :width=>30, :height=>30, :title=>'Emails of participants'), all_participants_path(template.id), :target => "_blank" %>
             </td>
             <td>
                 <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.id.to_s ) %>
@@ -48,8 +50,10 @@
 
           </tr>
       <% end %>
-      <%= will_paginate @templates %>
+
+      <td colspan ="8" class="apple_pagination"><%= will_paginate @templates %></td>
   </tbody>
+
 </table>
 
 <div id = "clone_dialog" data-template-id = "" style="display:none"> 
