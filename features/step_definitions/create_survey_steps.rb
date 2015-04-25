@@ -71,7 +71,7 @@ Given /I am on the new survey template page/ do
 end
 
 Given /I save the survey/ do 
-  click_button 'Send survey'
+  click_button 'Save survey'
 end
 
 Given /I name the survey "(.+)"/ do |name|
