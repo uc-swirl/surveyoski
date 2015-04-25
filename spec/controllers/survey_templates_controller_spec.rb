@@ -28,7 +28,7 @@ describe SurveyTemplatesController do
         expect(response).to render_template("new") 
       end
       it 'it sets up various variables' do
-        get :edit, :id => @survey.id
+        get :edit, :id => @survey.uuid
         expect(assigns(:survey)).not_to be_nil
         expect(assigns(:field_types)).not_to be_nil
         expect(assigns(:fields_json)).not_to be_nil
@@ -50,7 +50,7 @@ describe SurveyTemplatesController do
       it 'it allows adding new fields' do
         expect(@survey.survey_fields.length).to eq(0)
 
-        post :create, {:id => @survey.id, :fields => {0 => {:name => "Checky", :type => "Checkbox", :options => "C1:1\nC2:2", :form_name => "What a wonderful form"}}}
+        post :create, {:id => @survey.uuid, :fields => {0 => {:name => "Checky", :type => "Checkbox", :options => "C1:1\nC2:2", :form_name => "What a wonderful form"}}}
 
         @survey.reload
         expect(@survey.survey_fields.length).to eq(1)
@@ -84,11 +84,11 @@ describe SurveyTemplatesController do
         @survey.save
       end
       it 'sets various instance vars' do
-        get :show, :id => @survey.id
+        get :show, :id => @survey.uuid
         expect(response).to render_template("show") 
 
         expect(assigns(:fields)).to include (@field)
-        expect(assigns(:id)).to eq(@survey.id.to_s)
+        expect(assigns(:id)).to eq(@survey.uuid.to_s)
         expect(assigns(:survey_title)).to eq("Gunpowder")
         expect(assigns(:survey_description)).to eq("Green")
       end
@@ -100,10 +100,10 @@ describe SurveyTemplatesController do
         @survey.survey_fields << @field
       end
       it "deletes the survey object" do
-        expect {delete :destroy, :id => @survey.id}.to change{SurveyTemplate.all.length}.by(-1)
+        expect {delete :destroy, :id => @survey.uuid}.to change{SurveyTemplate.all.length}.by(-1)
       end
       it "deletes the survey object" do
-        expect {delete :destroy, :id => @survey.id}.to change{SurveyField.all.length}.by(-1)
+        expect {delete :destroy, :id => @survey.uuid}.to change{SurveyField.all.length}.by(-1)
       end
     end
 
@@ -114,20 +114,18 @@ describe SurveyTemplatesController do
         @survey.survey_fields << @field
       end
       it 'sets the survey_template var for all_responses' do
-        get :all_responses, :id => @survey.id
+        get :all_responses, :id => @survey.uuid
         expect(assigns(:survey_template)).to eq(@survey)
       end
       it 'sets the survey_template var for participants' do
-        get :participants, :id => @survey.id
+        get :participants, :id => @survey.uuid
         expect(assigns(:survey_template)).to eq(@survey)
       end
       it 'sets the survey_template var for submissions downalod' do
-        get :download_data, :id => @survey.id, :type => "submissions"
+        get :download_data, :id => @survey.uuid, :type => "submissions"
         expect(assigns(:survey_template)).to eq(@survey)
       end
     end
-
-
 
   end
 
