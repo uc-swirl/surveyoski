@@ -24,7 +24,7 @@ class SurveyTemplate < ActiveRecord::Base
   end
 
   def initialize_uuid
-    if self.uuid.nil?
+    if self.uuid.nil? or self.uuid.empty?
       self.uuid = UUID.new.generate(:compact)
     end
   end
