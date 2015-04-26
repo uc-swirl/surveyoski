@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150425194401) do
+ActiveRecord::Schema.define(:version => 20150425204122) do
 
   create_table "courses", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -72,9 +72,11 @@ ActiveRecord::Schema.define(:version => 20150425194401) do
     t.string   "status"
     t.integer  "user_id"
     t.boolean  "public"
+    t.string   "uuid"
   end
 
   add_index "survey_templates", ["course_id"], :name => "index_survey_templates_on_course_id"
+  add_index "survey_templates", ["uuid"], :name => "index_survey_templates_on_uuid", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

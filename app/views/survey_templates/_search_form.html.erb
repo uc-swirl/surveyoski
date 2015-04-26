@@ -1,0 +1,14 @@
+<%= form_tag survey_templates_path, :method => "get" do %>
+  <%= label_tag :my_surveys, "My Surveys" %>
+  <%= check_box_tag :my_surveys, "My Surveys", @show_my_surveys %>
+  <%= label_tag :public_surveys, "Public Surveys" %>
+  <%= check_box_tag :public_surveys, "Public Surveys", @show_public_surveys  %>
+  <%= select_tag "filters[department]", options_for_select(departments, @selected_department), prompt: "Department"%>
+  <%= select_tag "filters[semester]", options_for_select(semesters, @selected_semester), prompt: "Semester"%>
+  <%= select_year(@selected_year, {prompt: "Year"}, {name: "filters[year]"})%>
+  <br>
+<!--   <%= label_tag :title_words, "Survey Title Key Words"%>
+  <%= text_field_tag :title_words %>
+  <br> -->
+  <%= submit_tag "Go"%>
+  <% end %>

@@ -1,10 +1,9 @@
-%table
+
+
+
+
+
+%div.response_container{:data => {'route' => responses_data_path(@survey_template)}}
   = link_to "Download CSV", download_data_path(params[:id], "submissions")
-  %tbody
-    %tr
-    - @questions.each do |title|
-      %td= title
-    - @submissions.each do |submission|
-      %tr
-        - submission.each do |response|
-          %td= response
+
+

@@ -9,6 +9,18 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_email(session[:user_email]) if session[:user_email]
   end
 
+  @@departments =  ["Computer Science"]
+  @@semesters = ["Fall","Spring", "Summer"]
+  helper_method :departments 
+  helper_method :semesters
+  def departments
+    @@departments.map {|dept| [dept, dept]}
+  end
+  def semesters
+    @@semesters.map {|sem| [sem, sem]}
+  end
+
+
   private
 
   def user_not_authorized (exception)

@@ -1,20 +1,20 @@
 class CoursesController < ApplicationController
-  @@departments =  ["Computer Science"]
-  @@semesters = ["Fall","Spring", "Summer"]
-  helper_method :departments 
-  helper_method :semesters
-  def departments
-    @@departments.map {|dept| [dept, dept]}
-  end
-  def semesters
-    @@semesters.map {|sem| [sem, sem]}
-  end
+
   def index
     @courses = current_user.courses
   end
 
   def create
     course = Course.find_or_create_by_id(params[:id])
+    emails = params[:editor_email].split(/[ |,]+/)
+    emails.each do |editor| 
+      user = User.find_by_email(editor)
+      enrollment = course.enrollments.find_by_user_id(user.id)
+      if enrollment == nil
+        enrollment = course.enrollments.build(:user_id => user.id)
+        enrollment.save
+      end
+    end
     enrollment = course.enrollments.find_by_user_id(current_user.id)
     if enrollment == nil
       enrollment = course.enrollments.build(:user_id => current_user.id)
@@ -30,6 +30,7 @@ class CoursesController < ApplicationController
   def new
     @title = "New Course"
     @course = Course.new(:name => "", :department => "", :year => "", :semester => "")
+    @people = ""
   end
 
   def show
@@ -39,7 +40,10 @@ class CoursesController < ApplicationController
   def edit
     @title = "Edit Course"
   	@course = Course.find_by_id(params[:id])
-  	@people = @course.users
+  	@people = ""
+    @course.users.each do |user|
+      @people += user.email + ", "
+    end
     render :new
   end
 

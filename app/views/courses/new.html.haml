@@ -8,5 +8,7 @@
   = select_year(@course == nil ? Date.today : @course.year.to_i)
   = hidden_field_tag(:id, if @course then @course.id else "" end )
   <br>
+  = label_tag :editor_email, "Editors (please enter in the format of: email1@berkeley.edu, email2@berkeley.edu, email3@berkeley.edu"
+  <br>
+  = text_area_tag :editor_email, @people, rows: 10, cols: 25
   = submit_tag "Submit"
-

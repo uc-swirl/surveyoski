@@ -28,7 +28,7 @@ describe SurveyTemplatesController do
         expect(response).to render_template("new") 
       end
       it 'it sets up various variables' do
-        get :edit, :id => @survey.id
+        get :edit, :id => @survey.uuid
         expect(assigns(:survey)).not_to be_nil
         expect(assigns(:field_types)).not_to be_nil
         expect(assigns(:fields_json)).not_to be_nil
@@ -50,7 +50,7 @@ describe SurveyTemplatesController do
       it 'it allows adding new fields' do
         expect(@survey.survey_fields.length).to eq(0)
 
-        post :create, {:id => @survey.id, :fields => {0 => {:name => "Checky", :type => "Checkbox", :options => "C1:1\nC2:2", :form_name => "What a wonderful form"}}}
+        post :create, {:id => @survey.uuid, :fields => {0 => {:name => "Checky", :type => "Checkbox", :options => "C1:1\nC2:2", :form_name => "What a wonderful form"}}}
 
         @survey.reload
         expect(@survey.survey_fields.length).to eq(1)
@@ -59,18 +59,49 @@ describe SurveyTemplatesController do
 
     describe "index" do
       before(:each) do
-        course = Course.create(:name => "new course!")
+        course = FactoryGirl.create(:course)
         enrollment = @user.enrollments.build
         enrollment.course_id = course.id
         enrollment.save!
         @survey = course.survey_templates.create!
-
-        # @user.stub(:all_surveys).and_return([@survey])
+        @public = course.survey_templates.create(:public => true)
+        @params = {:filters => {"department"=>"", "semester"=>"", "year"=>""}, :my_surveys => "My Surveys", :public_surveys => "Public Surveys"}      
       end
       it 'it sets @templates and renders index' do
         post :index
         expect(response).to render_template("index") 
         expect(assigns(:templates)).to include(@survey)
+        expect(assigns(:public_templates)).to include(@public)
+      end
+      describe 'filters by search parameters' do
+        it "doesn't find wrong ones" do
+          @params[:filters]["department"] = "Nonexistant"
+          post :index, @params
+          expect(response).to render_template("index")
+          expect(assigns(:templates)).to_not include(@survey)
+          expect(assigns(:public_templates)).to_not include(@public)
+        end
+        it "does find the ones I filter for" do
+          @params[:filters]["department"] = "Computer Science"
+          post :index, @params
+          expect(response).to render_template("index")
+          expect(assigns(:templates)).to include(@survey)
+          expect(assigns(:public_templates)).to include(@public)
+        end
+        it "only shows my surveys if I only check that box" do 
+          @params.delete(:public_surveys)
+          post :index, @params
+          expect(response).to render_template("index")
+          expect(assigns(:templates)).to include(@survey)
+          expect(assigns(:public_templates)).to_not include(@public)
+        end
+        it "shows only public surveys if I only check that box" do
+          @params.delete(:my_surveys)
+          post :index, @params
+          expect(response).to render_template("index")
+          expect(assigns(:templates)).to_not include(@survey)
+          expect(assigns(:public_templates)).to include(@public)
+        end
       end
     end
 
@@ -84,11 +115,11 @@ describe SurveyTemplatesController do
         @survey.save
       end
       it 'sets various instance vars' do
-        get :show, :id => @survey.id
+        get :show, :id => @survey.uuid
         expect(response).to render_template("show") 
 
         expect(assigns(:fields)).to include (@field)
-        expect(assigns(:id)).to eq(@survey.id.to_s)
+        expect(assigns(:id)).to eq(@survey.uuid.to_s)
         expect(assigns(:survey_title)).to eq("Gunpowder")
         expect(assigns(:survey_description)).to eq("Green")
       end
@@ -100,10 +131,10 @@ describe SurveyTemplatesController do
         @survey.survey_fields << @field
       end
       it "deletes the survey object" do
-        expect {delete :destroy, :id => @survey.id}.to change{SurveyTemplate.all.length}.by(-1)
+        expect {delete :destroy, :id => @survey.uuid}.to change{SurveyTemplate.all.length}.by(-1)
       end
       it "deletes the survey object" do
-        expect {delete :destroy, :id => @survey.id}.to change{SurveyField.all.length}.by(-1)
+        expect {delete :destroy, :id => @survey.uuid}.to change{SurveyField.all.length}.by(-1)
       end
     end
 
@@ -114,20 +145,18 @@ describe SurveyTemplatesController do
         @survey.survey_fields << @field
       end
       it 'sets the survey_template var for all_responses' do
-        get :all_responses, :id => @survey.id
+        get :all_responses, :id => @survey.uuid
         expect(assigns(:survey_template)).to eq(@survey)
       end
       it 'sets the survey_template var for participants' do
-        get :participants, :id => @survey.id
+        get :participants, :id => @survey.uuid
         expect(assigns(:survey_template)).to eq(@survey)
       end
       it 'sets the survey_template var for submissions downalod' do
-        get :download_data, :id => @survey.id, :type => "submissions"
+        get :download_data, :id => @survey.uuid, :type => "submissions"
         expect(assigns(:survey_template)).to eq(@survey)
       end
     end
-
-
 
   end
 

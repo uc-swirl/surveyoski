@@ -1,3 +1,99 @@
+.text_response_display_container {
+  padding-bottom: 20px;
+}
+.text_response_display {
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: 1px solid #2980b9;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+
+.text_response_display_title {
+  text-align: center;
+  margin: 0px;
+  color: #2980b9;
+  font-size: 1em;
+  font-weight:bold;
+
+}
+
+.text_response_display_title:hover {
+  cursor: pointer;
+  color: #46506E;
+}
+
+.text_response_display li {
+  display: block;
+  line-height: 2em;
+  font-style: italic;
+  border-bottom: 1px solid #2980b9;
+}
+
+.text_response_display li:last-child
+{
+  border-bottom: 0px solid #2980b9;
+}
+
+
+.response_stats_container {
+  text-align: center;
+}
+
+.response_stats_container p {
+  margin: 0px;
+  line-height: 1.4em;
+}
+
+
+.response_question_title {
+  text-align: center;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+
+.bar:hover {
+  fill: rgb(219, 154, 154);
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.response_container {
+  color: #333;
+  text-align: left;
+  line-height: 40px;
+  border-spacing: 0;
+  border: 1px solid #2980b9;
+  width: 900px;
+  margin: 50px auto;
+  padding: 8px;
+  padding-bottom: 50px;
+}
+
+
+.response_container hr {
+  border-top: 1px solid #2980b9;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 
 .option_add_button {
   margin: 5px;
@@ -97,7 +193,7 @@
   box-sizing: border-box;
 }
 
-#all_surveys {
+.admin_table {
   color: #333;
   text-align: left;
   line-height: 40px;
@@ -117,47 +213,47 @@
   color: white;
 }
 
-#all_surveys thead tr:first-child {
+.admin_table thead tr:first-child {
   height: 60px;
   background: #2980b9;
   color: #fff;
   border: none;
 }
 
-#all_surveys th {
+.admin_table th {
   font-weight: bold;
 }
 
-#all_surveys th:first-child, td:first-child {
+.admin_table th:first-child, td:first-child {
   padding: 0 15px 0 20px;
 }
 
-#all_surveys thead tr:last-child th {
+.admin_table thead tr:last-child th {
   border-bottom: 2px solid #ddd;
 }
 
-#all_surveys tbody tr:hover {
+.admin_table tbody tr:hover {
   background-color: #f0fbff;
 }
 
-#all_surveys tbody tr:last-child td {
+.admin_table tbody tr:last-child td {
   border: none;
 }
 
-#all_surveys tbody td {
+.admin_table tbody td {
   border-bottom: 1px solid #ddd;
 }
 
-#all_surveys td:last-child {
+.admin_table td:last-child {
   text-align: center;
   padding-right: 10px;
 }
 
-#all_surveys tr {
+.admin_table tr {
   background: white;
 }
 
-#all_surveys tr:nth-of-type(odd) {
+.admin_table tr:nth-of-type(odd) {
   background: #f6f6f6;
 }
 
@@ -286,7 +382,7 @@
 /* line 284, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 /* line 320, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #survey_show {
-  background: url("../assets/wood.png"); /*, url("../assets/blue.png");*/
+  background: url("../assets/wood.png");
   color: #222;
   font-weight: 300;
   line-height: 1.625;

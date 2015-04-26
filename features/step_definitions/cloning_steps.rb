@@ -1,8 +1,6 @@
 Given(/^I clone the survey$/) do
   @orig = SurveyTemplate.all.length
   course = @user.courses.create
-  # puts page.body
-  # puts @user.status
   first("img.clone_button").click
   first(:button, "Submit").click()
   page.should have_content "SurveyOski"
@@ -16,7 +14,6 @@ end
 Then(/^this survey should have the same fields as the first survey$/) do
   original = @survey
   clone = SurveyTemplate.last
-  # puts SurveyTemplate.all.length
   expect(SurveyTemplate.all.length).to be(@orig + 1)
   original.survey_fields.each do |f|
     clone.survey_fields.where(question_title: f.question_title).length.should be 1

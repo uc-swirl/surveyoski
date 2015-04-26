@@ -22,14 +22,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def all_surveys
+  def all_surveys(filter_hash = nil)
     admin_surveys unless status != "admin"
-    surveys = []
     self.reload
-    self.courses.each do |course|
-      surveys += course.survey_templates
-    end
-    surveys
+    filtered_courses = if filter_hash then self.courses.where(filter_hash) else self.courses end
+    SurveyTemplate.where(:course_id => filtered_courses)
   end
   def admin_surveys
     SurveyTemplate.all
