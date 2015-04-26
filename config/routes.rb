@@ -4,7 +4,7 @@
   # first created -> highest priority.
 
   root :to => 'dashboard#index', :format => false
-  resources :survey_templates
+  resources :survey_templates, param: :uuid
   resources :submissions
   resources :courses # courses/edit, courses/create
   

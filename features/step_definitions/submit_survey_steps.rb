@@ -47,11 +47,11 @@ Given /I am on the survey template/ do
   @user ||= User.create(:email => "test@berkeley.edu", :status => "student")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
-  visit survey_template_path(@survey.id)
-  puts @user.courses
-  puts @user.status
-  puts @survey.status
-  puts Course.all
+  visit survey_template_path(@survey)
+  # puts @user.courses
+  # puts @user.status
+  # puts @survey.status
+  # puts Course.all
 
 end
 

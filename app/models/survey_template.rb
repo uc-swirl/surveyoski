@@ -1,7 +1,7 @@
 require 'csv'
 
 class SurveyTemplate < ActiveRecord::Base
-  attr_accessible :survey_title, :survey_description, :status, :user_id
+  attr_accessible :survey_title, :survey_description, :status, :user_id, :uuid
 
   has_many :survey_fields , :dependent => :destroy
   has_many :checkbox_fields
@@ -14,10 +14,20 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :participants, :dependent => :destroy
   belongs_to :course
   belongs_to :user
+  before_validation :initialize_uuid
   before_validation :pepper_up
   before_save :pepper_up
   validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
 
+  def to_param
+    self.uuid
+  end
+
+  def initialize_uuid
+    if self.uuid.nil?
+      self.uuid = UUID.new.generate(:compact)
+    end
+  end
 
   def pepper_up 
     if self.status.nil?
