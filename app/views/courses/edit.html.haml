@@ -1,13 +1,14 @@
-%h1 Edit course
+%h1="Edit " + @course.name
 <br>
-= @course.name
-= @course.id
-
-<br>
-%h2 People who can edit this course
+People who can edit this course
 <br>
 - @people.each do |person| 
   = person.name
-  <br>
-
-
+  = person.status
+<br>
+Add people to this courses
+= form_tag add_people_path do
+  = hidden_field_tag :id, @course.id
+  = label_tag :editor_email, "Berkeley Email"
+  = text_field_tag :editor_email
+  = submit_tag "Add"

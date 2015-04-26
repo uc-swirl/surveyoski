@@ -18,6 +18,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'will_paginate', '~> 3.0.5'
+  gem 'quiet_assets', group: :development
 end
 
 group :production do

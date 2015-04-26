@@ -70,7 +70,6 @@ end
   end
 
   def clone
-    # puts "cloning a survey!"
     template = SurveyTemplate.find(params[:id])
     new_template = template.dup
     new_template.status = nil
@@ -82,7 +81,6 @@ end
     flash[:notice] = "Your course was cloned successfully. "
     flash.keep(:notice)
     render js: "window.location = '#{survey_templates_path}'"
-    # puts "finished cloning"
   end
 
   def amend_title(clone)

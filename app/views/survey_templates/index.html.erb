@@ -61,7 +61,7 @@
     Which course would you like to clone this survey to?
     <select id="select_course_name">
       <%- @courses.each do |course| %>
-        <option value=<%= course.name %>><%= course.name %></option>
+        <option value="<%= course.name %>"><%= course.name %></option>
       <% end %>
     </select>
     <!-- Allow form submission with keyboard without duplicating the dialog button -->

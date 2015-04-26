@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :status
   has_many :enrollments
   has_many :courses, through: :enrollments
+  
 
   @@rankings = {"student" => 1, "ta" => 2, "professor" => 3, "admin" => 4}
 
