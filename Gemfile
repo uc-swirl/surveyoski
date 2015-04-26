@@ -41,3 +41,4 @@ gem 'omniauth-google-oauth2', "~> 0.2.1"
 gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'jquery-ui-rails'
 gem 'uuid', '~> 2.3.7'
+gem "d3-rails"

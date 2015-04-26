@@ -131,6 +131,18 @@ end
       @submissions = @survey_template.submissions_to_array #shuffle them inside the model, this is just embedded array of strings
     end
   end
+
+  def responses_data
+    authorize :survey_templates, :all_responses?
+    @survey_template = SurveyTemplate.find(params[:id])
+
+    if @survey_template.status != "closed" or @survey_template.submissions.length <= 10
+      render nothing: true
+    else
+      render json: @survey_template.pack_responses
+    end
+  end
+
   def participants
     authorize :survey_templates, :participants?
     @survey_template = SurveyTemplate.find_by_uuid(params[:id])
