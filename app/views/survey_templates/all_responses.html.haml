@@ -2,8 +2,8 @@
 
 
 
-
 %div.response_container{:data => {'route' => responses_data_path(@survey_template)}}
+  %h3{:class => "survey_response_title"}= @survey_template.survey_title
   = link_to "Download CSV", download_data_path(params[:id], "submissions")
 
 
