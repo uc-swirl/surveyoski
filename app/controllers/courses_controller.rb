@@ -9,6 +9,11 @@ class CoursesController < ApplicationController
     emails = params[:editor_email].split(/[ |,]+/)
     emails.each do |editor| 
       user = User.find_by_email(editor)
+      if user == nil
+        flash[:notice] = "That user doesn't exist"
+        redirect_to courses_path
+        return
+      end
       enrollment = course.enrollments.find_by_user_id(user.id)
       if enrollment == nil
         enrollment = course.enrollments.build(:user_id => user.id)
@@ -23,7 +28,7 @@ class CoursesController < ApplicationController
     Course.update(course.id, :name => params[:course_name], :department => params[:department], 
       :semester => params[:semester], :year => params[:date][:year])
   	course.reload
-  	flash[:notice] = "Your new course " + course.name.to_s + " was successfully updated "
+  	flash[:notice] = "Your course " + course.name.to_s + " was successfully updated "
   	redirect_to courses_path
   end
 

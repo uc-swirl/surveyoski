@@ -20,12 +20,14 @@ Given /^"(.+)" is( not | )a user with email "(.+)"$/ do |name, negative, email|
 end
 
 And /^I add (?:him|her) to the first course$/ do
+  puts @new_editor
 	click_link @course_name
+
 	if @new_editor.class == User
     step 'I fill in "editor_email" with "' + @new_editor.email + '"'
   else
   	step 'I fill in "editor_email" with "' + @new_editor[:email] + '"'
   end
-  click_button "Add"
-
+  click_button "Submit"
+  
 end

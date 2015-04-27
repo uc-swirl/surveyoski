@@ -11,14 +11,14 @@ Scenario: add user as an editor to a course
 Given "Marco" is a user with email "marcojoemontagna@berkeley.edu"
 When I go to the courses page
 And I add him to the first course
-Then I should be on the page for that course
-And I should see "Successfully added Marco as an editor" 
+Then I should be on the courses page
+And I should see "Your course CS169 was successfully updated" 
 
 Scenario: add nonexistent user as an editor to a course
 Given "Marco" is not a user with email "marcojoemontagna@berkeley.edu"
 When I go to the courses page
 And I add him to the first course
-Then I should be on the page for that course
+Then I should be on the courses page
 And I should see "That user doesn't exist" 
 
 Scenario: users can only see their own course surveys
