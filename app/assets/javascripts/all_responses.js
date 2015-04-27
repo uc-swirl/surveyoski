@@ -78,7 +78,9 @@ function generate_text_response_display(response_container, text_responses) {
 
   var response_container = jQuery("<ul/>", {"class" : "text_response_display"}).appendTo(container);
   jQuery.each(text_responses, function(index, value) {
-    jQuery("<li/>", {text: value['response']}).appendTo(response_container);
+    if (value) {
+     jQuery("<li/>", {text: value['response']}).appendTo(response_container);
+    }
   });
 
   response_container.hide();
