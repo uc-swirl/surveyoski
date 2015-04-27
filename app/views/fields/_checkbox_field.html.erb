@@ -5,8 +5,10 @@
 <% field.field_options.each do |option| %>
 
     <div class="question_choices">
+      
+      <label>
       <%= check_box_tag("submission[" + field.id.to_s + "][]", option[0], false, :id => "submission_#{field.id}_#{option[0]}") %>
-      <label for=<%="submission_#{field.id}_#{option[0]}"%>><%=option[0]%></label>
+      <%=option[0]%></label>
     </div>
 
     
