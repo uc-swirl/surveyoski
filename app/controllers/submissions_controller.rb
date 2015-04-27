@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
   def new
   end
   def create
-    user = User.find(session[:user_id])
+    user = current_user
     template = SurveyTemplate.find_by_uuid(params[:template_id])
     begin
 
