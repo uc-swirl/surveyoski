@@ -163,7 +163,7 @@ end
 
   def responses_data
     authorize :survey_templates, :all_responses?
-    @survey_template = SurveyTemplate.find(params[:id])
+    @survey_template = SurveyTemplate.find_by_uuid(params[:id])
 
     if @survey_template.status != "closed" or @survey_template.submissions.length <= 10
       render nothing: true
