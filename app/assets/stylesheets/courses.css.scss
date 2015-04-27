@@ -17,6 +17,10 @@
   line-height: 2em;
 }
 
+#editor_email {
+    width: 80%;
+}
+
 .create_edit_inner_padd {
   padding: 14px;
 
@@ -45,8 +49,8 @@
 
 
 .course_display .course_box {
-  padding-left: 10px;
-}
+  padding-left: 30px;
+  }
 
 .save_course_submit {
   float: right;
