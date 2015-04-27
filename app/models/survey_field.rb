@@ -3,10 +3,18 @@ class SurveyField < ActiveRecord::Base
   belongs_to :survey_template
   has_many :field_responses, :dependent => :destroy
   serialize :field_options, JSON
+  before_save :pepper_up
 
   # def is_valid? (response)
   #   {:value => true}
   # end
+
+
+  def pepper_up 
+    if self.field_options.nil?
+      self.field_options = []
+    end
+  end
 
   def self.descendants
     ObjectSpace.each_object(Class).select { |klass| klass < self }
