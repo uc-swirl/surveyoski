@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :enrollments
   has_many :courses, through: :enrollments
   
-
+  validates :email, uniqueness: true
   @@rankings = {"student" => 1, "ta" => 2, "professor" => 3, "admin" => 4}
 
   def self.from_omniauth(auth)
