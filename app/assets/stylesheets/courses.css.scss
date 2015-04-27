@@ -1,3 +1,43 @@
 // Place all the styles related to the courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#add_course {
+  margin-left: 10px;
+  }
+
+.course_display {
+  color: #333;
+  text-align: left;
+  line-height: 40px;
+  border-spacing: 0;
+  border: 1px solid #2980b9;
+  width: 900px;
+  margin: 50px auto;
+}
+
+.course_display_title {
+  height: 60px;
+  background: #2980b9;
+  color: #fff;
+  border: none;
+  padding-top: 18px;
+  border-bottom: 2px solid #ddd;
+}
+
+.course_display_title h3 {
+  margin: 0px;
+
+
+  font-size: 20px;
+  font-family: Ubuntu;
+  padding: 0 15px 0 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+
+
+.course_display .course_box {
+  padding-left: 10px;
+}
