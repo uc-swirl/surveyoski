@@ -2,11 +2,12 @@
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
-
   root :to => 'dashboard#index', :format => false
   resources :survey_templates, param: :uuid
   resources :submissions
   resources :courses # courses/edit, courses/create
+
+  # root :to => 'survey_templates#index'
   
   get 'admin', :to => 'dashboard#index', :format => false, :as => :dashboard
   get 'admin/update_user', :to => 'dashboard#update_user', :format => false, :as => :admin_update_user

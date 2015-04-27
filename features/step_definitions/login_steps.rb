@@ -2,9 +2,11 @@ Given /^I have logged in as a(?:n?) ([a-zA-Z]+)$/ do |role|
   class User
     attr_accessible :provider, :uid
   end
-  @user = User.create(:email => "test@berkeley.edu", :status => role, :name => "TEST USER")
+  @user = User.create(:email => "test#{Random.rand(42)}@berkeley.edu", :status => role, :name => "TEST USER")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
-  User.stub(:find).and_return(@user)
+  # User.stub(:find).and_return(@user)
+  puts 'new user id:'
+  puts @user.id.to_s
   visit dashboard_path
 end
 
