@@ -1,7 +1,7 @@
 require 'csv'
 
 class SurveyTemplate < ActiveRecord::Base
-  attr_accessible :survey_title, :survey_description, :status, :user_id
+  attr_accessible :survey_title, :survey_description, :status, :user_id, :uuid, :public
 
   has_many :survey_fields , :dependent => :destroy
   has_many :checkbox_fields
@@ -14,10 +14,20 @@ class SurveyTemplate < ActiveRecord::Base
   has_many :participants, :dependent => :destroy
   belongs_to :course
   belongs_to :user
+  before_validation :initialize_uuid
   before_validation :pepper_up
   before_save :pepper_up
   validates :status, inclusion: { in: %w(published unpublished closed),  message: "%{value} is not a valid status" }
 
+  def to_param
+    self.uuid
+  end
+
+  def initialize_uuid
+    if self.uuid.nil? or self.uuid.empty?
+      self.uuid = UUID.new.generate(:compact)
+    end
+  end
 
   def pepper_up 
     if self.status.nil?
@@ -67,6 +77,24 @@ class SurveyTemplate < ActiveRecord::Base
     titles
   end
 
+  def pack_responses
+    all_responses = []
+    submissions.each do |s|
+      curr_submis = []
+      survey_fields.each do |f|
+        field = s.field_responses.where(survey_field_id: f.id).first
+        if field
+          curr_submis << {:name => field.survey_field.question_title, :response => field.response, :type => field.survey_field.nice_name}
+        else
+          curr_submis << nil
+        end
+      end
+      all_responses << curr_submis
+    end
+    all_responses.shuffle
+  end
+
+
   def submissions_to_array
     all_responses = []
     submissions.each do |s|
@@ -92,10 +120,28 @@ class SurveyTemplate < ActiveRecord::Base
 
   private :number_to_name
 
-  def self.sort(s, user, p)
+  def self.public_surveys(show, filters)
+    return SurveyTemplate.where(:nothing) unless show
+    search_params = {:public => true}
+    if filters then search_params[:course_id] = Course.where(filters) end
+    SurveyTemplate.where(search_params)
+  end
+
+  def self.find_surveys(show, filters, current_user)
+    return SurveyTemplate.where(:nothing) unless show
+    if filters == nil
+      current_user.all_surveys
+    else
+      filters_hash = {}
+      filters.each_key do |search_term| 
+        filters_hash[search_term] = filters[search_term] if filters[search_term]
+      end
+      current_user.all_surveys(filters_hash)
+    end
+  end
+  def self.sort(collection, sort_type, page)
     id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}
-    #return SurveyTemplate.find(:all, :conditions => {:course_id => user.courses}, :order =>id_conversion[s])
-    return SurveyTemplate.where(:course_id => user.courses).paginate(:page => p, :per_page => 10).order(id_conversion[s])
+    return collection.paginate(:page => page, :per_page => 10).order(id_conversion[sort_type])#.order(id_conversion[sort_type])
   end
 
   def can_view(accessing_user)

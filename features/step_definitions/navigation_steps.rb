@@ -1,5 +1,5 @@
 Given /I go to the (.+) page/ do |page|
-  visit path_to(page) 
+  visit path_to(page)
 end
 
 Then /I should be on the (.+) page/ do |page|
@@ -19,5 +19,3 @@ Then /I should not be on the (.+) page/ do |page|
     assert_not_equal path_to(page), current_path
   end
 end
-
-

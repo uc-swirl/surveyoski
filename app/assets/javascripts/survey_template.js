@@ -69,6 +69,13 @@ function SurveyField(field_db_id, field_type, field_name, form, required) {
   SurveyField.prototype.fields.push(this);
 }
 
+SurveyField.prototype.delete = function () {
+  this.type_input.detach();
+  this.weight_input.detach();
+  if (this.id_input) {
+    this.id_input.detach();
+  }
+};
 
 SurveyField.prototype.setWeight = function (weight) {
   this.weight_input.val(weight);
@@ -205,7 +212,8 @@ var SurveyBuilder = (function () {
     add_field(field);
   }
 
-  function add_delete_button(question_container, field_name) {
+  function add_delete_button(question_container, field) {
+    var field_name = field.name;
     var del_button = jQuery("<button/>", {"class" : "delete_field_button", 
                                           text: "X", 
                                           name : "delete-" + field_name}).appendTo(question_container);
@@ -215,6 +223,7 @@ var SurveyBuilder = (function () {
 
     del_button.click(function () {
       question_container.detach();
+      field.delete();
     });
   }
 
@@ -233,7 +242,7 @@ var SurveyBuilder = (function () {
     field.container = question_container;
 
     var question_table = jQuery("<table/>", {"class" : "question_table"}).appendTo(question_container);
-    add_delete_button(question_container, field.name);
+    add_delete_button(question_container, field);
     add_title_row(question_table, field);
     add_type_row(question_table, field.type);
 

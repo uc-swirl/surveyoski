@@ -11,12 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150418025105) do
+ActiveRecord::Schema.define(:version => 20150425204122) do
 
   create_table "courses", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "name"
+    t.string   "year"
+    t.string   "department"
+    t.string   "semester"
   end
 
   create_table "enrollments", :force => true do |t|
@@ -68,9 +71,12 @@ ActiveRecord::Schema.define(:version => 20150418025105) do
     t.integer  "course_id"
     t.string   "status"
     t.integer  "user_id"
+    t.boolean  "public"
+    t.string   "uuid"
   end
 
   add_index "survey_templates", ["course_id"], :name => "index_survey_templates_on_course_id"
+  add_index "survey_templates", ["uuid"], :name => "index_survey_templates_on_uuid", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

@@ -1,13 +1,14 @@
 <div>
-  <%= field.id %>
   <%= label_tag "submission[" + field.id.to_s + "]", field.question_title, class: "question_title", id: field.id, name: "field-" + field.question_title  %>
 </div>
 
 <% field.field_options.each do |option| %>
 
     <div class="question_choices">
-      <%= check_box_tag("submission[" + field.id.to_s + "][]", option[0], false, :id => "submission_#{field.id}_#{option[0]}") %>
-      <label for=<%="submission_#{field.id}_#{option[0]}"%>><%=option[0]%></label>
+      
+      <label>
+      <%= check_box_tag("submission[" + field.id.to_s + "][]", option[1], false, :id => "submission_#{field.id}_#{option[0]}") %>
+      <%=option[0]%></label>
     </div>
 
     

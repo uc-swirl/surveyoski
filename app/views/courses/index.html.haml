@@ -1,11 +1,16 @@
-= link_to "Add a course", :new_course, id: "add_course"
-<br>
+%div.course_display
 
-Your Courses
+  %div.course_display_title
+    %h3= "Your Courses"
 
-<br>
+  = link_to "Add a course", new_course_path, id: "add_course"
+  %ul.course_box
+    - @courses.each do |course|
+      %li
 
-- @courses.each do |course|
-  = link_to course.name, edit_course_path(course), id: course.name
-  = link_to "Delete this course", "/courses/#{course.id}", method: :delete, id: "delete_course"
-  <br>
+        = link_to course.name, edit_course_path(course), id: course.name
+        = course.department
+        = course.semester
+        = course.year
+        = link_to "Delete this course", "/courses/#{course.id}", method: :delete, id: "delete_course"
+

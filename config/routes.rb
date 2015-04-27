@@ -4,7 +4,7 @@
   # first created -> highest priority.
 
   root :to => 'dashboard#index', :format => false
-  resources :survey_templates
+  resources :survey_templates, param: :uuid
   resources :submissions
   resources :courses # courses/edit, courses/create
   
@@ -20,6 +20,8 @@
 
   get 'survey_templates/:id/status', :to => 'survey_templates#status', :as => :survey_template_status
   put 'survey_templates/:id/status', :to => 'survey_templates#update_status', :as => :update_survey_template_status
+
+  get 'survey_templates/:id/responses_data', :to => 'survey_templates#responses_data', :as => :responses_data
 
 
   # for omniauth login 

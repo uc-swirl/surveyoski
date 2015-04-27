@@ -1,4 +1,6 @@
 function add_prompt_to_link(){  
+
+  console.log("calling add_prompt_to_link");
   $(".clone_button").each(function(index){
     var button = $(this);
     var dialog = $("#clone_dialog");
@@ -14,9 +16,7 @@ function add_prompt_to_link(){
         }
       }
     });
-
     button.click(function(){
-	    // console.log(button.attr("data-template-id"));
     	dialog.attr("data-template-id", button.attr("data-template-id"));
       dialog.dialog("open");
     });
@@ -25,10 +25,10 @@ function add_prompt_to_link(){
 
 function clone_survey(dialog_box){
 	id = dialog_box.attr("data-template-id");
-	// console.log(id);
+	console.log(id);
 	form = dialog_box.find("form");
 	course_name = form.find("select").val();
-	// console.log(course_name);
+	console.log(course_name);
 	$.ajax({
 	  type: "POST",
 	  url: "/survey_templates/"+id+"/clone",

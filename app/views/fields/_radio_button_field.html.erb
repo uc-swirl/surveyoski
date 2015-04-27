@@ -5,8 +5,10 @@
 <% field.field_options.each do |option| %>
 
     <div class="question_choices">
-      <%= radio_button_tag("submission[" + field.id.to_s + "]", option[0]) %>
-      <label for= <%="submission_#{field.id}_#{option[0]}"%> > <%=option[0]%></label>
+      
+      <label > 
+        <%= radio_button_tag("submission[" + field.id.to_s + "]", option[1]) %>
+      <%=option[0]%></label>
     </div>
 
 <% end %>

@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :status
   has_many :enrollments
   has_many :courses, through: :enrollments
+  
+
+  @@rankings = {"student" => 1, "ta" => 2, "professor" => 3, "admin" => 4}
 
   def self.from_omniauth(auth)
     where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
@@ -19,14 +22,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def all_surveys
+  def all_surveys(filter_hash = nil)
     admin_surveys unless status != "admin"
-    surveys = []
     self.reload
-    self.courses.each do |course|
-      surveys += course.survey_templates
-    end
-    surveys
+    filtered_courses = if filter_hash then self.courses.where(filter_hash) else self.courses end
+    SurveyTemplate.where(:course_id => filtered_courses)
   end
   def admin_surveys
     SurveyTemplate.all

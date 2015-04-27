@@ -4,7 +4,7 @@ Given (/^there are 11 submissions filled out with (.+)/) do |list|
     @user = User.create(:email => "tester#{i}@berkeley.edu", :status => "student")
     ApplicationController.any_instance.stub(:current_user).and_return(@user)
     User.stub(:find).and_return(@user)
-    visit survey_template_path(@survey.id)
+    visit survey_template_path(@survey)
     new_list.each do |answer|
       step 'I fill in the next field with "' + answer.to_s + '"'
     end
@@ -18,7 +18,7 @@ Given /I am on the survey responses page/ do
   @user = User.create(:email => "test@berkeley.edu", :status => "admin")
   ApplicationController.any_instance.stub(:current_user).and_return(@user)
   User.stub(:find).and_return(@user)
-  visit all_responses_path(@survey.id)
+  visit all_responses_path(@survey)
 end
 
 Given /I should see 11 responses/ do

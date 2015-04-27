@@ -16,8 +16,7 @@ Scenario: create a course
 When I go to the new course page
 When I make a new course called "CS188"
 Then I should be on the courses page
-And I should see "Your new course"
-And I should see "was successfully created"
+And I should see "Your course CS188 was successfully updated"
 
 Scenario: delete a course
 When I go to the courses page

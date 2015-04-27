@@ -17,7 +17,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
-  gem 'will_paginate', '~> 3.0.5'
+  gem 'quiet_assets', group: :development
 end
 
 group :production do
@@ -40,3 +40,6 @@ gem 'email_validator', '~> 1.5.0'
 gem 'omniauth-google-oauth2', "~> 0.2.1"
 gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'jquery-ui-rails'
+gem 'uuid', '~> 2.3.7'
+gem "d3-rails"
+gem 'will_paginate', '~> 3.0.5'

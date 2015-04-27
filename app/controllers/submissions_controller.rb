@@ -4,8 +4,8 @@ class SubmissionsController < ApplicationController
   def new
   end
   def create
-    user = User.find(session[:user_id])
-    template = SurveyTemplate.find(params[:template_id])
+    user = current_user
+    template = SurveyTemplate.find_by_uuid(params[:template_id])
     begin
 
       participant = template.participants.build(:email => user.email)
@@ -20,14 +20,14 @@ class SubmissionsController < ApplicationController
         answer.save!
       end
       flash[:notice] = "Your submission was recorded."
-      redirect_to survey_template_path(template.id)
+      redirect_to survey_template_path(template)
     rescue Exception => e
       participant.destroy
       if submission
         submission.destroy
       end
       flash[:notice] = e.message.split(":")[-1]
-      redirect_to survey_template_path(template.id)
+      redirect_to survey_template_path(template)
     end
 
   end 

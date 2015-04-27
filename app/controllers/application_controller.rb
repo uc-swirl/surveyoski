@@ -6,8 +6,20 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by_email(session[:user_email]) if session[:user_email]
   end
+
+  @@departments =  ["Computer Science"]
+  @@semesters = ["Fall","Spring", "Summer"]
+  helper_method :departments 
+  helper_method :semesters
+  def departments
+    @@departments.map {|dept| [dept, dept]}
+  end
+  def semesters
+    @@semesters.map {|sem| [sem, sem]}
+  end
+
 
   private
 
