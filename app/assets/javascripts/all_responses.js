@@ -3,6 +3,9 @@ function extract_response_for_chart(data, number) {
   var stuff = extract_response_text(data, number);
 
   return stuff.reduce(function (hash, value) {
+    if (! value) {
+      return hash;
+    }
     if (!hash[value.response]) {
       hash[value.response] = 0;
     }
