@@ -4,7 +4,6 @@
 
 @user = User.create :email => "mmontagna@berkeley.edu", :name => "Marco", :status => "admin"
 
-
 @template = SurveyTemplate.new :survey_title => "Example Survey"
 
 @template.user = @user
@@ -17,7 +16,6 @@
 
 @text = TextQuestionField.create(:question_title => "Example Text")
 @template.survey_fields << @text
-
 
 @enrollment = @user.enrollments.build 
 
@@ -46,8 +44,20 @@ end
 
 @template.save!
 
+# public survey
 
+@course2 = Course.create :name => "Oski 101"
+@template2 = SurveyTemplate.new :survey_title => "Example Public Survey"
+@user2 = User.create :email => "oskibear@berkeley.edu", :name => "Oski", :status => "professor"
+@template2.user = @user2
+@template2.course = @course2
+@text2 = TextQuestionField.create(:question_title => "Enter a number from 1 to 10")
+@radio2 = TextQuestionField.create(:question_title => "Did you really do that?", :field_options => [["yes","yes"],["no","no"]])
+@template2.survey_fields << @text2
+@template2.public = true
+@enrollment2 = @user2.enrollments.build
+@enrollment2.user = @user
+@enrollment2.course = @course
 
-
-
-
+@user2.save!
+@template2.save!

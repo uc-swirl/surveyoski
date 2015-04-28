@@ -21,7 +21,8 @@
 
   get 'survey_templates/:id/status', :to => 'survey_templates#status', :as => :survey_template_status
   put 'survey_templates/:id/status', :to => 'survey_templates#update_status', :as => :update_survey_template_status
-
+  put 'survey_templates/:id/public', :to => 'survey_templates#public', :as => :survey_template_public
+  
   get 'survey_templates/:id/responses_data', :to => 'survey_templates#responses_data', :as => :responses_data
 
 

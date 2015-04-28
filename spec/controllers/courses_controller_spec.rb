@@ -36,10 +36,6 @@ describe CoursesController do
 		  it 'updates the users correctly' do
 		  	put 'create', :id => @course.id, :course_name => "new course", :editor_email => "pepper@berkeley.edu, fifi@stanford.edu, lily@cmu.edu",
 		    	:department => "Computer Science", :date => {:year => "2014"}, :semester => "Spring"
-		    # puts "course"
-		    # puts Course.find(@course.id).name
-		    # puts "users"
-		    # puts Course.find(@course.id).users
 		    expect(Course.find(@course.id).users).to include(@u1)
 		  end
 	  end
