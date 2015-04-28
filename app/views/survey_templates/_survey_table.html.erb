@@ -41,7 +41,7 @@
               <%= link_to image_tag("email.png", :width=>30, :height=>30, :title=>'Emails of participants'), all_participants_path(template), :target => "_blank" %>
             </td>
             <td>
-                <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.uuid.to_s ) %>
+                <%= link_to image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.uuid.to_s ) %>
             </td>
             <td>
               <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), "/survey_templates/#{template.uuid}", method: :delete %>

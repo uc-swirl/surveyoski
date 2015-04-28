@@ -1437,7 +1437,6 @@ body {
     font-size: 14px;
     line-height: 1.428571429;
     color: #333333;
-    background-color: white;
 }
 
 /* line 39, /Users/Clancy/.rvm/gems/ruby-2.1.2/gems/bootstrap-sass-3.2.0.2/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -8244,7 +8243,7 @@ section {
     background: #003A70;
     font-size: 50px;
     border-bottom: 5px solid;
-    z-index: 0;
+    z-index: 1;
     font-family: Ubuntu;
     position: relative;
 }
@@ -8252,22 +8251,11 @@ section {
 #text {
     position: absolute;
     left: calc(50% - 253px/2);
+    text-shadow: 0 1px 3px rgba(0,0,0,1);
 }
 
-#background img {
-    position: absolute;
-    z-index:-1;
-    width:100%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-size: cover;
-}
 
-#background {
-    bottom: 150px;
-    position: relative;
-}
+
 
 #icon img {
     width: 60px;
@@ -8294,7 +8282,49 @@ section {
 form.permisson {
     margin-left: 150px;
 }
-.option {
-    margin-bottom: 20px;
+.option, #change, #email {
+
     margin-right: 20px;
+    font-size: 20px;
+}
+
+#email{
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+#change{
+    margin-bottom: 10px;
+
+}
+
+.option{
+    margin-bottom: 50px;
+}
+
+
+html,
+body{
+    height: 100%;
+}
+
+#main {
+    height: 100%;
+}
+
+#background{
+    width: 100%;
+    height: 120%;
+    position: relative;
+    bottom: 150px;
+    z-index: 0;
+}
+
+#background img{
+    width: 100%;
+    height: 100%;
+}
+
+.dashboard{
+    padding-left: 40px;
 }
