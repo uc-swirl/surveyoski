@@ -8,17 +8,24 @@ class SurveyTemplatesController < ApplicationController
       end
   end
 
+  def public
+    @survey = SurveyTemplate.find_by_uuid(params[:id])
+    @survey.toggle(:public)
+    @survey.save!
+    render :text => @survey.public
+  end
+
   def status
       @survey = SurveyTemplate.find_by_uuid(params[:id]) #why does this not work with uuid
       render :text =>  @survey.status
   end
 
-def update_status
-    @survey = SurveyTemplate.find_by_uuid(params[:id]) #why does this not work with uuid
-    @survey.status = params[:status]
-    @survey.save! 
-    render :text =>  @survey.status
-end
+  def update_status
+      @survey = SurveyTemplate.find_by_uuid(params[:id]) #why does this not work with uuid
+      @survey.status = params[:status]
+      @survey.save! 
+      render :text =>  @survey.status
+  end
 
   def new
     authorize :survey_templates, :new?
@@ -80,6 +87,7 @@ end
     new_template = template.dup
     new_template.status = nil
     new_template.uuid = nil
+    new_template.public = false
     course = Course.find_by_name(params[:course_name])
     course.survey_templates << new_template
     new_template.save!

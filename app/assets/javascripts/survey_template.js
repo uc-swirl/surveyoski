@@ -1,3 +1,19 @@
+
+function set_public_button(){
+  $(".toggle").find("#slideThree").change(function(){
+    jQuery.ajax({
+      method: "PUT",
+      url: $(this).attr("data-public-route"), 
+      success: function(data){
+        console.log(data);
+      }   
+    });
+  });
+}
+
+$(document).ready(set_public_button);
+
+
 function send_update_survey_template_status (path, stage_verb, container, next_stage_button) {
     container = jQuery(container);
     jQuery.ajax({

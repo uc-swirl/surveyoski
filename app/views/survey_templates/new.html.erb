@@ -18,16 +18,27 @@
         <%=  select_tag(:course_id, options_from_collection_for_select(@courses, 'id', 'name')) %>
       </p>
       
-       <p>
-      <label>
-        Survey Status
-        <br>
-        <span class="publish_button_container" 
-        data-status-route="<%= if @survey then survey_template_status_path(@survey) else "" end %>"
-        data-update-status-route="<%= if @survey then update_survey_template_status_path(@survey) else "" end %>"
-        >
-      </label>
-       </p>
+      <p>
+      <%- if @survey %>
+      
+        <label>
+          Survey Status
+          <br>
+          <span class="publish_button_container" 
+          data-status-route="<%= survey_template_status_path(@survey) %>"
+          data-update-status-route="<%= update_survey_template_status_path(@survey) %>"
+          >
+        </label>
+      </p><p>
+        <label>Survey Visibility should be <%=@survey.public.to_s %> 
+        <div class="toggle"> 
+          <input type="checkbox" <%= if @survey.public then "checked" else "" end %> value="None" id="slideThree" name="check" 
+            data-public-route="<%= survey_template_public_path(@survey) %>" />
+          <label for="slideThree"></label>
+        </div>
+        <br></label>
+      <% end %>
+      </p>
 
       </div>
 

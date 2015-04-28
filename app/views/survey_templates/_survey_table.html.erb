@@ -26,26 +26,32 @@
             <td>
                 <%=template.course.name %>
             </td>
+            <%- if not just_clone %>
             <td class="">
                 <span class="publish_button_container"
                 data-status-route="<%= if template then survey_template_status_path(template) else "" end %>"
                 data-update-status-route="<%= if template then update_survey_template_status_path(template) else "" end %>"></span>
             </td>
+            <% end %>
             <td>
               <%= link_to image_tag("view.png", :width=>30, :height=>30, :title=>'View live survey'), survey_template_path(template), :target => "_blank"%>
             </td>
+            <%- if not just_clone %>
             <td>
               <%= link_to image_tag("response.png", :width=>30, :height=>30, :title=>'See responses'), all_responses_path(template), :target => "_blank" %>
             </td>
             <td>
               <%= link_to image_tag("email.png", :width=>30, :height=>30, :title=>'Emails of participants'), all_participants_path(template), :target => "_blank" %>
             </td>
+            <% end %>
             <td>
                 <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.uuid.to_s ) %>
             </td>
+            <%- if not just_clone%>
             <td>
               <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), "/survey_templates/#{template.uuid}", method: :delete %>
             </td>
+            <% end %>
 
           </tr>
       <% end %>
