@@ -30,7 +30,7 @@
           >
         </label>
       </p><p>
-        <label>Survey Visibility should be <%=@survey.public.to_s %> 
+        <label> Public
         <div class="toggle"> 
           <input type="checkbox" <%= if @survey.public then "checked" else "" end %> value="None" id="slideThree" name="check" 
             data-public-route="<%= survey_template_public_path(@survey) %>" />
