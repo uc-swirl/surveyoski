@@ -40,7 +40,6 @@ describe User do
       course2.save!
     end
     it 'shows only my surveys' do 
-      puts @oski.all_surveys
       expect(@oski.all_surveys.length).to be(2)
       expect(SurveyTemplate.all.length).to be(4)
     end

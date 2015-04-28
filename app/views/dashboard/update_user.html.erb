@@ -1,4 +1,4 @@
-<div class = "dashboard_title ">Change permissions for user</div>
+<div class = "dashboard_title ">Add user or update status</div>
 <%= form_tag :admin_change_user, :class => 'permisson' do %>
     <div class = "dashboard">
       <%= label_tag('email', 'Email', :id=>'email') %>
@@ -6,7 +6,7 @@
     </div>
 
 
-    <div class = "dashboard" id="change">Change permission to</div>
+    <div class = "dashboard" id="change">Status: </div>
 
     <div class = "dashboard" >
       <%= radio_button_tag 'status', 'student' %>

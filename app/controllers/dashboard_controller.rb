@@ -16,7 +16,8 @@ class DashboardController < ApplicationController
         user.save
         flash[:notice] = user.name + " was successfully changed to " + user.status
       else
-        flash[:notice] = "User with that email does not exist."
+        User.create(:email => params[:email], :status => params[:status])
+        flash[:notice] = "A new user has been created."
       end
       redirect_to :root
     end

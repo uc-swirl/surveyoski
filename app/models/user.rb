@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
   
   validates :email, uniqueness: true
   @@rankings = {"student" => 1, "ta" => 2, "professor" => 3, "admin" => 4}
-
+  def is_admin?
+    status == "admin"
+  end
   def self.from_omniauth(auth)
     where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
       user.provider = auth.provider

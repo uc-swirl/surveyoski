@@ -16,8 +16,8 @@ Scenario: give a user admin privileges
   And "bestswordsman@berkeley.edu" should be an admin
 
 @omniauth_test_good
-Scenario: fail to update permissions
+Scenario: adding a nonexistent user
   Given I have logged in as an admin
   When I make "wesley@berkeley.edu" an admin
-  Then I should see "User with that email does not exist."
-  And "wesley@berkeley.edu" should not be an admin
+  Then I should see "A new user has been created."
+  And "wesley@berkeley.edu" should be an admin

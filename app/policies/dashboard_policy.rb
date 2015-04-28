@@ -3,6 +3,7 @@ class DashboardControllerPolicy < ApplicationPolicy
     @user.status != "student"  
   end
   def update_user?
-  	@user.status != "student"
+  	@user.status == "admin"
   end 
+
 end
