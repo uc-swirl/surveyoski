@@ -1,6 +1,5 @@
 Given(/^I delete the field "(.*?)"$/) do |field_name| 
   find(:xpath, "//button[contains(@name, 'delete-#{field_name}')]").click()
-
 end
 
 Then(/^the survey template should not have a field "(.*?)"$/) do |field_name|

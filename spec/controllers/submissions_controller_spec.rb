@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe SubmissionsController do
   before(:each) do
-    @user = User.create(:email => "example@email.com", :name => "Mrs Doubtfire")
-    session[:user_id] = @user.id
+    @user = User.create(:email => "example12345678@email.com", :name => "Mrs Doubtfire")
+    session[:user_email] = @user.email
   end
   it 'adds a submission to the submissions table' do
     st = SurveyTemplate.create
