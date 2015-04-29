@@ -22,6 +22,9 @@ Given /^"(.+)" is( not | )a user with email "(.+)"$/ do |name, negative, email|
 end
 
 And /^I add (?:him|her) to the first course$/ do
+  puts page.body
+  puts @user.courses
+  puts Course.all
 	click_link @course_name
 
 	if @new_editor.class == User

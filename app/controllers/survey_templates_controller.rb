@@ -44,7 +44,7 @@ class SurveyTemplatesController < ApplicationController
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
     @courses = current_user.active_courses(@survey.course)
     @title = "Edit survey"
-    @course_id = @survey.course.id
+    @course_id = if @survey.course then @survey.course.id else nil end
     render :new
   end
 

@@ -9,7 +9,6 @@ class Course < ActiveRecord::Base
 
   def pepper_up
     if active == nil
-      puts "setting active to true"
       active = true
     end
   end
@@ -34,8 +33,10 @@ class Course < ActiveRecord::Base
   	end
   end
   def add_user(user_id)
-    new_enrollment = enrollments.build(:user_id => user_id)
-    new_enrollment.save!
+    if Enrollment.where(:user_id => user_id, :course_id => id).first == nil
+      new_enrollment = enrollments.build(:user_id => user_id)
+      new_enrollment.save!
+    end
   end
   def add_users(emails)
     clear_enrollments

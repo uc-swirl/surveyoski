@@ -20,7 +20,8 @@ Given "Marco" is not a user with email "marcojoemontagna@berkeley.edu"
 When I go to the courses page
 And I add him to the first course
 Then I should be on the courses page
-And I should see "There was an error in updating your course." 
+And I should see "Your course 24601 was successfully updated"
+And "marcojoemontagna@berkeley.edu" should be a ta 
 
 Scenario: users can only see their own courses
 When I go to the courses page

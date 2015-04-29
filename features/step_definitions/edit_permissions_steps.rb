@@ -17,6 +17,12 @@ end
 Then(/^"(.*?)" should be an admin$/) do |email|
   User.find_by_email(email).status.should be == "admin"
 end
+Then(/^"(.*?)" should be a ta$/) do |email|
+  User.find_by_email(email).status.should be == "ta"
+end
+Then(/^"(.*?)" should be a professor$/) do |email|
+  User.find_by_email(email).status.should be == "professor"
+end
 
 Then(/^"(.*?)" should not be an admin$/) do |email|
   if User.find_by_email(email)
