@@ -15,7 +15,7 @@
       <p>
         <%= label :course_id, "Course" %>
         <br>
-        <%=  select_tag(:course_id, options_from_collection_for_select(@courses, 'id', 'name')) %>
+        <%=  select_tag(:course_id, options_from_collection_for_select(@courses, 'id', 'name', @course_id) )%>
       </p>
       
       <p>
@@ -32,8 +32,8 @@
       </p><p>
         <label> Public
         <div class="toggle"> 
-          <input type="checkbox" <%= if @survey.public then "checked" else "" end %> value="None" id="slideThree" name="check" 
-            data-public-route="<%= survey_template_public_path(@survey) %>" />
+          <input type="checkbox" <%= if @survey.public_survey then "checked" else "" end %> value="None" id="slideThree" name="check" 
+            data-update-route="<%= survey_template_public_path(@survey) %>" />
           <label for="slideThree"></label>
         </div>
         <br></label>

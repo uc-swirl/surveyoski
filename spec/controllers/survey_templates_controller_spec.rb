@@ -64,7 +64,7 @@ describe SurveyTemplatesController do
         enrollment.course_id = course.id
         enrollment.save!
         @survey = course.survey_templates.create!
-        @public = course.survey_templates.create(:public => true)
+        @public = course.survey_templates.create(:public_survey => true)
         @params = {:filters => {"department"=>"", "semester"=>"", "year"=>""}, :my_surveys => "My Surveys", :public_surveys => "Public Surveys"}      
       end
       it 'it sets @templates and renders index' do

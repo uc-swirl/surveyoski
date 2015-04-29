@@ -1,7 +1,7 @@
 require 'csv'
 
 class SurveyTemplate < ActiveRecord::Base
-  attr_accessible :survey_title, :survey_description, :status, :user_id, :uuid, :public
+  attr_accessible :survey_title, :survey_description, :status, :user_id, :uuid, :public_survey
 
   has_many :survey_fields , :dependent => :destroy
   has_many :checkbox_fields
@@ -122,7 +122,7 @@ class SurveyTemplate < ActiveRecord::Base
 
   def self.public_surveys(show, filters)
     return SurveyTemplate.where(:nothing) unless show
-    search_params = {:public => true}
+    search_params = {:public_survey => true}
     if filters then search_params[:course_id] = Course.where(filters) end
     SurveyTemplate.where(search_params)
   end

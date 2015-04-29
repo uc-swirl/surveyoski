@@ -5,6 +5,12 @@
     %h3= @title
 
   %div.create_edit_inner_padd
+    - if @course.id  
+      = label_tag :active_status, "Active"
+      %div.toggle
+        %input{:type => "checkbox", :checked => (checkbox = @course.active ? "checked" : nil), :value => "None", :id => "slideThree", :name => "check", :"data-update-route" => course_active_path(@course)}
+        %label{:for => "slideThree"}
+
     = form_tag courses_path do |course|
       = label_tag :course_name, "Course Name"
       = text_field_tag :course_name, @course.name
@@ -15,6 +21,10 @@
       <br>
       = label_tag :editor_email, "Editors (please enter in the format of: email1@berkeley.edu, email2@berkeley.edu, email3@berkeley.edu"
       <br>
+      Professors<br>
+      = text_field_tag :professor_email, @professors
+      <br>
+      TAs<br>
       = text_area_tag :editor_email, @people
       <br>
       = submit_tag "Submit"

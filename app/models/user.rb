@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   def is_admin?
     status == "admin"
   end
+  def is_professor?
+    status == "professor"
+  end
   def self.from_omniauth(auth)
     where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -32,6 +35,11 @@ class User < ActiveRecord::Base
   end
   def admin_surveys
     SurveyTemplate.all
+  end
+  def active_courses(keep)
+    courses.select {|course|
+      course == keep or course.active
+    }
   end
 
 end

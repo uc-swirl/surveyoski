@@ -21,7 +21,9 @@
 
   get 'survey_templates/:id/status', :to => 'survey_templates#status', :as => :survey_template_status
   put 'survey_templates/:id/status', :to => 'survey_templates#update_status', :as => :update_survey_template_status
-  put 'survey_templates/:id/public', :to => 'survey_templates#public', :as => :survey_template_public
+  post 'survey_templates/:id/public', :to => 'survey_templates#public', :as => :survey_template_public
+  post 'courses/:id/active', :to => 'courses#active', :as => :course_active
+
   
   get 'survey_templates/:id/responses_data', :to => 'survey_templates#responses_data', :as => :responses_data
 
@@ -31,7 +33,7 @@
   get 'auth/failure', to: redirect('/')
   get 'logout', to: 'sessions#destroy', as: 'signout'
 
-  post 'courses/add_editor', :to => 'courses#add_editor', :as => :add_people
+  # post 'courses/add_editor', :to => 'courses#add_editor', :as => :add_people
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

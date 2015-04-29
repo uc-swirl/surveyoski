@@ -2,8 +2,8 @@
 
   %div.course_display_title
     %h3= "Your Courses"
-
-  = link_to "Add a course", new_course_path, id: "add_course"
+  - if current_user.is_professor? or current_user.is_admin? 
+    = link_to "Add a course", new_course_path, id: "add_course"
   %ul.course_box
     - @courses.each do |course|
       %li

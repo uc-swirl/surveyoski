@@ -54,7 +54,7 @@ end
 @text2 = TextQuestionField.create(:question_title => "Enter a number from 1 to 10")
 @radio2 = TextQuestionField.create(:question_title => "Did you really do that?", :field_options => [["yes","yes"],["no","no"]])
 @template2.survey_fields << @text2
-@template2.public = true
+@template2.public_survey = true
 @enrollment2 = @user2.enrollments.build
 @enrollment2.user = @user
 @enrollment2.course = @course

@@ -23,3 +23,8 @@ When I go to the courses page
 And I delete the first course
 Then I should be on the courses page
 And I should see "Your course was deleted"
+
+Scenario: TA can't create a course
+Given I have logged in as a TA
+And I go to the courses page
+Then I should not see "Add course"

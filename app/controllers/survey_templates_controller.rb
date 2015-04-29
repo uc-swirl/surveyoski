@@ -10,9 +10,9 @@ class SurveyTemplatesController < ApplicationController
 
   def public
     @survey = SurveyTemplate.find_by_uuid(params[:id])
-    @survey.toggle(:public)
+    @survey.toggle(:public_survey)
     @survey.save!
-    render :text => @survey.public
+    render :text => @survey.public_survey
   end
 
   def status
@@ -30,7 +30,7 @@ class SurveyTemplatesController < ApplicationController
   def new
     authorize :survey_templates, :new?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
-    @courses = current_user.courses
+    @courses = current_user.active_courses(nil)
     @title = "Create a new survey"
   end
 
@@ -42,8 +42,9 @@ class SurveyTemplatesController < ApplicationController
     authorize @survey, :edit?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
-    @courses = current_user.courses
+    @courses = current_user.active_courses(@survey.course)
     @title = "Edit survey"
+    @course_id = @survey.course.id
     render :new
   end
 
@@ -87,7 +88,7 @@ class SurveyTemplatesController < ApplicationController
     new_template = template.dup
     new_template.status = nil
     new_template.uuid = nil
-    new_template.public = false
+    new_template.public_survey = false
     course = Course.find_by_name(params[:course_name])
     course.survey_templates << new_template
     new_template.save!

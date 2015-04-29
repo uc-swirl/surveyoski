@@ -5,6 +5,15 @@ class Course < ActiveRecord::Base
   has_many :users, through: :enrollments
   has_many :survey_templates, :dependent => :destroy
 
+  before_save :pepper_up
+
+  def pepper_up
+    if active == nil
+      puts "setting active to true"
+      active = true
+    end
+  end
+
   def remove_user(user_id)
 
     enrollment = Enrollment.where(:user_id => user_id, :course_id => id).first
@@ -24,22 +33,21 @@ class Course < ActiveRecord::Base
       "You have been removed from this course."
   	end
   end
-
   def add_user(user_id)
-    enrollment = enrollments.where(:user_id => user_id).first
-    if enrollment == nil
-      new_enrollment = enrollments.build(:user_id => user_id)
-      new_enrollment.save!
-    end
+    new_enrollment = enrollments.build(:user_id => user_id)
+    new_enrollment.save!
   end
   def add_users(emails)
+    clear_enrollments
     emails.each do |email|
       user = User.find_by_email(email)
       if user == nil
-        return false
-      else
-        add_user(user.id)
+        user = User.create(:email => email, :status => "ta")
       end
+      add_user(user.id)
     end
+  end
+  def clear_enrollments
+    enrollments.each do |e| e.destroy end 
   end
 end
