@@ -154,4 +154,13 @@ class SurveyTemplate < ActiveRecord::Base
     end
   end
 
+  def title
+    full_title = survey_title.to_s
+    if full_title.length < 25
+      full_title
+    else
+      full_title[0,25]+'...'
+    end
+  end
+
 end
