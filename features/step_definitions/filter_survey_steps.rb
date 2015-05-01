@@ -38,8 +38,8 @@ Then(/^"(.*?)" surveys should be present$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 When(/^I filter by checking "(.*?)"$/) do |arg1|
-	puts page.body
-	find(:xpath, "//label[@for='my_surveys']").click
+	# puts page.body
+	# find(:xpath, "//label[@for='my_surveys']").click
 	# find(:xpath, "//input[contains(@name, 'my_surveys')]").check()
 
 end
