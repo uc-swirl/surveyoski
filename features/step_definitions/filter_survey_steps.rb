@@ -22,28 +22,52 @@ Given (/^a bunch of public and private surveys exist$/) do
 	visit survey_templates_path
 end
 
-Then(/^my surveys should be present$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^public surveys should not be present$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^"(.*?)" surveys should not be present$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^"(.*?)" surveys should be present$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-When(/^I filter by checking "(.*?)"$/) do |arg1|
-	# puts page.body
-	# find(:xpath, "//label[@for='my_surveys']").click
-	# find(:xpath, "//input[contains(@name, 'my_surveys')]").check()
+Then(/^"(.*?)" surveys should (not |)be present$/) do |arg1, negative|
+  if /Spring|Fall/ =~ arg1
+    courses = Course.where(:semester => arg1)
+  elsif /2015|2013/ =~ arg1
+  	courses = Course.where(:year => arg1)
+  else
+  	courses = Course.where(:department => arg1)
+  end
+  if negative == "not "
+  	courses.each do |course|
+      page.should_not have_content(course.name)
+    end
+  else
+  	courses.each do |course|
+  	  page.should have_content(course.name)
+  	end
+  end
 
 end
 
-When(/^I filter by dropdown select "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I filter by semester "(.*?)"$/) do |option|
+  within '#my_surveys' do
+    within '#filters_semester' do
+      all("option[value='#{option}']").each do |thing| thing.click end
+    end
+    find("#filter_apply_button").click
+  end
+  within '#public_surveys' do
+    within '#filters_semester' do
+      all("option[value='#{option}']").each do |thing| thing.click end
+    end
+    find("#filter_apply_button").click
+  end
+end
+
+When(/^I filter by year "(.*?)"$/) do |option|
+  within '#my_surveys' do
+    within '#date_year' do
+      all("option[value='#{option}']").each do |thing| thing.click end
+    end
+    find("#filter_apply_button").click
+  end
+  within '#public_surveys' do
+    within '#date_year' do
+      all("option[value='#{option}']").each do |thing| thing.click end
+    end
+    find("#filter_apply_button").click
+  end
 end
