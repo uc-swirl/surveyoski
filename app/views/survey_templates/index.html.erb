@@ -10,7 +10,7 @@
   </tbody>
 </table>
 
-<table id= "my_surveys" class="admin_table">
+<!-- <table id= "my_surveys" class="admin_table">
   <thead>
     <th colspan = "8", id="all_surveys_text">All Surveys</th>
   </thead>
@@ -104,13 +104,11 @@
 
       <td colspan ="8" class="apple_pagination"><%= will_paginate @public_templates %></td>
   </tbody>
-</table>
+</table> -->
 
+<%= render :partial => "survey_table", :locals => {:@survey_id => "my_surveys", :surveys => @templates, :@title => 'My Surveys', :@private => true, :@column => 8}%>
+<%= render :partial => "survey_table", :locals => {:@survey_id => "public_surveys", :surveys => @public_templates, :@title=> "Public Surveys", :@private => false, :@column => 4}%>
 
-
-<!--<%= render partial: "survey_table", :locals => {:id => "my_surveys", :name => "My Surveys", :surveys => @templates, :just_clone => false} %>
-<%= render partial: "survey_table", :locals => {:id => "public_surveys", :name => "Public Surveys", :surveys => @public_templates, :just_clone => true} %>
--->
 <div id = "clone_dialog" data-template-id = "" style="display:none"> 
   <form>
     Which course would you like to clone this survey to?

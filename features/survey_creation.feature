@@ -18,4 +18,4 @@ Scenario: Form Creation
 Scenario:
 Given I am an instructor
 And I make a new survey
-Then I should be on the edit survey page
+Then I should be on the new survey template page

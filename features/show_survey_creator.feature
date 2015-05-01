@@ -5,7 +5,7 @@ Feature: Always display survey creator on the survey
   I want to be able to tell who (which instructor) created the survey.
 
   Background:
-    Given the following survey template exists in course "cs169"
+    Given the following survey template exists in course "cs169" with name "tralala"
       | question_title    | type                 | options                          | required|
       | course name       | text_question_fields |                                  | true    |
       | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero| true    |

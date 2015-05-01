@@ -21,10 +21,10 @@ describe CoursesController do
 	  		@u1.email = "pepper@berkeley.edu"
 	  		@u1.save
 	  		@u2 = FactoryGirl.create(:user, :email => "example#{Random.rand(12423)}@berkeley.edu")
-	  		@u2.email = "fifi@stanford.edu"
+	  		@u2.email = "fifi@berkeley.edu"
 	  		@u2.save
 	  		@u3 = FactoryGirl.create(:user, :email => "example#{Random.rand(12423)}@berkeley.edu")
-	  		@u3.email = "lily@cmu.edu"
+	  		@u3.email = "lily@berkeley.edu"
 	  		@u3.save
 	  	end
 		  it 'updates instead of making a new course' do
@@ -34,9 +34,16 @@ describe CoursesController do
 		    }.to change{Course.all.length}.by(0)
 		  end
 		  it 'updates the users correctly' do
-		  	put 'create', :id => @course.id, :course_name => "new course", :editor_email => "pepper@berkeley.edu, fifi@stanford.edu, lily@cmu.edu",
+		  	put 'create', :id => @course.id, :course_name => "new course", :editor_email => "pepper@berkeley.edu, fifi@berkeley.edu, lily@berkeley.edu",
 		    	:department => "Computer Science", :date => {:year => "2014"}, :semester => "Spring"
 		    expect(Course.find(@course.id).users).to include(@u1)
+		  end
+		  it 'can change from active to inactive' do
+		  	@course.active = true
+		  	@course.save!
+            post 'active', :id => @course.id
+            Course.find(@course.id).active.should == false
+
 		  end
 	  end
 	end

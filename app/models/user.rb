@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   def is_professor?
     status == "professor"
   end
+  def self.is_berkeley(email)
+    (email =~ /berkeley.edu$/) != nil
+  end
   def self.from_omniauth(auth)
     where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -20,7 +23,7 @@ class User < ActiveRecord::Base
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.email = auth.info.email
       user.status ||= "student"
-      if (auth.info.email =~ /berkeley.edu$/) == nil
+      if not is_berkeley(auth.info.email)
         return nil
       end
       user.save!

@@ -41,6 +41,9 @@ class Course < ActiveRecord::Base
   def add_users(emails)
     clear_enrollments
     emails.each do |email|
+      if not User.is_berkeley(email)
+        return false
+      end
       user = User.find_by_email(email)
       if user == nil
         user = User.create(:email => email, :status => "ta")
