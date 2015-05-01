@@ -7,17 +7,15 @@ Given(/^I clone the survey$/) do
  #   loop until page.evaluate_script('jQuery.active').zero?
  # end
 
-  puts page.body
 
-#  within "#my_surveys" do
-#    first(".clone_button").click
-#  end
+  within "#my_surveys" do
+    find(:css, ".clone_button").click
+  end
 
- # puts "found the first thing"
-#
-#  within "#clone_dialog" do
-#    find("#clone_submit_button").click
-#  end
+  within ".ui-dialog" do
+    click_button("Submit")
+
+  end
 
   page.should have_content "SurveyOski"
   page.should_not have_content "slow down, rspec. and let phantomjs finish cloning the survey."
