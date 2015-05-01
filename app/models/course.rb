@@ -1,6 +1,6 @@
 class Course < ActiveRecord::Base
 
-  attr_accessible :name, :department, :semester, :year
+  attr_accessible :name, :department, :semester, :year, :active
   has_many :enrollments
   has_many :users, through: :enrollments
   has_many :survey_templates, :dependent => :destroy

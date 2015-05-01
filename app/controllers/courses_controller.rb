@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
 
   def new
     @title = "New Course"
-    @course = Course.new(:name => "", :department => "", :year => "", :semester => "")
+    @course = Course.new(:name => "", :department => "", :year => "", :semester => "", :active => true)
     @people = ""
   end
 

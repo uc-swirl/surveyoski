@@ -12,9 +12,11 @@ Given the following survey template exists in course "cs169" with name "meep"
 | steak             | checkbox_fields      | rare:1,medium:1,welldone:1       | true    | 
 
 @javascript
-Scenario: make a survey public
+Scenario: make a survey public and visible to everyone
 Given I go to the edit survey page
 When I make the survey public
+When I go to the survey templates page
+Then I should see "cs169"
 Then I have logged in as a professor
 And I go to the survey templates page
 Then I should see "cs169"
