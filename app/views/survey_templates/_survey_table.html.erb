@@ -55,10 +55,11 @@
             </td>
             <% if @private %>
               <td>
-                <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), "/survey_templates/#{template.uuid}", method: :delete %>
+                <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), 
+                  "/survey_templates/#{template.uuid}", method: :delete, :class=> "delete_survey_link"  %>
               </td>
             <% end %>
-
+ 
           </tr>
       <% end %>
 
