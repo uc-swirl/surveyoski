@@ -125,7 +125,7 @@ class SurveyTemplatesController < ApplicationController
     @public_templates = SurveyTemplate.public_surveys(@show_public_surveys, filters)
 
     @templates = SurveyTemplate.sort(@templates, params[:sort], params[:page])
-    @public_templates = SurveyTemplate.sort(@public_templates, params[:sort], params[:page])
+    @public_templates = SurveyTemplate.sort(@public_templates, params[:sort], params[:public_page])
   end
   def set_view_variables(filters)
     return [nil, nil, nil] unless filters

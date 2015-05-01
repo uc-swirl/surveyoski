@@ -141,7 +141,7 @@ class SurveyTemplate < ActiveRecord::Base
   end
   def self.sort(collection, sort_type, page)
     id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}
-    return collection.paginate(:page => page, :per_page => 10).order(id_conversion[sort_type])#.order(id_conversion[sort_type])
+    return collection.paginate(:page => page, :per_page => 10).order(id_conversion[sort_type])
   end
 
   def can_view(accessing_user)
