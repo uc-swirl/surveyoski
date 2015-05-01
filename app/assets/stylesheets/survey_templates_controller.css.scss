@@ -308,6 +308,7 @@
   border: 1px solid #2980b9;
   width: 900px;
   margin: 50px auto;
+  position: relative;
 }
 
 /* line 211, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
@@ -804,4 +805,19 @@
   opacity: 0.8;
   padding-left: 100px;
   line-height: 80px;
+}
+
+#filter{
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+}
+
+#filter_apply_button{
+  width: 50px;
+  font-size: 15px;
+  background: #fec548;
+  color: black;
+  padding: 5px 0px;
+
 }
