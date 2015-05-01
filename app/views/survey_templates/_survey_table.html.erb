@@ -22,7 +22,7 @@
           <tr>
             <% if @private %>
               <td>
-                <%= link_to template.survey_title.to_s, edit_survey_template_path(template),:id=>"survey_name" %>
+                <%= link_to template.title, edit_survey_template_path(template),:id=>"survey_name", :title=>template.survey_title.to_s %>
               </td>
             <% else %>
               <td id="survey_name">
