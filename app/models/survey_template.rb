@@ -63,11 +63,11 @@ class SurveyTemplate < ActiveRecord::Base
 
   def few_responses_message
     if submissions.length == 0
-      return "There have been no submissions yet."
+      return "There were no submissions."
     elsif submissions.length == 1
-      return "There has only been one submission so far."
+      return "There was only one submission."
     elsif submissions.length <= 10
-      return "There have only been #{number_to_name(submissions.length)} submissions so far."
+      return "There were only #{number_to_name(submissions.length)} submissions."
     end
   end
 
@@ -141,7 +141,7 @@ class SurveyTemplate < ActiveRecord::Base
   end
   def self.sort(collection, sort_type, page)
     id_conversion = {'name'=>'LOWER(survey_title)', 'course'=>'course_id', 'date'=>'created_at'}
-    return collection.paginate(:page => page, :per_page => 10).order(id_conversion[sort_type])#.order(id_conversion[sort_type])
+    return collection.paginate(:page => page, :per_page => 10).order(id_conversion[sort_type])
   end
 
   def can_view(accessing_user)

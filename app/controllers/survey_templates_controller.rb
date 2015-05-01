@@ -36,8 +36,10 @@ class SurveyTemplatesController < ApplicationController
 
   def edit
     @survey = SurveyTemplate.find_by_uuid(params[:id]) #why does this not work with uuid
-    if (@survey.status != "unpublished")
+    if (@survey.status == "published")
       return render :text => "Sorry, you can't edit a survey once it's been published", :status => :unauthorized
+    elsif (@survey.status == "closed")
+      return render :text => "Sorry, you can't edit a survey once it's been closed", :status => :unauthorized
     end
     authorize @survey, :edit?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
@@ -125,7 +127,7 @@ class SurveyTemplatesController < ApplicationController
     @public_templates = SurveyTemplate.public_surveys(@show_public_surveys, filters)
 
     @templates = SurveyTemplate.sort(@templates, params[:sort], params[:page])
-    @public_templates = SurveyTemplate.sort(@public_templates, params[:sort], params[:page])
+    @public_templates = SurveyTemplate.sort(@public_templates, params[:sort], params[:public_page])
   end
   def set_view_variables(filters)
     return [nil, nil, nil] unless filters

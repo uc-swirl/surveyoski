@@ -5,7 +5,7 @@ Given (/^there are 11 submissions filled out with (.+)/) do |list|
     @user = User.create(:email => "tester#{i}@berkeley.edu", :status => "student")
     ApplicationController.any_instance.stub(:current_user).and_return(@user)
     step 'I am on the survey template'
-    puts page.body
+    # puts page.body
     step 'I fill in the fields with "CS 169", "Fox", "2010", "rare:medium"'
     step 'I press submit'
   end
