@@ -51,7 +51,7 @@
               </td>
             <% end %>
             <td>
-                <%= link_to image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.uuid.to_s ) %>
+                <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.uuid.to_s ) %>
             </td>
             <% if @private %>
               <td>
