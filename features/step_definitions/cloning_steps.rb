@@ -1,14 +1,25 @@
 Given(/^I clone the survey$/) do
+  # puts page.body
   @orig = SurveyTemplate.all.length
   course = @user.courses.create
-  first(".clone_button").click
+  
+  Timeout.timeout(Capybara.default_wait_time) do
+    loop until page.evaluate_script('jQuery.active').zero?
+  end
+
+  within "#my_surveys" do
+    first(".clone_button").click
+  end
   puts "found the first thing"
-  first("#clone_submit_button").click
+  within "#clone_dialog" do
+    find("#clone_submit_button").click
+  end
   page.should have_content "SurveyOski"
   page.should_not have_content "slow down, rspec. and let phantomjs finish cloning the survey."
 end
 
 Then(/^I should see another survey$/) do
+  @user.courses.each do |c| puts c; puts c.survey_templates; end
   page.should have_content("cloned")
 end
 
