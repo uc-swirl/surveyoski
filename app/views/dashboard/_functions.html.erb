@@ -1,5 +1,5 @@
 <nav class="nav">
-  <ul class="admin_links", id="top">
+  <ul class="admin_links" id="top">
     <%- if current_user.is_admin? %>
     <li>
       <%= link_to "Change permissions", :admin_update_user %>

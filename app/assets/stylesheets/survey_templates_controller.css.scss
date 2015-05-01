@@ -417,15 +417,16 @@
 /* line 229, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 /* line 290, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .sort_tag {
-  position: relative;
   color: white;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   height: 30px;
-  position: relative;
-  top: 10px;
+  margin-top: 7px;
+  margin-bottom: 7px;
   text-align: center;
   padding: 5px;
+  line-height: 1.5em;
+
 }
 
 /* line 139, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
@@ -468,10 +469,7 @@
 /* line 242, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 /* line 273, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 /* line 338, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-.sort_tag div {
-  position: relative;
-  bottom: 11px;
-}
+
 
 /* line 161, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 /* line 213, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
