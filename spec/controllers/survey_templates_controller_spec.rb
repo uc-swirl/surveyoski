@@ -158,6 +158,36 @@ describe SurveyTemplatesController do
       end
     end
 
+    describe "it provides a json api endpoint for response data" do
+      before(:each) do
+        @template = FactoryGirl.create(:survey_template_with_submissions)
+      end
+
+      it "should render nothing if not unpublished" do 
+        get :responses_data, :id => @template.uuid
+        response.body.should be_blank
+      end
+
+      it "should render nothing if not published" do 
+        @template.status = "published"
+        @template.save!
+        get :responses_data, :id => @template.uuid
+        response.body.should be_blank
+      end
+
+      it "should render json if published" do 
+        @template.status = "closed"
+        @template.save!
+
+        get :responses_data, :id => @template.uuid
+        ActiveSupport::JSON.decode(response.body).should_not be_nil
+      end
+
+    end
+
+
+
+
   end
 
 end
