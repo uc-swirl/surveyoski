@@ -146,7 +146,7 @@ Given /^(?:|I )am a(?:|n) (.+)$/ do |user|
 end
 
 And /^(?:|I )make a new survey/ do
-  visit path_to('new')
+  visit path_to('new survey template')
 end
 
 Then /^(?:|I ) should be on (.+)$/ do |page_name|
@@ -156,4 +156,9 @@ Then /^(?:|I ) should be on (.+)$/ do |page_name|
   else
     assert_equal path_to(page_name), current_path
   end
+end
+
+Given /^the survey is published$/ do
+  @survey.status = "published"
+  @survey.save!
 end

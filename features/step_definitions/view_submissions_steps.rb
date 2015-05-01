@@ -1,14 +1,18 @@
 Given (/^there are 11 submissions filled out with (.+)/) do |list|
+  # puts page.body
   new_list = list.split(",").each {|t| t.strip!; t.gsub!(/\A"|"\Z/, '')}
   11.times do |i|
     @user = User.create(:email => "tester#{i}@berkeley.edu", :status => "student")
     ApplicationController.any_instance.stub(:current_user).and_return(@user)
-    User.stub(:find).and_return(@user)
-    visit survey_template_path(@survey)
-    new_list.each do |answer|
-      step 'I fill in the next field with "' + answer.to_s + '"'
-    end
+    # User.stub(:find).and_return(@user)
+    step 'I am on the survey template'
+    puts page.body
+    step 'I fill in the fields with "CS 169", "Fox", "2010", "rare:medium"'
     step 'I press submit'
+    # new_list.each do |answer|
+    #   step 'I fill in the next field with "' + answer.to_s + '"'
+    # end
+    # step 'I press submit'
   end
 end
 
