@@ -378,6 +378,7 @@
 
 /* line 265, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #survey_name {
+  width: 900px;
   text-decoration: none;
   color: black;
 }
@@ -792,7 +793,6 @@
   text-decoration: underline;
 }
 
-/*
 #notice {
   position: absolute;
   top: 80px;
@@ -804,4 +804,4 @@
   opacity: 0.8;
   padding-left: 100px;
   line-height: 80px;
-}*/
+}
