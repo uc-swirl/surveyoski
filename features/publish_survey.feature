@@ -38,3 +38,19 @@ And I am on the survey template
 Then I should see "course name"
 And I should see "course instructor"
 
+
+@javascript
+Scenario: Publish a survey via the survey template page
+Given I have logged in as a professor
+And I am in course "cs10"
+And I am on the edit survey template
+And I click on the publish status button
+Then the survey should be published
+
+@javascript
+Scenario: Publish a survey via the all surveys page
+Given I have logged in as a professor
+And I am in course "cs10"
+And I am on the all survey templates page
+And I click on the publish status button
+Then the survey should be published
