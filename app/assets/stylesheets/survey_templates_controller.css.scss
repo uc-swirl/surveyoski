@@ -378,11 +378,20 @@
 }
 
 /* line 265, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
-#survey_name {
+#survey_name_on_new {
   width: 900px;
   text-decoration: none;
   color: black;
+  margin: 0 auto;
+  font-size: 20px;
+  margin-top: 20px;
 }
+
+#survey_name{
+  text-decoration: none;
+  color: black;
+}
+
 
 /* line 270, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .button {

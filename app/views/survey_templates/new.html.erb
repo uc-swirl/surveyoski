@@ -5,7 +5,7 @@
         <div><%= @title %></div>
     </div>
 
-    <div id='survey_name'>
+    <div id='survey_name_on_new'>
       <div>
         <%= label :form_name, "Survey name" %>
         <%= text_field_tag :form_name, if @survey then @survey.survey_title else "" end %>
