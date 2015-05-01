@@ -8,71 +8,19 @@
         <div id = "background">
           <img src = "../../assets/UC-Berkeley-151.jpg">
         </div>
-
-        <span>
-          <%= flash[:notice] %>
-        </span>
-        <div id = "notice">
             <% if current_user %>
-                Signed in as <strong><%= current_user.name  %></strong>!
-                <%= link_to "Sign out", signout_path, id: "sign_out" %>
-            <% else %>
-        </div>
+                <div id = "notice">
+                  <%= flash[:notice] %>
+                  Signed in as <strong><%= current_user.name  %></strong>! <%= link_to "Sign Out", signout_path, id: "sign_out" %>
+                </div>
+                <% else %>
 
-            <style type="text/css">
-
-                #customBtn {
-                    display: inline-block;
-                    background: #dd4b39;
-                    color: white;
-                    width: auto;
-                    border-radius: 5px;
-                    white-space: nowrap;
-                    position: absolute;
-                    left: calc(50% - 265px / 2);
-                    top: 180px;
-                    border: 2px solid;
-                }
-                #customBtn:hover {
-                    background: #e74b37;
-                    cursor: pointer;
-                }
-                span.label {
-                    font-weight: bold;
-                }
-                span.icon {
-                    background: url('../../assets/btn_red_32.png') transparent 5px 50% no-repeat;
-                    display: inline-block;
-                    vertical-align: middle;
-                    width: 45px;
-                    height: 45px;
-                    border-right: #bb3f30 1px solid;
-                }
-
-                #sign_in{
-                    display: inline-block;
-                    vertical-align: middle;
-                    padding-left: 30px;
-                    padding-right: 30px;
-                    padding-top: 10px;
-                    padding-bottom: 10px;
-                    font-size: 17px;
-                    font-weight: bold;
-                    font-family: Ubuntu;
-                }
-
-
-            </style>
-            <!-- In the callback, you would hide the gSignInWrapper element on a
-            successful sign in -->
             <div id="gSignInWrapper">
               <div id="customBtn" class="customGPlusSignIn">
                 <span class="icon"></span>
                 <a id="sign_in" href = "/auth/google_oauth2">Log in with Google</a>
               </div>
-
             </div>
-
         <% end %>
     </body>
 </html>

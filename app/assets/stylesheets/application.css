@@ -8327,3 +8327,49 @@ body{
 .dashboard{
     padding-left: 40px;
 }
+
+#sign_out{
+    margin-left: 10px;
+    color: darkred;
+    font-weight: 900;
+}
+
+#customBtn {
+    display: inline-block;
+    background: #dd4b39;
+    color: white;
+    width: auto;
+    border-radius: 5px;
+    white-space: nowrap;
+    position: absolute;
+    left: calc(50% - 265px / 2);
+    top: 180px;
+    border: 2px solid;
+}
+#customBtn:hover {
+    background: #e74b37;
+    cursor: pointer;
+}
+span.label {
+    font-weight: bold;
+}
+span.icon {
+    background: url('../../assets/btn_red_32.png') transparent 5px 50% no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 45px;
+    height: 45px;
+    border-right: #bb3f30 1px solid;
+}
+
+#sign_in{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: Ubuntu;
+}
