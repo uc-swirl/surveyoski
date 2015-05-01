@@ -1,5 +1,5 @@
-<%= render :partial => "survey_table", :locals => {:@survey_id => "my_surveys", :surveys => @templates, :@title => 'My Surveys', :@private => true, :@column => 8}%>
-<%= render :partial => "survey_table", :locals => {:@survey_id => "public_surveys", :surveys => @public_templates, :@title=> "Public Surveys", :@private => false, :@column => 4}%>
+<%= render :partial => "survey_table", :locals => {:@survey_id => "my_surveys", :surveys => @templates, :@title => 'My Surveys', :@private => true}%>
+<%= render :partial => "survey_table", :locals => {:@survey_id => "public_surveys", :surveys => @public_templates, :@title=> "Public Surveys", :@private => false}%>
 
 <div id = "clone_dialog" data-template-id = "" style="display:none"> 
   <form>
