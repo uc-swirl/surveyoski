@@ -1,19 +1,19 @@
-<table id= @survey_id class="admin_table">
+<table id= <%=@survey_id%> class="admin_table">
   <thead>
-    <th colspan = "8", id="all_surveys_text"><%= @title %><%= render partial: "search_form" %></th>
+    <th colspan = "8" id="all_surveys_text"><%= @title %><%= render partial: "search_form" %></th>
   </thead>
   <tbody>
       <tr>
         <td colspan="8" >
             <div id = 'sort_by'>Sort by</div>
             <button class = 'sort_tag' id = 'name'>
-            <div><%= link_to "Survey Name", survey_templates_path(:sort => 'name'), :class=>"sort_text" %></div>
+              <%= link_to "Survey Name", survey_templates_path(:sort => 'name'), :class=>"sort_text" %>
             </button>
             <button class = 'sort_tag' id= 'course'>
-            <div><%= link_to "Course", survey_templates_path(:sort => 'course'),:class=>"sort_text" %></div>
+              <%= link_to "Course", survey_templates_path(:sort => 'course'),:class=>"sort_text" %>
             </button>
             <button class = 'sort_tag' id= 'date'>
-            <div><%= link_to "Release Date", survey_templates_path(:sort => 'date'),:class=>"sort_text" %></div>
+              <%= link_to "Release Date", survey_templates_path(:sort => 'date'),:class=>"sort_text" %>
             </button>
         </td>
       </tr>
@@ -22,10 +22,10 @@
           <tr>
             <% if @private %>
               <td>
-                <%= link_to template.title, edit_survey_template_path(template),:id=>"survey_name", :title=>template.survey_title.to_s %>
+                <%= link_to template.title, edit_survey_template_path(template), :title=>template.survey_title.to_s %>
               </td>
             <% else %>
-              <td id="survey_name">
+              <td >
                 <%= template.survey_title.to_s %>
               </td>
             <% end %>
@@ -51,14 +51,15 @@
               </td>
             <% end %>
             <td>
-                <%= link_to image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.uuid.to_s ) %>
+                <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.uuid.to_s ) %>
             </td>
             <% if @private %>
               <td>
-                <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), "/survey_templates/#{template.uuid}", method: :delete %>
+                <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), 
+                  "/survey_templates/#{template.uuid}", method: :delete, :class=> "delete_survey_link"  %>
               </td>
             <% end %>
-
+ 
           </tr>
       <% end %>
 

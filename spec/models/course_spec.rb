@@ -45,11 +45,14 @@ describe Course do
       	Course.find(@course.id).remove_user(@u3.id)
       	Course.all.length.should be(orig-1)
       end
-      it 'deals with the case of removing a nonexistant users' 
-      # do
-      #   user = User.create(:email => "a_unique_email@berkeley.edu")
-      #   @course.remove_user(user.id)
-      # end
+      it 'deals with the case of removing a nonexistant users' do
+        orig = Course.all.length
+        orig_users = @course.users.length
+        user = User.create(:email => "a_unique_email@berkeley.edu")
+        @course.remove_user(user.id)
+        Course.all.length.should be orig
+        @course.users.length.should be orig_users
+      end
     end
   end
   describe 'users not in course yet' do
@@ -66,10 +69,12 @@ describe Course do
   	  	Course.find(@course.id).users.length.should be(orig + 3)
   	  	expect(Course.find(@course.id).users).to match_array([@u1,@u2,@u3])
   	  end
-  	  it 'creates users when they do not exist previously' 
-      # do
-
-      # end
+  	  it 'creates users when they do not exist previously' do
+        orig = @course.users.length
+        @course.add_users(["curiousgeorge@berkeley.edu"])
+        Course.find(@course.id).users.length.should be(orig + 1)
+        expect(User.find_by_email("curiousgeorge@berkeley.edu")).to be
+      end
 
     end
   end  

@@ -1,6 +1,6 @@
 class Course < ActiveRecord::Base
 
-  attr_accessible :name, :department, :semester, :year
+  attr_accessible :name, :department, :semester, :year, :active
   has_many :enrollments
   has_many :users, through: :enrollments
   has_many :survey_templates, :dependent => :destroy
@@ -19,10 +19,6 @@ class Course < ActiveRecord::Base
     if enrollment != nil
       enrollment.destroy
     else
-      # didn't find the enrollment, means you're deleting 
-      # someone from a course that doesn't exist in the course
-      # puts 'didn\'t find'
-      # TODO DEAL WITH THIS CASE.
       return "This person is not part of the course."
     end
   	if users.length == 0

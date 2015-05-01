@@ -120,15 +120,13 @@ class SurveyTemplate < ActiveRecord::Base
 
   private :number_to_name
 
-  def self.public_surveys(show, filters)
-    return SurveyTemplate.where(:nothing) unless show
+  def self.public_surveys(filters)
     search_params = {:public_survey => true}
     if filters then search_params[:course_id] = Course.where(filters) end
     SurveyTemplate.where(search_params)
   end
 
-  def self.find_surveys(show, filters, current_user)
-    return SurveyTemplate.where(:nothing) unless show
+  def self.find_surveys(filters, current_user)
     if filters == nil
       current_user.all_surveys
     else

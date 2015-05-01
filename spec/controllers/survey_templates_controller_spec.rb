@@ -88,20 +88,20 @@ describe SurveyTemplatesController do
           expect(assigns(:templates)).to include(@survey)
           expect(assigns(:public_templates)).to include(@public)
         end
-        it "only shows my surveys if I only check that box" do 
-          @params.delete(:public_surveys)
-          post :index, @params
-          expect(response).to render_template("index")
-          expect(assigns(:templates)).to include(@survey)
-          expect(assigns(:public_templates)).to_not include(@public)
-        end
-        it "shows only public surveys if I only check that box" do
-          @params.delete(:my_surveys)
-          post :index, @params
-          expect(response).to render_template("index")
-          expect(assigns(:templates)).to_not include(@survey)
-          expect(assigns(:public_templates)).to include(@public)
-        end
+        # it "only shows my surveys if I only check that box" do 
+        #   @params.delete(:public_surveys)
+        #   post :index, @params
+        #   expect(response).to render_template("index")
+        #   expect(assigns(:templates)).to include(@survey)
+        #   expect(assigns(:public_templates)).to_not include(@public)
+        # end
+        # it "shows only public surveys if I only check that box" do
+        #   @params.delete(:my_surveys)
+        #   post :index, @params
+        #   expect(response).to render_template("index")
+        #   expect(assigns(:templates)).to_not include(@survey)
+        #   expect(assigns(:public_templates)).to include(@public)
+        # end
       end
     end
 
