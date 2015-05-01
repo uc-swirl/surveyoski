@@ -22,7 +22,7 @@ describe SurveyTemplate do
     it 'gives a proper message when there have been no submissions yet' do
       @s.status = 'closed'
       @s.save
-      @s.submissions_to_csv.should eq "There have been no submissions yet."
+      @s.submissions_to_csv.should eq "There were no submissions."
     end
     it 'gives a proper message when there has been one submission' do
       submis = @s.submissions.build
@@ -33,7 +33,7 @@ describe SurveyTemplate do
       submis.save
       @s.status = 'closed'
       @s.save
-      @s.submissions_to_csv.should eq "There has only been one submission so far."
+      @s.submissions_to_csv.should eq "There was only one submission."
     end
     it 'does not format results if there have been fewer than 11 submissions' do
       5.times do
@@ -46,7 +46,7 @@ describe SurveyTemplate do
       end
       @s.status = 'closed'
       @s.save
-      @s.submissions_to_csv.should eq "There have only been five submissions so far."
+      @s.submissions_to_csv.should eq "There were only five submissions."
     end
     it 'formats submissions into csv string when there have been more than 10 responses' do
       3.times do
