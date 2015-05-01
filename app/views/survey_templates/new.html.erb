@@ -14,12 +14,11 @@
       <div>
       <p>
         <%= label :course_id, "Course" %>
-        <br>
         <%=  select_tag(:course_id, options_from_collection_for_select(@courses, 'id', 'name', @course_id) )%>
       </p>
       
       <p>
-      <%- if @survey %>
+      <% if @survey %>
       
         <label>
           Survey Status
@@ -27,7 +26,7 @@
           <span class="publish_button_container" 
           data-status-route="<%= survey_template_status_path(@survey) %>"
           data-update-status-route="<%= update_survey_template_status_path(@survey) %>"
-          >
+          ></span>
         </label>
       </p><p>
         <label> Public
