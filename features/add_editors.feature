@@ -15,13 +15,21 @@ And I add him to the first course
 Then I should be on the courses page
 And I should see "Your course 24601 was successfully updated" 
 
-Scenario: add nonexistent user as an editor to a course
+Scenario: add nonexistent berkeley user as an editor to a course
 Given "Marco" is not a user with email "marcojoemontagna@berkeley.edu"
 When I go to the courses page
 And I add him to the first course
 Then I should be on the courses page
 And I should see "Your course 24601 was successfully updated"
 And "marcojoemontagna@berkeley.edu" should be a ta 
+
+Scenario: add nonexistent nonberkeley user as an editor to a course
+Given "Marco" is not a user with email "marcojoemontagna@gmail.com"
+When I go to the courses page
+And I add him to the first course
+Then I should be on the courses page
+And I should see "There was an error in updating your course."
+
 
 Scenario: users can only see their own courses
 When I go to the courses page

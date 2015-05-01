@@ -5,7 +5,7 @@ Feature: View Submissions for a Survey
   I want to view my the submissions to my survey
 
   Background:
-  Given the following survey template exists in course "hello"
+  Given the following survey template exists in course "hello" with name "hi there"
   | question_title    | type                 | options                          | required|
   | course name       | text_question_fields |                                  | false    |
   | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero| false    |

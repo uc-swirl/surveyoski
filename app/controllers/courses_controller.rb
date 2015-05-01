@@ -6,15 +6,11 @@ class CoursesController < ApplicationController
   end
 
   def create
-    # puts 'calling create'
     course = Course.find_or_create_by_id(params[:id])
     emails = params[:editor_email].split(/[ |,]+/)
     emails << current_user.email
 
     ok = course.add_users(emails)
-    # puts "course users: "
-    # puts course.users
-    # TODO FIX THIS TO TELL WHICH EMAILS ARE NOT VALID, MAYBE USE A VALIDATION?! how to abort things...
     if not ok
       flash[:notice] = "There was an error in updating your course."
     else
@@ -55,9 +51,10 @@ class CoursesController < ApplicationController
   end
   def active
     @course = Course.find_by_id(params[:id])
-    puts "course is now #{@course.active}"
+    # puts "course is first #{@course.active}"
     @course.toggle(:active)
     @course.save!
+    # puts "course is now #{@course.active}"
     render :text => @course.active
   end
 

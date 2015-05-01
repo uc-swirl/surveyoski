@@ -5,7 +5,7 @@ Feature: Check the disclaimer on the survey page
   I want to for sure know that even though I've signed in with my berkeley.edu that my response will remain anonymous
 
   Background:
-    Given the following survey template exists in course "cs169"
+    Given the following survey template exists in course "cs169" with name "hello world"
       | question_title    | type                 | options                          | required|
       | course name       | text_question_fields |                                  | true    |
       | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero| true    |

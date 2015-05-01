@@ -5,7 +5,7 @@ I would like to make a survey live and visible to students
 
 Background:
 Given I have logged in as a professor
-Given the following survey template exists in course "cs10"
+Given the following survey template exists in course "cs10" with name "cs is cool"
 | question_title    | type                 | options                          | required|
 | course name       | text_question_fields |                                  | false   |
 | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero| false   |
@@ -13,7 +13,7 @@ Given the following survey template exists in course "cs10"
 | hello             | checkbox_fields      | hi:1,hello:1,salutations:1       | false   | 
 
 Scenario: Don't see unpublished surveys that are not my own
-Given the following survey template exists in course "cs10"
+Given the following survey template exists in course "cs10" with name "ilovecs"
 | question_title    | type                 | options                          | required|
 | course name       | text_question_fields |                                  | false   |
 | course instructor | radio_button_fields  | Fox:Fox,Klein:Klein,DeNero:DeNero| false   |
