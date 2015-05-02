@@ -5,7 +5,7 @@ I would like to be able to search for them by course, department, and/or year
 
 Background:
 Given I have logged in as a professor
-Given a bunch of public and private surveys exist
+Given 4 public surveys and 4 private surveys exist
 
 
 @omniauth_test_good
