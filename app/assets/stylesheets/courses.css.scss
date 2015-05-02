@@ -3,8 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #add_course {
-  margin-left: 10px;
-  }
+  text-decoration: none;
+  width: 120px;
+  font-size: 15px;
+  background: #fec548;
+  color: black;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#add_course:hover {
+  color: ghostwhite;
+}
 
 .course_display {
   color: #333;
@@ -18,7 +28,8 @@
 }
 
 #editor_email {
-    width: 80%;
+  width: 80%;
+  height: 150px;
 }
 
 .create_edit_inner_padd {
@@ -54,4 +65,51 @@
 
 .save_course_submit {
   float: right;
+}
+
+.course_box {
+  position: relative;
+  margin-top: 80px;
+}
+
+#course_name{
+  text-decoration: none;
+  font-size: 20px;
+  font-family: Ubuntu;
+  color: #dd9902;
+  margin-right: 20px;
+
+}
+
+#manage_course_text{
+  font-size: 20px;
+  font-family: Ubuntu;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+#delete_course{
+  display: inline-block;
+  margin-left: 50px;
+  position: absolute;
+  right: 20px;
+}
+
+#course_submit{
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+    color: black;
+    background: #fec548;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+}
+
+#course_submit:hover{
+  color: ghostwhite;
 }
