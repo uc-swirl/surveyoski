@@ -11,4 +11,4 @@ Given "20" public surveys and "20" private surveys exist
 Scenario: Only see part of the surveys on the page
 Given I go to the survey templates page
 Then I should see survey 10
-And I should not see survey 11
+Then I should not see survey 11
