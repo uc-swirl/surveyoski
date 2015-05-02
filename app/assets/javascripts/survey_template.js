@@ -232,9 +232,9 @@ var SurveyBuilder = (function () {
     var id = uniqId();
     var require_row = jQuery("<tr/>").appendTo(question_table);
     var col = jQuery("<td/>").appendTo(require_row);
-    jQuery("<label/>", {"for" : id, text : "Required: "}).appendTo(col);
+    jQuery("<label/>", {"for" : id, text : "Required"}).appendTo(col);
     col = jQuery("<td/>").appendTo(require_row);
-    jQuery("<input/>", {id: id, type : "checkbox", name : field.form_name("required"), checked : field.required}).appendTo(col);
+    jQuery("<input/>", {id: 'required', type : "checkbox", name : field.form_name("required"), checked : field.required}).appendTo(col);
   }
 
   var add_field = function (field) {
@@ -254,7 +254,7 @@ var SurveyBuilder = (function () {
   };
   var add_title_row = function(question_table, field) {
     var title_row = jQuery("<tr/>").appendTo(question_table);
-    jQuery("<td/>", {text : "Title: "}).appendTo(title_row);
+    jQuery("<td/>", {text : "Title"}).appendTo(title_row);
     var title = jQuery("<td/>").appendTo(title_row);
     field.coupledNameInput().appendTo(title);
 
@@ -262,7 +262,7 @@ var SurveyBuilder = (function () {
 
   var add_type_row = function(question_table, field_type) {
     var type_row = jQuery("<tr/>").appendTo(question_table);
-    jQuery("<td/>", {text : "Question Type: "}).appendTo(type_row).addClass("hi");
+    jQuery("<td/>", {text : "Question Type"}).appendTo(type_row).addClass("hi");
     jQuery("<td/>", {text : field_type}).appendTo(type_row);
   };
 
