@@ -1,5 +1,5 @@
-<%= render :partial => "survey_table", :locals => {:@survey_id => "my_surveys", :surveys => @templates, :@title => 'My Surveys', :@private => true}%>
-<%= render :partial => "survey_table", :locals => {:@survey_id => "public_surveys", :surveys => @public_templates, :@title=> "Public Surveys", :@private => false}%>
+<%= render :partial => "survey_table", :locals => {:@survey_id => "my_surveys", :surveys => @templates, :@title => 'My Surveys', :@private => true, :@other_survey => "public_surveys", :other_sort => @my_survey_sort}%>
+<%= render :partial => "survey_table", :locals => {:@survey_id => "public_surveys", :surveys => @public_templates, :@title=> "Public Surveys", :@private => false, :@other_survey => "my_surveys", :other_sort => @public_survey_sort}%>
 
 <div id = "clone_dialog" data-template-id = "" style="display:none"> 
   <form>
@@ -9,6 +9,5 @@
         <option value="<%= course.name %>"><%= course.name %></option>
       <% end %>
     </select>
-    <input type="submit" id="clone_submit_button" tabindex="-1" style="position:absolute; top:-1000px">
   </form>
 </div>
