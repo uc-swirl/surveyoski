@@ -10,7 +10,7 @@
                 <%= link_to template.title, edit_survey_template_path(template), :title=>template.survey_title.to_s %>
               </td>
             <% else %>
-              <td >
+              <td id="survey_name">
                 <%= template.survey_title.to_s %>
               </td>
             <% end %>

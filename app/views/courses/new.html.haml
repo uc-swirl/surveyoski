@@ -8,7 +8,7 @@
     - if @course.id  
       = label_tag :active_status, "Active"
       %div.toggle
-        %input{:type => "checkbox", :checked => (checkbox = @course.active ? "checked" : nil), :value => "None", :id => "slideThree", :name => "check", :"data-update-route" => course_active_path(@course)}
+        %input{:type => "checkbox", :checked => (@course.active ? "checked" : nil), :value => "None", :id => "slideThree", :name => "check", :"data-update-route" => course_active_path(@course)}
         %label{:for => "slideThree"}
 
     = form_tag courses_path do |course|

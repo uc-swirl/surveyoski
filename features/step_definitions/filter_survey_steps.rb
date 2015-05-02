@@ -13,8 +13,7 @@ Given /^"(.*?)" public surveys and "(.*?)" private surveys exist$/ do |public_co
   for i in 1...public_count.to_i
     SurveyTemplate.create(:survey_title => "MCB102 course eval#{i}", :user_id => @user.id, :course_id => @course1.id, :public_survey => true)
   end
-  
-
+  visit survey_templates_path
 end
 
 Then(/^"(.*?)" surveys should (not |)be present$/) do |arg1, negative|
@@ -38,31 +37,23 @@ Then(/^"(.*?)" surveys should (not |)be present$/) do |arg1, negative|
 end
 
 When(/^I filter by semester "(.*?)"$/) do |option|
-  within '#my_surveys' do
-    within '#filters_semester' do
-      all("option[value='#{option}']").each do |thing| thing.click end
-    end
-    find("#filter_apply_button").click
+  within '#filters_semester' do
+    all("option[value='#{option}']").each do |thing| thing.click end
   end
-  within '#public_surveys' do
-    within '#filters_semester' do
-      all("option[value='#{option}']").each do |thing| thing.click end
-    end
-    find("#filter_apply_button").click
+
+  within '#filters_semester' do
+    all("option[value='#{option}']").each do |thing| thing.click end
   end
+  find("#filter_apply_button").click
 end
 
 When(/^I filter by year "(.*?)"$/) do |option|
-  within '#my_surveys' do
-    within '#date_year' do
-      all("option[value='#{option}']").each do |thing| thing.click end
-    end
-    find("#filter_apply_button").click
+  within '#date_year' do
+    all("option[value='#{option}']").each do |thing| thing.click end
   end
-  within '#public_surveys' do
-    within '#date_year' do
-      all("option[value='#{option}']").each do |thing| thing.click end
-    end
-    find("#filter_apply_button").click
+  find("#filter_apply_button").click
+  within '#date_year' do
+    all("option[value='#{option}']").each do |thing| thing.click end
   end
+  find("#filter_apply_button").click
 end

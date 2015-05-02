@@ -18,6 +18,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'quiet_assets', group: :development
+  gem 'thin'
 end
 
 group :production do

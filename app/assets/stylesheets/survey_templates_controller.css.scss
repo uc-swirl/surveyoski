@@ -415,19 +415,13 @@
 
 /* line 265, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #survey_name_on_new {
+  color: #428bca;
   width: 900px;
   text-decoration: none;
-  color: black;
-  margin: 0 auto;
+  font-family: Ubuntu;
   font-size: 20px;
-  margin-top: 20px;
+  margin: 0 auto;
 }
-
-#survey_name{
-  text-decoration: none;
-  color: black;
-}
-
 
 /* line 270, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 .button {
@@ -757,6 +751,7 @@
 
 /* line 572, ../../app/assets/stylesheets/survey_templates_controller.css.scss */
 #add_question_button {
+  border-radius: 5px;
   background: #fecd61;
   padding: 5px;
   color: black;
@@ -867,4 +862,8 @@
 
 .clone_button{
   cursor: pointer;
+}
+
+#inner_thead{
+  height: 50px;
 }
