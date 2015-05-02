@@ -15,12 +15,6 @@ class User < ActiveRecord::Base
     (email =~ /berkeley.edu$/) != nil
   end
   def self.from_omniauth(auth) # where(:email => "sldjfl@berkeley.edu") => [<>, <>], 
-    puts "INFO"
-    puts auth.slice(:info)
-    x = auth.slice(:info)
-    puts "EMAIL"
-    puts auth.info.email    
-
     user = find_or_create_by_email(auth.info.email)
     user.provider = auth.provider
     user.uid = auth.uid

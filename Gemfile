@@ -43,4 +43,3 @@ gem 'jquery-ui-rails'
 gem 'uuid', '~> 2.3.7'
 gem "d3-rails"
 gem 'will_paginate', '~> 3.0.5'
-gem 'thin'
