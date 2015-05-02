@@ -77,6 +77,23 @@ class SurveyTemplate < ActiveRecord::Base
     titles
   end
 
+ def export_responses
+    all_responses = []
+    submissions.each do |s|
+      curr_submis = []
+      survey_fields.each do |f|
+        field = s.field_responses.where(survey_field_id: f.id).first
+        if field
+          curr_submis << (yield field)
+        else
+          curr_submis << nil
+        end
+      end
+      all_responses << curr_submis
+    end
+    all_responses.shuffle
+  end
+
   def pack_responses
     all_responses = []
     submissions.each do |s|
