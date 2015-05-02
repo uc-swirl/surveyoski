@@ -20,7 +20,18 @@ function extract_response_text(data, number) {
 }
 
 function extract_question_name(data, number) {
-  return data[0][number]['name'];
+  var first = data[0];
+  var second = first[number];
+  if (first) {
+    second = first;
+  }
+
+  third = "Unknown Question";
+  if (second) {
+    third = second['name'];
+  }
+
+  return third;
 }
 
 
