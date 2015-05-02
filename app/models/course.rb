@@ -10,6 +10,7 @@ class Course < ActiveRecord::Base
   def pepper_up
     if active == nil
       active = true
+      save!
     end
   end
 

@@ -14,7 +14,13 @@ class User < ActiveRecord::Base
   def self.is_berkeley(email)
     (email =~ /berkeley.edu$/) != nil
   end
-  def self.from_omniauth(auth)
+  def self.from_omniauth(auth) # where(:email => "sldjfl@berkeley.edu") => [<>, <>], 
+    puts "INFO"
+    puts auth.slice(:info)
+    x = auth.slice(:info)
+    puts "EMAIL"
+    puts x.slice(:email)
+    
     where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
