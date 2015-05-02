@@ -20,6 +20,42 @@
   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
 }
 
+.all_surveys_display_title h3 {
+  display: inline-block;
+  margin: 0px;
+
+}
+
+#main #All_surveys {
+  width: 920px;
+}
+
+#All_surveys #my_surveys {
+  margin: 10px;
+  margin-top: 20px;
+}
+#All_surveys #public_surveys {
+  margin: 10px;
+  margin-top: 20px;
+}
+
+
+.sort_survey_box {
+  background: #f6f6f6;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.all_surveys_display_title {
+  height: 60px;
+  background: #2980b9;
+  color: #fff;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
 .toggle:after {
   content: 'OFF';
   font: 12px/26px Arial, sans-serif;
