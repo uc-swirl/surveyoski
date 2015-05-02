@@ -1,0 +1,30 @@
+
+%div.course_display
+
+  %div.course_display_title
+    %h3= @title
+
+  %div.create_edit_inner_padd
+    - if @course.id  
+      = label_tag :active_status, "Active"
+      %div.toggle
+        %input{:type => "checkbox", :checked => (@course.active ? "checked" : nil), :value => "None", :id => "slideThree", :name => "check", :"data-update-route" => course_active_path(@course)}
+        %label{:for => "slideThree"}
+
+    = form_tag courses_path do |course|
+      = label_tag :course_name, "Course Name"
+      = text_field_tag :course_name, @course.name
+      = select_tag :department, options_for_select(departments, @course.department)
+      = select_tag :semester, options_for_select(semesters, @course.semester)
+      = select_year(@course == nil ? Date.today : @course.year.to_i)
+      = hidden_field_tag(:id, if @course then @course.id else "" end )
+      <br>
+      = label_tag :editor_email, "Editors (please enter in the format of: email1@berkeley.edu, email2@berkeley.edu, email3@berkeley.edu"
+      <br>
+      Professors<br>
+      = text_field_tag :professor_email, @professors
+      <br>
+      TAs<br>
+      = text_area_tag :editor_email, @people
+      <br>
+      = submit_tag "Submit"
