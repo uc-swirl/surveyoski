@@ -36,11 +36,6 @@ class SurveyTemplatesController < ApplicationController
 
   def edit
     @survey = SurveyTemplate.find_by_uuid(params[:id]) #why does this not work with uuid
-    if (@survey.status == "published")
-      return render :text => "Sorry, you can't edit a survey once it's been published", :status => :unauthorized
-    elsif (@survey.status == "closed")
-      return render :text => "Sorry, you can't edit a survey once it's been closed", :status => :unauthorized
-    end
     authorize @survey, :edit?
     @field_types = SurveyField.descendants.map {|klass| klass.nice_name}
     @fields_json = ActiveSupport::JSON.encode(@survey.survey_fields)
@@ -53,7 +48,8 @@ class SurveyTemplatesController < ApplicationController
   def create
     @survey = SurveyTemplate.find_or_create_by_uuid(params[:id])
     if (@survey.status != "unpublished")
-      return render :text => "Sorry, you can't edit a survey once it's been published", :status => :unauthorized
+      flash[:notice] = "You can't edit a survey once it's been published."
+      return redirect_to edit_survey_template_path @survey
     end
     @name = create_name
     @fields = if params[:fields] then params[:fields] else [] end
