@@ -1,23 +1,8 @@
 <table id= <%=survey_id%> class="admin_table">
   <thead>
-    <th colspan = "8" id="all_surveys_text"><%= title %><%= render partial: "search_form" %></th>
+    <th colspan = "8" id="all_surveys_text"><%= title %></th>
   </thead>
   <tbody>
-      <tr>
-        <td colspan="8" >
-            <div id = 'sort_by'>Sort by</div>
-            <button class = 'sort_tag' id = 'name'>
-              <%= link_to "Survey Name", survey_templates_path(sort => 'name'), :class=>"sort_text" %>
-            </button>
-            <button class = 'sort_tag' id= 'course'>
-              <%= link_to "Course", survey_templates_path(sort => 'course'),:class=>"sort_text" %>
-            </button>
-            <button class = 'sort_tag' id= 'date'>
-              <%= link_to "Release Date", survey_templates_path(sort => 'date'),:class=>"sort_text" %>
-            </button>
-        </td>
-      </tr>
-      
       <% surveys.each do |template| %>
           <tr>
             <% if private_survey %>
