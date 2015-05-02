@@ -95,38 +95,15 @@ class SurveyTemplate < ActiveRecord::Base
   end
 
   def pack_responses
-    all_responses = []
-    submissions.each do |s|
-      curr_submis = []
-      survey_fields.each do |f|
-        field = s.field_responses.where(survey_field_id: f.id).first
-        if field
-          curr_submis << {:name => field.survey_field.question_title, :response => field.response, :type => field.survey_field.nice_name}
-        else
-          curr_submis << nil
-        end
-      end
-      all_responses << curr_submis
+    export_responses do |field| 
+      {:name => field.survey_field.question_title, :response => field.response, :type => field.survey_field.nice_name}
     end
-    all_responses.shuffle
   end
 
-
-  def submissions_to_array
-    all_responses = []
-    submissions.each do |s|
-      curr_submis = []
-      survey_fields.each do |f|
-        field = s.field_responses.where(survey_field_id: f.id).first
-        if field
-          curr_submis << field.response
-        else
-          curr_submis << nil
-        end
-      end
-      all_responses << curr_submis
+ def submissions_to_array
+    export_responses do |field|
+      field.response
     end
-    all_responses.shuffle
   end
 
   def number_to_name(num)
