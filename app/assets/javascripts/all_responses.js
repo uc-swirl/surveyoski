@@ -16,7 +16,7 @@ function extract_response_for_chart(data, number) {
 
 
 function extract_response_text(data, number) {
-  return data.map(function (x) { return x[number]; })
+  return data.map(function (x) { return x[number]; });
 }
 
 function extract_question_name(data, number) {
@@ -26,9 +26,9 @@ function extract_question_name(data, number) {
     second = first;
   }
 
-  third = "Unknown Question";
+  var third = "Unknown Question";
   if (second) {
-    third = second['name'];
+    third = second.name;
   }
 
   return third;
@@ -42,7 +42,9 @@ function calculate_number_fields (data) {
 }
 
 jQuery(document).ready(function () {
-
+  var extractor = function (b) { return {response : b, frequency : (freq[b] / num_responses), total : freq[b]  }};
+  var reducer = function (a, b) { return a && !isNaN(b) };
+  var parseFloatDec = function (x) { return parseFloat(x, 10); };
   jQuery(".response_container").each(function (index, element) {
     var response_container = jQuery(element);
 
@@ -52,12 +54,12 @@ jQuery(document).ready(function () {
         var num_responses = data.length;
         var freq = extract_response_for_chart(data, i);
         var question_name = extract_question_name(data, i);
-        var histograms = Object.keys(freq).map (function (b) { return {response : b, frequency : (freq[b] / num_responses), total : freq[b]  }});
+        var histograms = Object.keys(freq).map (extractor);
 
         var number_unique_responses = histograms.length;
 
         var string_values = Object.keys( freq )
-        var all_responses_numeric = string_values.reduce(function (a, b) { return a && !isNaN(b) }, true);
+        var all_responses_numeric = string_values.reduce(reducer, true);
 
         jQuery("<h3/>", {"class" : "response_question_title", text : question_name}).appendTo(response_container);
 
@@ -65,7 +67,7 @@ jQuery(document).ready(function () {
           generate_chart(response_container[0], histograms);
         } 
         if (all_responses_numeric) {
-         var float_values = string_values.map (function (x) { return parseFloat(x, 10); });
+         var float_values = string_values.map (parseFloatDec);
          generate_numeric_averages(response_container, float_values);
         } else {
           generate_text_response_display(response_container, extract_response_text(data, i));
