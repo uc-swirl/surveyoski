@@ -27,3 +27,8 @@ end
 Given /I should see a download link to a csv of the responses/ do
   page.should have_content("Download CSV")
 end
+
+Given /the survey is closed/ do
+  @survey.status = 'closed'
+  @survey.save
+end
