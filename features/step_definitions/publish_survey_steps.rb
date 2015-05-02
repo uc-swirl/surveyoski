@@ -10,7 +10,7 @@ end
 Given(/^I click on the publish status button$/) do
   page.evaluate_script('window.confirm = function() { return true; }')
   find(:css, ".survey_status_button").click
-  sleep 1
+  sleep 3
 end
 
 Then(/^the survey should be published$/) do
