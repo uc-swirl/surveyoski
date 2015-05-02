@@ -1,26 +1,11 @@
-<table id= <%=@survey_id%> class="admin_table">
+<table id= <%=survey_id%> class="admin_table">
   <thead>
-    <th colspan = "8" id="all_surveys_text"><%= @title %><%= render partial: "search_form" %></th>
+    <th colspan = "8" id="all_surveys_text"><%= title %></th>
   </thead>
   <tbody>
-      <tr>
-        <td colspan="8" >
-            <div id = 'sort_by'>Sort by</div>
-            <button class = 'sort_tag' id = 'name'>
-              <%= link_to "Survey Name", survey_templates_path("#{@survey_id}_sort" => 'name', "#{@other_id}_sort" => @other_sort), :class=>"sort_text" %>
-            </button>
-            <button class = 'sort_tag' id= 'course'>
-              <%= link_to "Course", survey_templates_path("#{@survey_id}_sort" => 'course', "#{@other_id}_sort" => @other_sort),:class=>"sort_text" %>
-            </button>
-            <button class = 'sort_tag' id= 'date'>
-              <%= link_to "Creation Date", survey_templates_path("#{@survey_id}_sort" => 'date',"#{@other_id}_sort" => @other_sort),:class=>"sort_text" %>
-            </button>
-        </td>
-      </tr>
-      
       <% surveys.each do |template| %>
           <tr>
-            <% if @private %>
+            <% if private_survey %>
               <td>
                 <%= link_to template.title, edit_survey_template_path(template), :title=>template.survey_title.to_s %>
               </td>
@@ -32,7 +17,7 @@
             <td>
                 <%=template.course.name %>
             </td>
-            <% if @private %>
+            <% if private_survey %>
               <td class="">
                   <span class="publish_button_container"
                   data-status-route="<%= if template then survey_template_status_path(template) else "" end %>"
@@ -42,7 +27,7 @@
             <td>
               <%= link_to image_tag("view.png", :width=>30, :height=>30, :title=>'View live survey'), survey_template_path(template), :target => "_blank"%>
             </td>
-            <% if @private %>
+            <% if private_survey %>
               <td>
                 <%= link_to image_tag("response.png", :width=>30, :height=>30, :title=>'See responses'), all_responses_path(template), :target => "_blank" %>
               </td>
@@ -53,7 +38,7 @@
             <td>
                 <%= image_tag("clone.png", :width=>30, :height=>30, :title=>'Clone this survey', :class => "clone_button", :"data-template-id" => template.uuid.to_s ) %>
             </td>
-            <% if @private %>
+            <% if private_survey %>
               <td>
                 <%= link_to image_tag("delete.png", :width=>30, :height=>30, :title=>'Delete'), 
                   "/survey_templates/#{template.uuid}", method: :delete, :class=> "delete_survey_link"  %>
@@ -63,6 +48,6 @@
           </tr>
       <% end %>
 
-      <td colspan ="8" class="apple_pagination"><%= will_paginate surveys %></td>
+      <td colspan ="8" class="apple_pagination"><%= will_paginate surveys, :param_name=> page_name %></td>
   </tbody>
 </table>

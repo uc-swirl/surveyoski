@@ -123,11 +123,8 @@ class SurveyTemplatesController < ApplicationController
     @selected_year, @selected_department, @selected_semester = set_view_variables(filters) 
     @templates = SurveyTemplate.find_surveys(filters, current_user)
     @public_templates = SurveyTemplate.public_surveys(filters)
-    @my_survey_sort = params[:my_survey_sort]
-    @public_survey_sort = params[:public_survey_sort]
-    
-    @templates = SurveyTemplate.sort(@templates, params[:my_survey_sort], params[:page])
-    @public_templates = SurveyTemplate.sort(@public_templates, params[:public_survey_sort], params[:public_page])
+    @templates = SurveyTemplate.sort(@templates, params[:sort], params[:page])
+    @public_templates = SurveyTemplate.sort(@public_templates, params[:pulic_sort], params[:public_page])
   end
   def set_view_variables(filters)
     return [nil, nil, nil] unless filters
