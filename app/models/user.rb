@@ -19,24 +19,20 @@ class User < ActiveRecord::Base
     puts auth.slice(:info)
     x = auth.slice(:info)
     puts "EMAIL"
-    # puts x[:email]
-    
-    puts auth.info.email
+    puts auth.info.email    
 
-
-    
-    where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.name = auth.info.name
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.email = auth.info.email
-      user.status ||= "student"
-      if not is_berkeley(auth.info.email)
-        return nil
-      end
-      user.save!
+    user = find_or_create_by_email(auth.info.email)
+    user.provider = auth.provider
+    user.uid = auth.uid
+    user.name = auth.info.name
+    user.oauth_token = auth.credentials.token
+    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+    user.email = auth.info.email
+    user.status ||= "student"
+    if not is_berkeley(auth.info.email)
+      return nil
+    end
+    user.save!
     end
   end
 
