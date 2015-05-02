@@ -71,7 +71,7 @@ var SurveyBuilder = (function () {
     }
 
     add_field(field);
-  }
+  };
 
   function add_delete_button(question_container, field) {
     var field_name = field.name;
@@ -86,7 +86,7 @@ var SurveyBuilder = (function () {
       question_container.detach();
       field.delete();
     });
-  }
+  };
 
   function add_require_button(question_table, field) {
     var id = uniqId();
