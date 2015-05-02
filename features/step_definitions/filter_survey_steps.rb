@@ -1,24 +1,17 @@
 Given /^"(.*?)" public surveys and "(.*?)" private surveys exist$/ do |public_count, private_count|
-	@course1 = Course.create(:name => "course 1", :department => "MCB", :semester => "Fall", :year => "2013")
-	@course2 = Course.create(:name => "course 2", :department => "MCB", :semester => "Fall", :year => "2013")
-	@course3 = Course.create(:name => "course 3", :department => "CS", :semester => "Spring", :year => "2015")
-	@course4 = Course.create(:name => "course 4", :department => "CS", :semester => "Spring", :year => "2015")
-
-	otheruser = User.create(:email => "ilovecs@berkeley.edu")
-	@user = User.create(:email => "ilovemcb@berkeley.edu", :status => "professor")
-
-	Enrollment.create(:user_id => @user.id, :course_id => @course1.id)
-	Enrollment.create(:user_id => @user.id, :course_id => @course2.id)
-
-	class SurveyTemplate 
-		attr_accessible :user_id , :course_id , :public_survey
-	end
-
-  for i in 1...public_count.to_i
-    SurveyTemplate.create(:survey_title => "MCB102 course eval#{i}", :user_id => @user.id, :course_id => @course1.id, :public_survey => false)
+  @course1 = Course.create(:name => "course 1", :department => "MCB", :semester => "Fall", :year => "2013", :active=>true)
+  @course2 = Course.create(:name => "course 2", :department => "MCB", :semester => "Fall", :year => "2013", :active=>true)
+  Enrollment.create(:user_id => @user.id, :course_id => @course2.id)
+  Enrollment.create(:user_id => @user.id, :course_id => @course1.id)
+  class SurveyTemplate 
+    attr_accessible :user_id , :course_id , :public_survey
   end
+
   for i in 1...private_count.to_i
-    SurveyTemplate.create(:survey_title => "MCB104 course eval#{i}", :user_id => otheruser.id, :course_id => @course3.id, :public_survey => true)
+    SurveyTemplate.create(:survey_title => "MCB104 course eval#{i}", :user_id => @user.id, :course_id => @course1.id, :public_survey => false)
+  end
+  for i in 1...public_count.to_i
+    SurveyTemplate.create(:survey_title => "MCB102 course eval#{i}", :user_id => @user.id, :course_id => @course1.id, :public_survey => true)
   end
   visit survey_templates_path
 end

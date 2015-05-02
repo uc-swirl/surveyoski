@@ -61,3 +61,6 @@ end
 
 @user2.save!
 @template2.save!
+
+
+
