@@ -42,7 +42,6 @@ function calculate_number_fields (data) {
 }
 
 jQuery(document).ready(function () {
-  var extractor = function (b) { return {response : b, frequency : (freq[b] / num_responses), total : freq[b]  }};
   var reducer = function (a, b) { return a && !isNaN(b) };
   var parseFloatDec = function (x) { return parseFloat(x, 10); };
   jQuery(".response_container").each(function (index, element) {
@@ -54,7 +53,7 @@ jQuery(document).ready(function () {
         var num_responses = data.length;
         var freq = extract_response_for_chart(data, i);
         var question_name = extract_question_name(data, i);
-        var histograms = Object.keys(freq).map (extractor);
+        var histograms = Object.keys(freq).map (function (b) { return {response : b, frequency : (freq[b] / num_responses), total : freq[b]  }});
 
         var number_unique_responses = histograms.length;
 
