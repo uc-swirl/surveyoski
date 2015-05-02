@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
       return nil
     end
     user.save!
-    
+    user
   end
 
   def all_surveys(filter_hash = nil)
