@@ -19,7 +19,10 @@ class User < ActiveRecord::Base
     puts auth.slice(:info)
     x = auth.slice(:info)
     puts "EMAIL"
-    puts x[:email]
+    # puts x[:email]
+    
+    puts auth.info.email
+
 
     
     where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
