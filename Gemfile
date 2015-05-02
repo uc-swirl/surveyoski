@@ -18,7 +18,6 @@ group :development, :test do
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'quiet_assets', group: :development
-  gem 'thin'
 end
 
 group :production do
@@ -44,3 +43,4 @@ gem 'jquery-ui-rails'
 gem 'uuid', '~> 2.3.7'
 gem "d3-rails"
 gem 'will_paginate', '~> 3.0.5'
+gem 'thin'

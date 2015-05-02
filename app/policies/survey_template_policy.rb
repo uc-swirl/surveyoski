@@ -20,7 +20,7 @@ class SurveyTemplatePolicy < ApplicationPolicy
     if @template.can_view(@user)
       true
     else
-      @template.status == "published"
+      @template.status != "unpublished" or @template.public_survey == true
     end
   end
   def all_responses?
