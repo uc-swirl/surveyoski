@@ -6,19 +6,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    course = Course.find_or_create_by_id(params[:id])
-    emails = params[:editor_email].split(/[ |,]+/)
-    emails << current_user.email
-
-    ok = course.add_users(emails)
-    if not ok
-      flash[:notice] = "There was an error in updating your course."
-    else
-      Course.update(course.id, :name => params[:course_name], :department => params[:department], 
-        :semester => params[:semester], :year => params[:date][:year])
-  	  course.reload
-  	  flash[:notice] = "Your course " + course.name.to_s + " was successfully updated "
-    end
+    flash[:notice] = Course.create_course(params, current_user)
   	redirect_to courses_path
   end
 

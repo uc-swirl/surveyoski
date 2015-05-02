@@ -50,4 +50,22 @@ class Course < ActiveRecord::Base
   def clear_enrollments
     enrollments.each do |e| e.destroy end 
   end
+
+  def self.create_course(params, current_user)
+    course = self.find_or_create_by_id(params[:id])
+    emails = params[:editor_email].split(/[ |,]+/)
+    emails << current_user.email
+
+    ok = course.add_users(emails)
+    if not ok
+      return "There was an error in updating your course."
+    else
+      self.update(course.id, :name => params[:course_name], :department => params[:department], 
+      :semester => params[:semester], :year => params[:date][:year])
+      course.reload
+      return "Your course " + course.name.to_s + " was successfully updated "
+    end
+  end
+
+
 end
