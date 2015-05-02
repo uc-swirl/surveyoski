@@ -114,13 +114,10 @@ class SurveyTemplatesController < ApplicationController
   def index
     authorize :survey_templates, :index?
     @courses = current_user.courses
-
     filters = set_filters(params)
     @selected_year, @selected_department, @selected_semester = set_view_variables(filters) 
-    @templates = SurveyTemplate.find_surveys(filters, current_user)
-    @public_templates = SurveyTemplate.public_surveys(filters)
-    @templates = SurveyTemplate.sort(@templates, params[:sort], params[:page])
-    @public_templates = SurveyTemplate.sort(@public_templates, params[:pulic_sort], params[:public_page])
+    @templates = SurveyTemplate.return_surveys(filters, current_user, params[:sort], params[:page])
+    @public_templates = SurveyTemplate.return_surveys(filters, nil, params[:sort], params[:page])
   end
   def set_view_variables(filters)
     return [nil, nil, nil] unless filters

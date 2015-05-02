@@ -126,6 +126,15 @@ class SurveyTemplate < ActiveRecord::Base
     SurveyTemplate.where(search_params)
   end
 
+  def self.return_surveys(filters, current_user, sort_type, page)
+    if current_user
+      set = self.find_surveys(filters, current_user)
+    else
+      set = self.public_surveys(filters)
+    end
+    return self.sort(set, sort_type, page)
+  end
+
   def self.find_surveys(filters, current_user)
     if filters == nil
       current_user.all_surveys
