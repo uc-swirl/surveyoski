@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
     puts auth.slice(:info)
     x = auth.slice(:info)
     puts "EMAIL"
-    puts x.slice(:email)
+    puts x[:email]
+
     
     where(auth.slice(:info).slice(:email)).first_or_initialize.tap do |user|
       user.provider = auth.provider
