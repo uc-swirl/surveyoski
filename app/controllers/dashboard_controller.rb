@@ -14,7 +14,8 @@ class DashboardController < ApplicationController
       if user
         user.status = params[:status]
         user.save
-        flash[:notice] = user.name + " was successfully changed to " + user.status
+
+        flash[:notice] = "#{user.name} was successfully changed to " + user.status
       else
         User.create(:email => params[:email], :status => params[:status])
         flash[:notice] = "A new user has been created."
